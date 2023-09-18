@@ -1,7 +1,8 @@
-package com.maktabah.maktabahyarsi
+package com.maktabah.maktabahyarsi.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.maktabah.maktabahyarsi.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
