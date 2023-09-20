@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Maktabah YARSI</string>
+    <string name="maktabah_yarsi_splash">مكتبة يرسي \t\nMaktabah YARSI</string>
+    <string name="maktabah_arab">مكتبة يرسي</string>
 </resources>
