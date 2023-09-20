@@ -25,12 +25,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="About"
             android:layout_marginLeft="10dp"
+            android:text="About"
             android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/icon_about"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            tools:ignore="TextSizeCheck" />
 
         <ImageView
             android:id="@+id/next_about"
@@ -65,12 +66,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Change Language"
             android:layout_marginLeft="10dp"
+            android:text="Change Language"
             android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/icon_change_language"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            tools:ignore="TextSizeCheck" />
 
         <ImageView
             android:id="@+id/next_change_language"
@@ -104,12 +106,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Theme"
             android:layout_marginLeft="10dp"
+            android:text="Theme"
             android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/icon_theme"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            tools:ignore="TextSizeCheck" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:layout_width="30dp"
