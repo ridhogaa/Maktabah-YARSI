@@ -7,30 +7,34 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.viewpager.widget.ViewPager
 import com.maktabah.maktabahyarsi.R
 import com.maktabah.maktabahyarsi.databinding.FragmentHomeBinding
+import com.maktabah.maktabahyarsi.databinding.FragmentSplashScreenBinding
+import com.maktabah.maktabahyarsi.ui.home.adapter.CategoryAdapter
 import com.maktabah.maktabahyarsi.ui.home.slider.SliderAdapter
+import com.maktabah.maktabahyarsi.ui.splashscreen.SplashScreenViewModel
+import com.maktabah.maktabahyarsi.utils.DataCategory
 
 class HomeFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = HomeFragment()
-    }
-
-    private lateinit var viewModel: HomeViewModel
-    private lateinit var binding: FragmentHomeBinding
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+    private val viewModel: HomeViewModel by viewModels()
     lateinit var vpSlider: ViewPager
 
-
-    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
+        return binding.root
+    }
 
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         vpSlider = view.findViewById(R.id.viewPager)
 
         val arraySlider = ArrayList<Int>()
@@ -39,16 +43,16 @@ class HomeFragment : Fragment() {
 
         val sliderAdapter = SliderAdapter(arraySlider, requireActivity())
         vpSlider.adapter = sliderAdapter
-
-        return view
+        binding.rvCategory.apply {
+            adapter = CategoryAdapter(DataCategory.listDataCategory)
+            layoutManager = GridLayoutManager(requireContext(), 4)
+            setHasFixedSize(true)
+        }
     }
 
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        // TODO: Use the ViewModel
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }
