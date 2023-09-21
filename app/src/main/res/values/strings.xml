@@ -2,4 +2,8 @@
     <string name="app_name">Maktabah YARSI</string>
     <string name="maktabah_yarsi_splash">مكتبة يرسي \t\nMaktabah YARSI</string>
     <string name="maktabah_arab">مكتبة يرسي</string>
+    <string name="adab_murid_terhadap_diri_sendiri">Adab Murid Terhadap Diri Sendiri</string>
+    <string name="gratis">Gratis</string>
+    <string name="syafri_m_noor_lc">Syafri M, Noor, Lc</string>
+    <string name="akhlak">Akhlak</string>
 </resources>
