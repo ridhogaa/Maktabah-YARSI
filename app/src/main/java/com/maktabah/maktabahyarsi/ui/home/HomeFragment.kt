@@ -29,9 +29,9 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
+        binding = FragmentHomeBinding.inflate(layoutInflater)
 
-        vpSlider = view.findViewById(R.id.viewPager)
+        vpSlider = binding.viewPager
 
         val arraySlider = ArrayList<Int>()
         arraySlider.add(R.drawable.img_example)
@@ -40,7 +40,7 @@ class HomeFragment : Fragment() {
         val sliderAdapter = SliderAdapter(arraySlider, requireActivity())
         vpSlider.adapter = sliderAdapter
 
-        return view
+        return binding.root
     }
 
 
