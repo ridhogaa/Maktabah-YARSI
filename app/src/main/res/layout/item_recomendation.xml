@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@color/grey_recommendation"
+    app:cardCornerRadius="15dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="15dp">
+
+        <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_judul_buku"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/adab_murid_terhadap_diri_sendiri"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/group_rincian_buku"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_judul_buku"
+            >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_gratis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_recommendation"
+            android:padding="1dp"
+            tools:ignore="MissingConstraints">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/gratis"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:fontFamily="@font/poppins_light"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:ignore="SmallSp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/circle_one"
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:src="@drawable/baseline_circle_24"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/cl_gratis"
+            app:layout_constraintEnd_toStartOf="@id/tv_tahun"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_tahun"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2020"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintStart_toEndOf="@id/circle_one"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:ignore="HardcodedText,MissingConstraints" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/circle_two"
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:src="@drawable/baseline_circle_24"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_tahun" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_halaman"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="45 Hlm"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintStart_toEndOf="@id/circle_two"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:ignore="HardcodedText,MissingConstraints" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/group_pencipta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        app:layout_constraintTop_toBottomOf="@id/group_rincian_buku"
+        tools:ignore="ExtraText">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_pencipta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/syafri_m_noor_lc"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            android:layout_marginStart="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:ignore="MissingConstraints,SmallSp" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/circle_three"
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:src="@drawable/baseline_circle_24"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_pencipta"/> />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_kategori"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/akhlak"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            android:layout_marginStart="10dp"
+            app:layout_constraintStart_toEndOf="@id/circle_three"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:ignore="MissingConstraints,SmallSp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
