@@ -1,7 +1,33 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.MaktabahYARSI" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/green_maktabah</item>
+        <item name="colorPrimaryVariant">@color/green_maktabah</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/green_maktabah</item>
+        <item name="colorSecondaryVariant">@color/green_maktabah</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_wrapper</item>
+        <item name="windowSplashScreenAnimationDuration">2000</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:navigationBarColor">@color/black_pearl_transparent</item>
+        <item name="postSplashScreenTheme">@style/Base.Theme.MaktabahYARSI</item>
+    </style>
+
+    <style name="Theme.MaktabahYARSI" parent="Base.Theme.MaktabahYARSI" />
+
+    <style name="BottomNavigationViewTextStyle">
+        <item name="android:fontFamily">@font/poppins_regular</item>
     </style>
 </resources>

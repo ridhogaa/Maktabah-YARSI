@@ -16,6 +16,15 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_wrapper</item>
+        <item name="windowSplashScreenAnimationDuration">100</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:navigationBarColor">@color/black_pearl_transparent</item>
+        <item name="postSplashScreenTheme">@style/Base.Theme.MaktabahYARSI</item>
+    </style>
+
     <style name="Theme.MaktabahYARSI" parent="Base.Theme.MaktabahYARSI" />
 
     <style name="BottomNavigationViewTextStyle">

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/fragment_onboarding_scene"
+    tools:context=".ui.onboarding.OnboardingFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/logo1"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:layout_margin="20dp"
+        android:contentDescription="@null"
+        android:src="@drawable/logo_onboarding_1"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_desc_1"
+        android:layout_width="0dp"
+        android:layout_height="180dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="@string/desc_1"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toTopOf="@+id/fab_next"
+        app:layout_constraintEnd_toEndOf="@id/logo1"
+        app:layout_constraintStart_toStartOf="@+id/tv_maktabah_yarsi"
+        app:layout_constraintTop_toBottomOf="@id/tv_maktabah_yarsi" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/logo2"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:layout_margin="20dp"
+        android:contentDescription="@null"
+        android:src="@drawable/logo_onboarding_2"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_desc_2"
+        android:layout_width="0dp"
+        android:layout_height="180dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="@string/desc_2"
+        android:textSize="32sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/fab_next"
+        app:layout_constraintEnd_toEndOf="@id/logo2"
+        app:layout_constraintStart_toStartOf="@+id/tv_maktabah_yarsi"
+        app:layout_constraintTop_toBottomOf="@id/tv_maktabah_yarsi" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/logo3"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:layout_margin="20dp"
+        android:contentDescription="@null"
+        android:src="@drawable/logo_onboarding_3"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_desc_3"
+        android:layout_width="0dp"
+        android:layout_height="180dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="@string/desc_3"
+        android:textSize="32sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/fab_next"
+        app:layout_constraintEnd_toEndOf="@id/logo3"
+        app:layout_constraintStart_toStartOf="@+id/tv_maktabah_yarsi"
+        app:layout_constraintTop_toBottomOf="@id/tv_maktabah_yarsi" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_maktabah_yarsi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="@string/app_name"
+        android:textColor="@color/neutral_400"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/guideline2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/fab_next"
+        style="?attr/materialIconButtonFilledTonalStyle"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="@color/primary_500"
+        app:icon="@drawable/baseline_chevron_right_24"
+        app:iconSize="42dp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_lewati"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_desc_1" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/fab_done"
+        style="?attr/materialIconButtonFilledTonalStyle"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="@color/primary_500"
+        app:icon="@drawable/baseline_chevron_right_24"
+        app:iconSize="42dp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_lewati"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_desc_1" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/primary_500"
+        app:altSrc="@drawable/ic_enable_nav"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_next"
+        app:layout_constraintEnd_toStartOf="@id/button2"
+        app:layout_constraintStart_toStartOf="@id/tv_maktabah_yarsi"
+        app:layout_constraintTop_toTopOf="@+id/fab_next"
+        app:srcCompat="@drawable/ic_disable_nav" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/neutral_400"
+        app:altSrc="@drawable/ic_enable_nav"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_next"
+        app:layout_constraintEnd_toStartOf="@id/button3"
+        app:layout_constraintStart_toEndOf="@id/button1"
+        app:layout_constraintTop_toTopOf="@+id/fab_next"
+        app:srcCompat="@drawable/ic_disable_nav" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/neutral_400"
+        app:altSrc="@drawable/ic_enable_nav"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_next"
+        app:layout_constraintStart_toEndOf="@id/button2"
+        app:layout_constraintTop_toTopOf="@+id/fab_next"
+        app:srcCompat="@drawable/ic_disable_nav" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_lewati"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="@string/lewati"
+        android:textColor="@color/green_maktabah"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fab_next" />
+</androidx.constraintlayout.motion.widget.MotionLayout>
