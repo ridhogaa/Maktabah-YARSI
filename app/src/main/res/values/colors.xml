@@ -7,4 +7,50 @@
     <color name="grey">#d2d2d2</color>
     <color name="grey_category">#D9D9D9</color>
     <color name="grey_recommendation">#475569</color>
+
+    <color name="black_pearl">#222831</color>
+    <color name="black_pearl_transparent">#26222831</color>
+    <color name="white_smoke">#EAEAEA</color>
+    <color name="ic_launcher_background">#222831</color>
+    <color name="green">#39B54A</color>
+    <color name="blue">#00AEEF</color>
+    <color name="bunting">#2C394B</color>
+    <color name="nobel">#9A9A9A</color>
+    <color name="nobel_transparent">#4D9A9A9A</color>
+
+    <color name="primary_50">#ecfdf7</color>
+    <color name="primary_100">#d1faec</color>
+    <color name="primary_200">#a7f3da</color>
+    <color name="primary_300">#6ee7bf</color>
+    <color name="primary_400">#34d39e</color>
+    <color name="primary_500">#10b981</color>
+    <color name="primary_600">#059666</color>
+    <color name="primary_700">#047852</color>
+    <color name="primary_800">#065f42</color>
+    <color name="primary_900">#064e36</color>
+    <color name="primary_950">#022c1e</color>
+
+    <color name="neutral_50">#fefefe</color>
+    <color name="neutral_100">#efefef</color>
+    <color name="neutral_200">#dcdcdc</color>
+    <color name="neutral_300">#bdbdbd</color>
+    <color name="neutral_400">#989898</color>
+    <color name="neutral_500">#7c7c7c</color>
+    <color name="neutral_600">#656565</color>
+    <color name="neutral_700">#525252</color>
+    <color name="neutral_800">#464646</color>
+    <color name="neutral_900">#3d3d3d</color>
+    <color name="neutral_950">#292929</color>
+
+    <color name="secondary_50">#fef2f3</color>
+    <color name="secondary_100">#fde6e7</color>
+    <color name="secondary_200">#fbd0d5</color>
+    <color name="secondary_300">#f7aab2</color>
+    <color name="secondary_400">#f27a8a</color>
+    <color name="secondary_500">#ea546c</color>
+    <color name="secondary_600">#d5294d</color>
+    <color name="secondary_700">#b31d3f</color>
+    <color name="secondary_800">#961b3c</color>
+    <color name="secondary_900">#811a39</color>
+    <color name="secondary_950">#48091a</color>
 </resources>
