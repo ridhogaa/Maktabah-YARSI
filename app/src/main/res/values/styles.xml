@@ -6,4 +6,10 @@
         <item name="android:textSize">14sp</item>
         <item name="android:fontFamily">@font/poppins_regular</item>
     </style>
+
+    <style name="switch_notif" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/blue</item>
+        <item name="colorSwitchThumbNormal">@color/white</item>
+        <item name="android:colorForeground">@color/grey</item>
+    </style>
 </resources>

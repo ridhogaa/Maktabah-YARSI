@@ -36,11 +36,7 @@ class HomeFragment : Fragment() {
 
         val sliderAdapter = SliderAdapter(arraySlider, requireActivity())
         binding.viewPager.adapter = sliderAdapter
-        binding.rvCategory.apply {
-            adapter = CategoryAdapter(DataCategory.listDataCategory)
-            layoutManager = GridLayoutManager(requireContext(), 4)
-            setHasFixedSize(true)
-        }
+
 
     }
 
