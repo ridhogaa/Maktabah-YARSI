@@ -7,9 +7,11 @@ import android.view.MenuItem.OnMenuItemClickListener
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.maktabah.maktabahyarsi.R
 import com.maktabah.maktabahyarsi.databinding.FragmentLoginBinding
 
@@ -39,7 +41,7 @@ class LoginFragment : Fragment() {
 
 
     private fun signUp(): Unit = binding.tvSignUp.setOnClickListener {
-
+        it.findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
     }
 
     private fun guestLogin(): Unit = binding.tvGuestLogin.setOnClickListener {

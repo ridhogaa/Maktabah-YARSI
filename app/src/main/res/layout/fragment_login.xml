@@ -55,7 +55,6 @@
         android:text="@string/email_address"
         android:textColor="@color/neutral_950"
         android:textSize="14sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/tv_desc"
         app:layout_constraintStart_toStartOf="@id/tv_desc"
         app:layout_constraintTop_toBottomOf="@id/tv_desc" />
@@ -96,7 +95,6 @@
         android:text="@string/password"
         android:textColor="@color/neutral_950"
         android:textSize="14sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@id/til_email"
         app:layout_constraintStart_toStartOf="@id/til_email"
         app:layout_constraintTop_toBottomOf="@id/til_email" />
@@ -203,11 +201,12 @@
         android:id="@+id/linear_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@id/linear_2"
         app:layout_constraintEnd_toEndOf="@id/btn_login_google"
-        app:layout_constraintStart_toStartOf="@id/btn_login_google">
+        app:layout_constraintStart_toStartOf="@id/btn_login_google"
+        app:layout_constraintTop_toBottomOf="@id/btn_login_google">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_bpa"
@@ -233,12 +232,11 @@
         android:id="@+id/linear_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/linear_1"
-        app:layout_constraintStart_toStartOf="@id/linear_1">
+        app:layout_constraintStart_toStartOf="@id/linear_1"
+        app:layout_constraintTop_toBottomOf="@id/linear_1">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_tpa"
