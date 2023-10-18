@@ -32,6 +32,9 @@ class OnboardingFragment : Fragment() {
         binding.fabDone.setOnClickListener {
             it.findNavController().navigate(R.id.action_onboardingFragment_to_loginFragment)
         }
+        binding.tvLewati.setOnClickListener {
+            it.findNavController().navigate(R.id.action_onboardingFragment_to_loginFragment)
+        }
     }
 
     override fun onDestroyView() {
