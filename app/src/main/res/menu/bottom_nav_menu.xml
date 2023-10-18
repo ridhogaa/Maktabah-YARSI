@@ -1,19 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/homeFragment"
-        android:icon="@drawable/home_menu"
-        android:title="Home" />
+        android:icon="@drawable/ic_home_24"
+        android:title="Beranda"
+        app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/searchFragment"
-        android:icon="@drawable/search"
-        android:title="Search" />
+        android:id="@+id/riwayatFragment"
+        android:icon="@drawable/ic_riwayat_24"
+        android:title="Riwayat"
+        app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/settingFragment"
-        android:icon="@drawable/settings"
-        android:title="Settings" />
+        android:id="@+id/favoriteFragment"
+        android:icon="@drawable/ic_favorit_24"
+        android:title="Favorit"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/ic_user_24"
+        android:title="Saya"
+        app:showAsAction="ifRoom" />
 
 </menu>
