@@ -65,4 +65,9 @@
         android:name="com.maktabah.maktabahyarsi.ui.home.SubBabAqidah"
         android:label="fragment_sub_bab_aqidah"
         tools:layout="@layout/fragment_sub_bab_aqidah" />
+    <fragment
+        android:id="@+id/riwayatFragment"
+        android:name="com.maktabah.maktabahyarsi.ui.riwayat.RiwayatFragment"
+        android:label="fragment_riwayat"
+        tools:layout="@layout/fragment_riwayat" />
 </navigation>
