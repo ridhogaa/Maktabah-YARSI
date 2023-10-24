@@ -70,4 +70,9 @@
         android:name="com.maktabah.maktabahyarsi.ui.riwayat.RiwayatFragment"
         android:label="fragment_riwayat"
         tools:layout="@layout/fragment_riwayat" />
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.maktabah.maktabahyarsi.ui.favorite.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" />
 </navigation>
