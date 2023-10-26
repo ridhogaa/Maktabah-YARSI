@@ -16,7 +16,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/search_home"
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
                 android:layout_height="34dp"
                 android:background="@drawable/rounded_search_home"
                 app:layout_constraintTop_toTopOf="parent"
@@ -44,23 +44,6 @@
                    app:layout_constraintBottom_toBottomOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <Switch
-                android:id="@+id/switchdonasi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|center_vertical"
-                android:checked="false"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:textOff=""
-                android:textOn=""
-                android:theme="@style/switch_notif"
-                android:thumb="@drawable/switch_custom_thumb"
-                android:track="@drawable/switch_custom_track"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="UseSwitchCompatOrMaterialXml,TouchTargetSizeCheck" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
