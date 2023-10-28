@@ -10,7 +10,6 @@
         android:id="@+id/background_foto"
         android:layout_width="match_parent"
         android:layout_height="243dp"
-        android:layout_marginTop="16dp"
         android:background="@drawable/background_green"
         android:elevation="18dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -87,6 +86,7 @@
                 android:text="Ganti Foto"
                 android:textColor="@color/neutral_50"
                 android:textSize="12dp"
+                android:layout_marginTop="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/icon_pict"
                 app:layout_constraintTop_toTopOf="parent"
@@ -118,21 +118,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Username"
+            android:textSize="14sp"
             android:fontFamily="@font/poppins_regular"
             android:textColor="@color/neutral_700"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Dian Purnama Sari"
-            android:textSize="16dp"
-            android:fontFamily="@font/poppins_regular"
-            app:layout_constraintTop_toBottomOf="@id/tv_username"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:background="@null" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Dian Purnama Sari"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_username"
+                tools:ignore="TouchTargetSizeCheck" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View
@@ -158,21 +160,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Alamat Email"
+                android:textSize="14sp"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/neutral_700"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
-            <androidx.appcompat.widget.AppCompatEditText
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="dianpurnama1902@gmail.com"
-                android:textSize="16dp"
+                android:background="@null"
                 android:fontFamily="@font/poppins_regular"
-                app:layout_constraintTop_toBottomOf="@id/tv_email"
-                app:layout_constraintStart_toStartOf="parent"
+                android:text="dianpurnama1902@gmail.com"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:background="@null" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_email"
+                tools:ignore="TouchTargetSizeCheck" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View
@@ -198,21 +202,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Password"
+                android:textSize="14sp"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/neutral_700"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
-            <androidx.appcompat.widget.AppCompatEditText
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="aku***tik***"
-                android:textSize="16dp"
                 android:fontFamily="@font/poppins_regular"
-                app:layout_constraintTop_toBottomOf="@id/tv_password"
-                app:layout_constraintStart_toStartOf="parent"
+                android:inputType="textPassword"
+                android:text="aku***tik***"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:inputType="textPassword" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_password"
+                tools:ignore="TouchTargetSizeCheck" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -239,21 +245,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nomor Ponsel"
+                android:textSize="14sp"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/neutral_700"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
-            <androidx.appcompat.widget.AppCompatEditText
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="089292842093"
-                android:textSize="16dp"
+                android:background="@null"
                 android:fontFamily="@font/poppins_regular"
-                app:layout_constraintTop_toBottomOf="@id/tv_nomor_telp"
-                app:layout_constraintStart_toStartOf="parent"
+                android:text="089292842093"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:background="@null" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_nomor_telp"
+                tools:ignore="TouchTargetSizeCheck" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View
@@ -279,21 +287,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Alamat"
+                android:textSize="14sp"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/neutral_700"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
-            <androidx.appcompat.widget.AppCompatEditText
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@null"
+                android:fontFamily="@font/poppins_regular"
                 android:text="Kav. Petikemas No. 02"
                 android:textSize="16dp"
-                android:fontFamily="@font/poppins_regular"
-                app:layout_constraintTop_toBottomOf="@id/tv_alamat"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:background="@null" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_alamat"
+                tools:ignore="TouchTargetSizeCheck" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

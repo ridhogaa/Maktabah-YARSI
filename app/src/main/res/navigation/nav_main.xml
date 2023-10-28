@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_subBabAqidah"
             app:destination="@id/subBabAqidah" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment2"
+            app:destination="@id/profileFragment2" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -65,4 +68,21 @@
         android:name="com.maktabah.maktabahyarsi.ui.home.SubBabAqidah"
         android:label="fragment_sub_bab_aqidah"
         tools:layout="@layout/fragment_sub_bab_aqidah" />
+    <fragment
+        android:id="@+id/profileFragment2"
+        android:name="com.maktabah.maktabahyarsi.ui.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment2_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_profileFragment2_to_editProfileFragment2"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.maktabah.maktabahyarsi.ui.profile.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" />
 </navigation>
