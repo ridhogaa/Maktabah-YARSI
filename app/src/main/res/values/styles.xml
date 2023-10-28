@@ -19,4 +19,24 @@
         <item name="android:textColor">?attr/color</item>
         <item name="android:textAllCaps">false</item>
     </style>
+
+    <style name="customStyleChipMonth" parent="Widget.Material3.Chip.Suggestion.Elevated">
+        <item name="chipBackgroundColor">@color/chip_month_background_color</item>
+        <item name="android:textColor">@color/chip_month_text_color</item>
+        <item name="android:strokeWidth">0</item>
+        <item name="checkedIconVisible">false</item>
+        <item name="android:textAppearance">@style/TextAppearance.App.ChipText</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.App.ChipMonthComponent</item>
+    </style>
+
+    <style name="TextAppearance.App.ChipText" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:fontFamily">@font/poppins_regular</item>
+        <item name="fontFamily">@font/poppins_regular</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="ShapeAppearance.App.ChipMonthComponent" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">30dp</item>
+    </style>
 </resources>

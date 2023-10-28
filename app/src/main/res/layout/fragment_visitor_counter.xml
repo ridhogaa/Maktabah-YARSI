@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.visitorcounter.VisitorCounterFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_visitor_counter"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:text="Visitor Counter"
+                android:textColor="@color/neutral_950"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ic_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/iconback"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_statistics"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center"
+            android:text="Statistics"
+            android:textColor="@color/neutral_950"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <HorizontalScrollView
+            android:id="@+id/hsv_cg"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:scrollbars="none"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_statistics">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chip_group_filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:singleLine="true"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_januari"
+                    style="@style/customStyleChipMonth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Januari" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_februari"
+                    style="@style/customStyleChipMonth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="Februari" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_maret"
+                    style="@style/customStyleChipMonth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Maret" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_april"
+                    style="@style/customStyleChipMonth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="April" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_mei"
+                    style="@style/customStyleChipMonth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mei" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_juni"
+                    style="@style/customStyleChipMonth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Juni" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_juli"
+                    style="@style/customStyleChipMonth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Juli" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_agustus"
+                    style="@style/customStyleChipMonth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Agustus" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_september"
+                    style="@style/customStyleChipMonth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="September" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_oktober"
+                    style="@style/customStyleChipMonth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Oktober" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_november"
+                    style="@style/customStyleChipMonth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="November" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_desember"
+                    style="@style/customStyleChipMonth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Desember" />
+
+            </com.google.android.material.chip.ChipGroup>
+        </HorizontalScrollView>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_pengguna_aktif"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Pengguna Aktif"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hsv_cg" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_jumlah_aktif"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
+            android:text="1.750"
+            android:textAlignment="textStart"
+            android:textColor="@color/primary_500"
+            android:textSize="40sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_pengguna_aktif" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_user"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="-8dp"
+            android:layout_marginEnd="30dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="User"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_jumlah_aktif" />
+
+        <com.straiberry.android.charts.view.BarChartView
+            android:id="@+id/bar_chart_view"
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="10dp"
+            android:clickable="false"
+            android:focusable="false"
+            app:chart_barsColorsList="@array/BrushingChartColor"
+            app:chart_barsRadius="20dp"
+            app:chart_grid="horizontal"
+            app:chart_labelsSize="15dp"
+            app:chart_spacing="60dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_user" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
