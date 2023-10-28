@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="BrushingChartColor">
+        <item>@color/primary_500</item>
+        <item>@color/primary_500</item>
+        <item>@color/primary_500</item>
+        <item>@color/primary_500</item>
+        <item>@color/primary_500</item>
+    </integer-array>
+</resources>

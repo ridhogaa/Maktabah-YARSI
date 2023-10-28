@@ -101,4 +101,7 @@ dependencies {
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+
+    // Charts
+    implementation("com.github.STRAIBERRY-AI-INC:Straiberry-charts:1.1.0")
 }
