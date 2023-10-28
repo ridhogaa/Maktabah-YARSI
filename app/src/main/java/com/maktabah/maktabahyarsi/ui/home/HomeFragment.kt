@@ -38,10 +38,6 @@ class HomeFragment : Fragment() {
         val sliderAdapter = SliderAdapter(arraySlider, requireActivity())
         binding.viewPager.adapter = sliderAdapter
 
-        binding.chevronRight.setOnClickListener {
-            it.findNavController().navigate(R.id.action_homeFragment_to_profileFragment2)
-
-        }
     }
 
     override fun onDestroyView() {
