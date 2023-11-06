@@ -15,7 +15,9 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.maktabah.maktabahyarsi.R
 import com.maktabah.maktabahyarsi.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private var isReady = false

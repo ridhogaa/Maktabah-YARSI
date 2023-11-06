@@ -5,6 +5,8 @@ plugins {
     id("kotlin-parcelize")
     id("com.google.dagger.hilt.android")
     id("androidx.navigation.safeargs.kotlin")
+    id("com.google.devtools.ksp")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -19,6 +21,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "BASE_URL", "\"http://192.168.0.145:3000\"")
     }
 
     buildTypes {
@@ -39,6 +42,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -49,6 +53,8 @@ dependencies {
     implementation("com.google.android.material:material:1.9.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.2")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    implementation("com.google.firebase:firebase-auth:22.2.0")
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -70,7 +76,7 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.6")
 
     // Chucker interceptor
-    debugImplementation("com.github.chuckerteam.chucker:library:3.5.2")
+    debugImplementation("com.github.chuckerteam.chucker:library:4.0.0")
     releaseImplementation("com.github.chuckerteam.chucker:library-no-op:3.5.2")
 
     // Shimmer
@@ -91,17 +97,20 @@ dependencies {
     implementation("androidx.activity:activity-ktx:1.7.2")
 
     // Glide
-    implementation("com.github.bumptech.glide:glide:4.14.2")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.14.2")
 
     // Dagger hilt
-    implementation("com.google.dagger:hilt-android:2.44.2")
-    kapt("com.google.dagger:hilt-compiler:2.44.2")
+    implementation("com.google.dagger:hilt-android:2.48")
+    ksp("com.google.dagger:hilt-compiler:2.48")
 
     // Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.2")
 
     // Charts
     implementation("com.github.STRAIBERRY-AI-INC:Straiberry-charts:1.1.0")
+
+    implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
+    implementation("com.google.firebase:firebase-analytics")
 }

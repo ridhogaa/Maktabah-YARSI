@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1065446694283",
+    "project_id": "maktabah-yarsi",
+    "storage_bucket": "maktabah-yarsi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1065446694283:android:2f58e3aa52efe7058ce38e",
+        "android_client_info": {
+          "package_name": "com.maktabah.maktabahyarsi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1065446694283-icr0k7nrek5esg1osd85v9lcd8mi7db1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.maktabah.maktabahyarsi",
+            "certificate_hash": "62bd30fc470e43372fdb4ce85430107d54618d04"
+          }
+        },
+        {
+          "client_id": "1065446694283-en18jq76rp96g21qd2dka4l4tvikhi2i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDC5BcYdwsbKtk4I32VnDB27e0Vq8Nw5_k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1065446694283-en18jq76rp96g21qd2dka4l4tvikhi2i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
