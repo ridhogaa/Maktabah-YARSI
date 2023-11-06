@@ -127,18 +127,32 @@
             android:textAppearance="@style/PlaceholderTextAppearance" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_login"
+    <FrameLayout
+        android:id="@+id/fl_btn_loading_state"
         android:layout_width="0dp"
-        android:layout_height="55dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:fontFamily="@font/poppins_medium"
-        android:text="@string/login"
-        android:textSize="16sp"
-        app:cornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="@+id/til_password"
         app:layout_constraintStart_toStartOf="@+id/til_password"
-        app:layout_constraintTop_toBottomOf="@+id/til_password" />
+        app:layout_constraintTop_toBottomOf="@+id/til_password">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/login"
+            android:textSize="16sp"
+            app:cornerRadius="8dp" />
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/pb_loading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:visibility="gone" />
+    </FrameLayout>
 
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/div1"
@@ -147,8 +161,8 @@
         android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_login"
         app:layout_constraintEnd_toStartOf="@id/tv_login"
-        app:layout_constraintStart_toStartOf="@id/btn_login"
-        app:layout_constraintTop_toBottomOf="@id/btn_login" />
+        app:layout_constraintStart_toStartOf="@id/fl_btn_loading_state"
+        app:layout_constraintTop_toBottomOf="@id/fl_btn_loading_state" />
 
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/div2"
@@ -156,9 +170,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_login"
-        app:layout_constraintEnd_toEndOf="@id/btn_login"
+        app:layout_constraintEnd_toEndOf="@id/fl_btn_loading_state"
         app:layout_constraintStart_toEndOf="@id/tv_login"
-        app:layout_constraintTop_toBottomOf="@id/btn_login" />
+        app:layout_constraintTop_toBottomOf="@id/fl_btn_loading_state" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_login"
@@ -172,7 +186,7 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@id/div2"
         app:layout_constraintStart_toEndOf="@id/div1"
-        app:layout_constraintTop_toBottomOf="@id/btn_login" />
+        app:layout_constraintTop_toBottomOf="@id/fl_btn_loading_state" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_login_google"
@@ -228,34 +242,17 @@
             android:textSize="12sp" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linear_2"
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_guest_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@id/linear_1"
-        app:layout_constraintStart_toStartOf="@id/linear_1"
-        app:layout_constraintTop_toBottomOf="@id/linear_1">
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_tpa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_regular"
-            android:padding="4dp"
-            android:text="@string/tidak_punya_akun"
-            android:textSize="12sp" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_guest_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_regular"
-            android:padding="4dp"
-            android:text="@string/guest_login"
-            android:textColor="@color/primary_500"
-            android:textSize="12sp" />
-    </LinearLayout>
+        android:fontFamily="@font/poppins_regular"
+        android:padding="4dp"
+        android:text="@string/guest_login"
+        android:textColor="@color/primary_500"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linear_1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

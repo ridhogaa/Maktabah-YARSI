@@ -6,14 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.viewpager.widget.ViewPager
 import com.maktabah.maktabahyarsi.R
 import com.maktabah.maktabahyarsi.databinding.FragmentHomeBinding
-import com.maktabah.maktabahyarsi.ui.home.adapter.CategoryAdapter
 import com.maktabah.maktabahyarsi.ui.home.slider.SliderAdapter
-import com.maktabah.maktabahyarsi.utils.DataCategory
 
 class HomeFragment : Fragment() {
 
