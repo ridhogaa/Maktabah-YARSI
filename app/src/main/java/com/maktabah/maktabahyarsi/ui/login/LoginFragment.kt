@@ -5,12 +5,9 @@ import android.content.IntentSender
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.MenuItem.OnMenuItemClickListener
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -29,9 +26,9 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.CommonStatusCodes
 import com.maktabah.maktabahyarsi.R
 import com.maktabah.maktabahyarsi.data.network.api.model.auth.LoginRequestBody
-import com.maktabah.maktabahyarsi.data.network.api.model.auth.RegisterRequestBody
 import com.maktabah.maktabahyarsi.databinding.FragmentLoginBinding
-import com.maktabah.maktabahyarsi.utils.proceedWhen
+import com.maktabah.maktabahyarsi.utils.safeNavigate
+import com.maktabah.maktabahyarsi.wrapper.proceedWhen
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -173,15 +170,15 @@ class LoginFragment : Fragment() {
     }
 
     private fun navigateToMain() =
-        findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+        findNavController().safeNavigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
 
 
     private fun signUp(): Unit = binding.tvSignUp.setOnClickListener {
-        it.findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+        findNavController().safeNavigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
     }
 
     private fun guestLogin(): Unit = binding.tvGuestLogin.setOnClickListener {
-        it.findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+        findNavController().safeNavigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
     }
 
     private fun validateInput(): Boolean {

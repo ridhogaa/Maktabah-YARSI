@@ -1,4 +1,4 @@
-package com.maktabah.maktabahyarsi.utils
+package com.maktabah.maktabahyarsi.wrapper
 
 import com.google.gson.Gson
 import com.maktabah.maktabahyarsi.data.network.api.model.error.BaseErrorResponse

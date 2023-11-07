@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.homeFragment -> hideBottomNav(false)
                 R.id.riwayatFragment -> hideBottomNav(false)
                 R.id.favoriteFragment -> hideBottomNav(false)
+                R.id.profileFragment -> hideBottomNav(false)
                 else -> hideBottomNav(true)
             }
         }

@@ -5,8 +5,8 @@ import com.maktabah.maktabahyarsi.data.network.api.model.auth.LoginRequestBody
 import com.maktabah.maktabahyarsi.data.network.api.model.auth.LoginResponse
 import com.maktabah.maktabahyarsi.data.network.api.model.auth.RegisterRequestBody
 import com.maktabah.maktabahyarsi.data.network.api.model.auth.RegisterResponse
-import com.maktabah.maktabahyarsi.utils.ResultWrapper
-import com.maktabah.maktabahyarsi.utils.proceedFlow
+import com.maktabah.maktabahyarsi.wrapper.ResultWrapper
+import com.maktabah.maktabahyarsi.wrapper.proceedFlow
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

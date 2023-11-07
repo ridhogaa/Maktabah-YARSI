@@ -4,10 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.maktabah.maktabahyarsi.data.network.api.model.auth.LoginRequestBody
 import com.maktabah.maktabahyarsi.data.network.api.model.auth.LoginResponse
-import com.maktabah.maktabahyarsi.data.network.api.model.auth.RegisterRequestBody
-import com.maktabah.maktabahyarsi.data.network.api.model.auth.RegisterResponse
 import com.maktabah.maktabahyarsi.data.repository.AuthRepository
-import com.maktabah.maktabahyarsi.utils.ResultWrapper
+import com.maktabah.maktabahyarsi.wrapper.ResultWrapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

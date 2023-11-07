@@ -1,8 +1,6 @@
 package com.maktabah.maktabahyarsi.ui.register
 
-import android.app.Activity
 import android.app.Activity.RESULT_OK
-import android.content.Intent
 import android.content.IntentSender
 import android.os.Bundle
 import android.util.Log
@@ -25,20 +23,14 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.CommonStatusCodes
-import com.google.firebase.auth.GoogleAuthProvider
 import com.maktabah.maktabahyarsi.R
 import com.maktabah.maktabahyarsi.data.network.api.model.auth.RegisterRequestBody
 import com.maktabah.maktabahyarsi.databinding.FragmentRegisterBinding
-import com.maktabah.maktabahyarsi.utils.proceedWhen
+import com.maktabah.maktabahyarsi.utils.safeNavigate
+import com.maktabah.maktabahyarsi.wrapper.proceedWhen
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -151,8 +143,7 @@ class RegisterFragment : Fragment() {
 
     private fun navigateToLogin() {
         // TODO : navigate to Login
-        Navigation.findNavController(requireView())
-            .navigate(R.id.action_registerFragment_to_loginFragment)
+        findNavController().safeNavigate(RegisterFragmentDirections.actionRegisterFragmentToLoginFragment())
     }
 
     private fun observeResult() = with(binding) {
@@ -194,7 +185,7 @@ class RegisterFragment : Fragment() {
         val callbacks: OnBackPressedCallback =
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+                   navigateToLogin()
                 }
             }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callbacks)

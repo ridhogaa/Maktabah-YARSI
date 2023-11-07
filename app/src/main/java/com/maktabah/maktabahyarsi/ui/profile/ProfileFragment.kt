@@ -28,8 +28,7 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.groupProfile.setOnClickListener {
-            it.findNavController().navigate(R.id.action_profileFragment2_to_editProfileFragment)
-
+            it.findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
         }
 
     }
