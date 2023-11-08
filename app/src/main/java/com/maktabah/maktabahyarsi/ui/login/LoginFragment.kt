@@ -143,10 +143,12 @@ class LoginFragment : Fragment() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.loginResponse.collectLatest {
                     it.proceedWhen(
-                        doOnSuccess = {
+                        doOnSuccess = { success ->
                             pbLoading.isVisible = false
                             btnLogin.isVisible = true
                             btnLogin.isEnabled = false
+                            viewModel.setUserTokenPref(success.payload?.data?.accessToken?.token.toString())
+                            viewModel.setUserIdPref(success.payload?.data?.accessToken?.id.toString())
                             navigateToMain()
                         },
                         doOnLoading = {

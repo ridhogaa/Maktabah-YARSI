@@ -2,9 +2,14 @@ package com.maktabah.maktabahyarsi.di
 
 import com.maktabah.maktabahyarsi.data.local.datastore.OnboardingPreferenceDataSource
 import com.maktabah.maktabahyarsi.data.local.datastore.OnboardingPreferenceDataSourceImpl
+import com.maktabah.maktabahyarsi.data.local.datastore.UserPreferenceDataSource
+import com.maktabah.maktabahyarsi.data.local.datastore.UserPreferenceDataSourceImpl
 import com.maktabah.maktabahyarsi.data.network.api.datasource.AuthApiDataSource
 import com.maktabah.maktabahyarsi.data.network.api.datasource.AuthApiDataSourceImpl
+import com.maktabah.maktabahyarsi.data.network.api.datasource.UserApiDataSource
+import com.maktabah.maktabahyarsi.data.network.api.datasource.UserApiDataSourceImpl
 import com.maktabah.maktabahyarsi.data.network.api.service.AuthService
+import com.maktabah.maktabahyarsi.data.network.api.service.UserService
 import com.maktabah.maktabahyarsi.utils.PreferenceDataStoreHelper
 import com.maktabah.maktabahyarsi.utils.PreferenceDataStoreHelperImpl
 import dagger.Binds
@@ -26,6 +31,17 @@ object DataSourceModule {
 
     @Singleton
     @Provides
+    fun provideUserApiDataSource(userService: UserService): UserApiDataSource =
+        UserApiDataSourceImpl(userService)
+
+    @Singleton
+    @Provides
     fun provideOnboardingPreferenceDataSource(preferenceDataStoreHelperImpl: PreferenceDataStoreHelperImpl): OnboardingPreferenceDataSource =
         OnboardingPreferenceDataSourceImpl(preferenceDataStoreHelperImpl)
+
+    @Singleton
+    @Provides
+    fun provideUserPreferenceDataSource(preferenceDataStoreHelperImpl: PreferenceDataStoreHelperImpl): UserPreferenceDataSource =
+        UserPreferenceDataSourceImpl(preferenceDataStoreHelperImpl)
+
 }

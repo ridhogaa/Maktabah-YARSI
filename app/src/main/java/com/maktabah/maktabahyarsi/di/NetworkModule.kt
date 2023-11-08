@@ -2,6 +2,7 @@ package com.maktabah.maktabahyarsi.di
 
 import com.maktabah.maktabahyarsi.BuildConfig
 import com.maktabah.maktabahyarsi.data.network.api.service.AuthService
+import com.maktabah.maktabahyarsi.data.network.api.service.UserService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -38,5 +39,10 @@ object NetworkModule {
     @Singleton
     fun provideAuthService(retrofit: Retrofit): AuthService =
         retrofit.create(AuthService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideUserService(retrofit: Retrofit): UserService =
+        retrofit.create(UserService::class.java)
 
 }
