@@ -1,62 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.Material3.BottomSheet"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="20dp">
+    android:padding="20dp"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+    tools:context=".ui.profile.editprofile.EditUsernameBottomSheetFragment">
 
-    <View
-        android:id="@+id/line"
-        android:layout_width="48dp"
-        android:layout_height="5dp"
-        android:background="@color/neutral_200"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_ganti_alamat"
+    <com.google.android.material.bottomsheet.BottomSheetDragHandleView
+        android:id="@+id/drag_handle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ganti Alamat"
-        android:textSize="16sp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/poppins_semibold"
-        android:textColor="@color/neutral_700"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/line"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_alamat"
+        android:id="@+id/tv_ganti_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Masukkan Alamat"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Ganti Username"
+        android:textColor="@color/neutral_700"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/drag_handle" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/poppins_regular"
+        android:text="Username"
         android:textColor="@color/neutral_950"
-        app:layout_constraintTop_toBottomOf="@id/tv_ganti_alamat"
         app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@id/tv_ganti_username" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/group_alamat"
+        android:id="@+id/group_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
         android:background="@drawable/rounded_neutral_300"
-        app:layout_constraintTop_toBottomOf="@id/tv_alamat"
-        app:layout_constraintStart_toStartOf="parent"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        >
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_username">
 
         <androidx.appcompat.widget.AppCompatEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
             android:fontFamily="@font/poppins_regular"
-            android:text="Masukkan username baru"
+            android:hint="Masukkan username baru"
             android:textColor="@color/neutral_500"
             android:textSize="14dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -66,26 +65,26 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/btn_simpan_alamat"
+        android:id="@+id/btn_simpan_username"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@drawable/rounded_green"
-        app:layout_constraintTop_toBottomOf="@id/group_alamat"
         android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_green"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/group_username">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Simpan"
             android:fontFamily="@font/poppins_regular"
+            android:text="Simpan"
             android:textColor="@color/white"
             android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

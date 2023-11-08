@@ -21,7 +21,15 @@ data class LoginResponse(
 
 @Keep
 data class DataLogin(
-
     @field:SerializedName("access_token")
-    val accessToken: String
+    val accessToken: AccessToken,
+)
+
+@Keep
+data class AccessToken(
+    @field:SerializedName("token")
+    val token: String,
+
+    @field:SerializedName("id")
+    val id: String
 )

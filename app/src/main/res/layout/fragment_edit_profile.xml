@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.profile.EditProfileFragment">
+    tools:context=".ui.profile.editprofile.EditProfileFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/background_foto"
@@ -82,11 +82,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
                 android:fontFamily="@font/poppins_regular"
                 android:text="Ganti Foto"
                 android:textColor="@color/neutral_50"
                 android:textSize="12dp"
-                android:layout_marginTop="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/icon_pict"
                 app:layout_constraintTop_toTopOf="parent"
@@ -99,37 +99,37 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
         android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/background_foto"
-        android:background="@drawable/rounded_neutral200">
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/rounded_neutral200"
+        app:layout_constraintTop_toBottomOf="@id/background_foto">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/group_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_username"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Username"
-            android:textSize="14sp"
-            android:fontFamily="@font/poppins_regular"
-            android:textColor="@color/neutral_700"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Username"
+                android:textColor="@color/neutral_700"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_username_data"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Dian Purnama Sari"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -142,36 +142,36 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/neutral_200"
-            app:layout_constraintTop_toBottomOf="@id/group_username"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/group_username" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/group_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/line_bottom_username">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Alamat Email"
-                android:textSize="14sp"
                 android:fontFamily="@font/poppins_regular"
+                android:text="Alamat Email"
                 android:textColor="@color/neutral_700"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/tv_email_data"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:fontFamily="@font/poppins_regular"
-                android:text="dianpurnama1902@gmail.com"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -184,36 +184,37 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/neutral_200"
-            app:layout_constraintTop_toBottomOf="@id/group_email"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@id/group_email" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/group_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/line_bottom_email">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Password"
-                android:textSize="14sp"
                 android:fontFamily="@font/poppins_regular"
+                android:text="Password"
                 android:textColor="@color/neutral_700"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/tv_password_data"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
                 android:inputType="textPassword"
-                android:text="aku***tik***"
+                android:text="*****"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -227,85 +228,9 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/neutral_200"
-            app:layout_constraintTop_toBottomOf="@id/group_password"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/group_nomor_telp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/line_bottom_password">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_nomor_telp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nomor Ponsel"
-                android:textSize="14sp"
-                android:fontFamily="@font/poppins_regular"
-                android:textColor="@color/neutral_700"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:fontFamily="@font/poppins_regular"
-                android:text="089292842093"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_nomor_telp"
-                tools:ignore="TouchTargetSizeCheck" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <View
-            android:id="@+id/line_bottom_nomor_telp"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/neutral_200"
-            app:layout_constraintTop_toBottomOf="@id/group_nomor_telp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/group_alamat"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/line_bottom_nomor_telp">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_alamat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Alamat"
-                android:textSize="14sp"
-                android:fontFamily="@font/poppins_regular"
-                android:textColor="@color/neutral_700"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:fontFamily="@font/poppins_regular"
-                android:text="Kav. Petikemas No. 02"
-                android:textSize="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_alamat"
-                tools:ignore="TouchTargetSizeCheck" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
+            app:layout_constraintTop_toBottomOf="@id/group_password" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
