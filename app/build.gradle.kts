@@ -104,4 +104,7 @@ dependencies {
 
     // Charts
     implementation("com.github.STRAIBERRY-AI-INC:Straiberry-charts:1.1.0")
+
+    //Shimmer
+    implementation("com.facebook.shimmer:shimmer:0.5.0")
 }

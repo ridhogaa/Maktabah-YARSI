@@ -8,10 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.ViewPager
 import com.maktabah.maktabahyarsi.R
 import com.maktabah.maktabahyarsi.databinding.FragmentHomeBinding
 import com.maktabah.maktabahyarsi.ui.home.adapter.CategoryAdapter
+import com.maktabah.maktabahyarsi.ui.home.slider.ModelSlider
 import com.maktabah.maktabahyarsi.ui.home.slider.SliderAdapter
 import com.maktabah.maktabahyarsi.utils.DataCategory
 
@@ -31,12 +33,18 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val arraySlider = ArrayList<Int>()
-        arraySlider.add(R.drawable.img_example)
-        arraySlider.add(R.drawable.example)
+        val arraySlider = arrayListOf(
+        ModelSlider(R.drawable.img_example),
+        ModelSlider(R.drawable.example)
+        )
 
-        val sliderAdapter = SliderAdapter(arraySlider, requireActivity())
-        binding.viewPager.adapter = sliderAdapter
+        val sliderAdapter = SliderAdapter(arraySlider)
+        binding.carouselRecyclerView.adapter = sliderAdapter
+
+        val lm = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        binding.carouselRecyclerView.layoutManager = lm
+        binding.carouselRecyclerView.adapter = sliderAdapter
+
 
     }
 
