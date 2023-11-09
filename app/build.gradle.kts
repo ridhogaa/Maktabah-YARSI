@@ -111,6 +111,7 @@ dependencies {
     // Charts
     implementation("com.github.STRAIBERRY-AI-INC:Straiberry-charts:1.1.0")
 
+    // Firebase
     implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
     implementation("com.google.firebase:firebase-analytics")
 }
