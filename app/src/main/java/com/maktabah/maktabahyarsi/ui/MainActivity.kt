@@ -78,30 +78,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp() || super.onSupportNavigateUp()
-    }
-
-    private fun installSplashScreenWithAnim() {
-        installSplashScreen().setOnExitAnimationListener { splashScreenView ->
-            // Create custom animation.
-            splashScreenView.iconView.animate().rotation(180F).duration = 500L
-            val slideUp = ObjectAnimator.ofFloat(
-                splashScreenView.iconView,
-                View.TRANSLATION_Y,
-                0f,
-                -splashScreenView.iconView.height.toFloat()
-            )
-
-            slideUp.apply {
-                interpolator = AnticipateInterpolator()
-                duration = 500L
-                doOnEnd { splashScreenView.remove() }
-                start()
-            }
-        }
-    }
-
     override fun onDestroy() {
         super.onDestroy()
         _binding = null

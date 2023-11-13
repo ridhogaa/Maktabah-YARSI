@@ -7,6 +7,7 @@ import com.maktabah.maktabahyarsi.data.network.api.model.user.GetUserByIdRespons
 import com.maktabah.maktabahyarsi.data.repository.UserRepository
 import com.maktabah.maktabahyarsi.wrapper.ResultWrapper
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -25,7 +26,7 @@ class ProfileViewModel @Inject constructor(
         MutableStateFlow<ResultWrapper<GetUserByIdResponse>>(ResultWrapper.Loading())
     val userResponse = _userResponse.asStateFlow()
 
-    fun getUserById() = viewModelScope.launch {
+    fun getUserById() = viewModelScope.launch(Dispatchers.IO) {
         userRepository.getUserById(userPreferenceDataSource.getUserIdPrefFlow().first())
             .collectLatest {
                 _userResponse.value = it

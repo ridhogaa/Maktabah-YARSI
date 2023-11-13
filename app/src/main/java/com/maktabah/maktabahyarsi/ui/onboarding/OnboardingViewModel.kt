@@ -22,7 +22,7 @@ class OnboardingViewModel @Inject constructor(
     val getUserTokenPrefFlow =
         userPreferenceDataSource.getUserTokenPrefFlow().asLiveData()
 
-    fun setOnboardingPref(isDone: Boolean) = viewModelScope.launch {
+    fun setOnboardingPref(isDone: Boolean) = viewModelScope.launch(Dispatchers.IO) {
         onboardingPreferenceDataSource.setOnboardingPref(isDone)
     }
 

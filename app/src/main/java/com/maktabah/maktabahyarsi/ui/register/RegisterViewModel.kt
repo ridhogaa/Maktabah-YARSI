@@ -7,6 +7,7 @@ import com.maktabah.maktabahyarsi.data.network.api.model.auth.RegisterResponse
 import com.maktabah.maktabahyarsi.data.repository.AuthRepository
 import com.maktabah.maktabahyarsi.wrapper.ResultWrapper
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -22,7 +23,7 @@ class RegisterViewModel @Inject constructor(
         MutableStateFlow<ResultWrapper<RegisterResponse>>(ResultWrapper.Loading())
     val registerResponse = _registerResponse.asStateFlow()
 
-    fun register(registerRequestBody: RegisterRequestBody) = viewModelScope.launch {
+    fun register(registerRequestBody: RegisterRequestBody) = viewModelScope.launch(Dispatchers.IO) {
         authRepository.register(registerRequestBody).collectLatest {
             _registerResponse.value = it
         }

@@ -16,4 +16,9 @@ interface AuthService {
     @POST("/api/v1/auth/login")
     suspend fun login(@Body loginRequestBody: LoginRequestBody): LoginResponse
 
+    @POST("/api/v1/auth/registerauth")
+    suspend fun registerWithGoogle(@Body token: String)
+
+    @POST("/api/v1/auth/loginauth")
+    suspend fun loginWithGoogle(@Body token: String)
 }

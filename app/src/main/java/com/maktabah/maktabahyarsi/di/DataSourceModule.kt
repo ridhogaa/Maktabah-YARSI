@@ -6,9 +6,15 @@ import com.maktabah.maktabahyarsi.data.local.datastore.UserPreferenceDataSource
 import com.maktabah.maktabahyarsi.data.local.datastore.UserPreferenceDataSourceImpl
 import com.maktabah.maktabahyarsi.data.network.api.datasource.AuthApiDataSource
 import com.maktabah.maktabahyarsi.data.network.api.datasource.AuthApiDataSourceImpl
+import com.maktabah.maktabahyarsi.data.network.api.datasource.BookApiDataSource
+import com.maktabah.maktabahyarsi.data.network.api.datasource.BookApiDataSourceImpl
+import com.maktabah.maktabahyarsi.data.network.api.datasource.CategoryApiDataSource
+import com.maktabah.maktabahyarsi.data.network.api.datasource.CategoryApiDataSourceImpl
 import com.maktabah.maktabahyarsi.data.network.api.datasource.UserApiDataSource
 import com.maktabah.maktabahyarsi.data.network.api.datasource.UserApiDataSourceImpl
 import com.maktabah.maktabahyarsi.data.network.api.service.AuthService
+import com.maktabah.maktabahyarsi.data.network.api.service.BookService
+import com.maktabah.maktabahyarsi.data.network.api.service.CategoryService
 import com.maktabah.maktabahyarsi.data.network.api.service.UserService
 import com.maktabah.maktabahyarsi.utils.PreferenceDataStoreHelper
 import com.maktabah.maktabahyarsi.utils.PreferenceDataStoreHelperImpl
@@ -33,6 +39,16 @@ object DataSourceModule {
     @Provides
     fun provideUserApiDataSource(userService: UserService): UserApiDataSource =
         UserApiDataSourceImpl(userService)
+
+    @Singleton
+    @Provides
+    fun provideCategoryApiDataSource(categoryService: CategoryService): CategoryApiDataSource =
+        CategoryApiDataSourceImpl(categoryService)
+
+    @Singleton
+    @Provides
+    fun provideBookApiDataSource(bookService: BookService): BookApiDataSource =
+        BookApiDataSourceImpl(bookService)
 
     @Singleton
     @Provides

@@ -114,4 +114,12 @@ dependencies {
     // Firebase
     implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
     implementation("com.google.firebase:firebase-analytics")
+
+    // coil
+    implementation("io.coil-kt:coil:2.4.0")
+
+    // jwt
+    implementation("io.jsonwebtoken:jjwt-api:0.11.2")
+    implementation("io.jsonwebtoken:jjwt-impl:0.11.2")
+
 }

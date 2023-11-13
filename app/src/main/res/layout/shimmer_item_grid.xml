@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="170dp"
+    android:layout_height="320dp"
+    android:layout_margin="13dp"
+    android:elevation="4dp"
+    app:cardCornerRadius="12dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/cover_buku"
+            android:layout_width="0dp"
+            android:layout_height="190dp"
+            android:scaleType="centerCrop"
+            android:src="@color/background"
+            app:layout_constraintBottom_toTopOf="@id/tv_judul_buku"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_judul_buku"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="10dp"
+            android:background="@color/background"
+            android:fontFamily="@font/poppins_bold"
+            android:lineHeight="18dp"
+            android:maxLines="2"
+            android:text="Buku Pintar Islam"
+            android:textAlignment="textStart"
+            android:textColor="@color/background"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@id/tv_desc_buku"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cover_buku" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_desc_buku"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:background="@color/background"
+            android:ellipsize="end"
+            android:fontFamily="@font/poppins_regular"
+            android:maxLines="3"
+            android:text="Buku ini meliputi berbagai tentang islam meliputi tauhid, syariat, dan lainnya."
+            android:textAlignment="textStart"
+            android:textColor="@color/background"
+            android:textSize="8sp"
+            app:layout_constraintBottom_toTopOf="@id/icon_favorite_fill"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_judul_buku" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/icon_file"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:scaleType="fitCenter"
+            android:src="@color/background"
+            app:layout_constraintBottom_toBottomOf="@+id/icon_favorite_fill"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/icon_favorite_fill" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_jumlah_halaman"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/background"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="124 Halaman"
+            android:textColor="@color/background"
+            android:textSize="8sp"
+            app:layout_constraintBottom_toBottomOf="@+id/icon_favorite_fill"
+            app:layout_constraintStart_toEndOf="@+id/icon_file"
+            app:layout_constraintTop_toTopOf="@+id/icon_favorite_fill" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/icon_favorite_fill"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:src="@color/background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_desc_buku" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

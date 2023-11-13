@@ -2,18 +2,22 @@ package com.maktabah.maktabahyarsi.di
 
 import com.maktabah.maktabahyarsi.BuildConfig
 import com.maktabah.maktabahyarsi.data.network.api.service.AuthService
+import com.maktabah.maktabahyarsi.data.network.api.service.BookService
+import com.maktabah.maktabahyarsi.data.network.api.service.CategoryService
 import com.maktabah.maktabahyarsi.data.network.api.service.UserService
+import com.maktabah.maktabahyarsi.utils.JwtUtils
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import io.jsonwebtoken.Claims
+import io.jsonwebtoken.Jwts
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
-
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -45,4 +49,13 @@ object NetworkModule {
     fun provideUserService(retrofit: Retrofit): UserService =
         retrofit.create(UserService::class.java)
 
+    @Provides
+    @Singleton
+    fun provideCategoryService(retrofit: Retrofit): CategoryService =
+        retrofit.create(CategoryService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideBookService(retrofit: Retrofit): BookService =
+        retrofit.create(BookService::class.java)
 }

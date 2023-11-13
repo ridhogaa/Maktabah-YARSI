@@ -26,7 +26,7 @@ class LoginViewModel @Inject constructor(
         MutableStateFlow<ResultWrapper<LoginResponse>>(ResultWrapper.Loading())
     val loginResponse = _loginResponse.asStateFlow()
 
-    fun login(loginRequestBody: LoginRequestBody) = viewModelScope.launch {
+    fun login(loginRequestBody: LoginRequestBody) = viewModelScope.launch(Dispatchers.IO) {
         authRepository.login(loginRequestBody).collectLatest {
             _loginResponse.value = it
         }

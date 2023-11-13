@@ -2,6 +2,10 @@ package com.maktabah.maktabahyarsi.di
 
 import com.maktabah.maktabahyarsi.data.repository.AuthRepository
 import com.maktabah.maktabahyarsi.data.repository.AuthRepositoryImpl
+import com.maktabah.maktabahyarsi.data.repository.BookRepository
+import com.maktabah.maktabahyarsi.data.repository.BookRepositoryImpl
+import com.maktabah.maktabahyarsi.data.repository.CategoryRepository
+import com.maktabah.maktabahyarsi.data.repository.CategoryRepositoryImpl
 import com.maktabah.maktabahyarsi.data.repository.UserRepository
 import com.maktabah.maktabahyarsi.data.repository.UserRepositoryImpl
 import dagger.Binds
@@ -18,4 +22,11 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun provideUserRepository(userRepositoryImpl: UserRepositoryImpl): UserRepository
+
+    @Binds
+    abstract fun provideCategoryRepository(categoryRepositoryImpl: CategoryRepositoryImpl): CategoryRepository
+
+    @Binds
+    abstract fun provideBookRepository(bookRepositoryImpl: BookRepositoryImpl): BookRepository
+
 }
