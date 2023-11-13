@@ -35,4 +35,8 @@
     <string name="web_client_id">1065446694283-en18jq76rp96g21qd2dka4l4tvikhi2i.apps.googleusercontent.com</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="category_buku_format">%s Buku</string>
+    <string name="kategori">Kategori</string>
+    <string name="lainnya_category">Lainnya</string>
+    <string name="halaman">%1$s Halaman</string>
 </resources>

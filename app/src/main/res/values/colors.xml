@@ -3,10 +3,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="green_maktabah">#10B981</color>
-    <color name="lavender">#8692f7</color>
     <color name="grey">#d2d2d2</color>
-    <color name="grey_category">#D9D9D9</color>
-    <color name="grey_recommendation">#475569</color>
+    <color name="background">#dddddd</color>
 
     <color name="black_pearl">#222831</color>
     <color name="black_pearl_transparent">#26222831</color>

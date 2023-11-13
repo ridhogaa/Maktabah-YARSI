@@ -13,17 +13,18 @@
         <action
             android:id="@+id/action_homeFragment_to_subBabAqidah"
             app:destination="@id/subBabAqidah" />
+        <action
+            android:id="@+id/action_homeFragment_to_categoryFragment"
+            app:destination="@id/categoryFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_lihatSemuaFragment"
+            app:destination="@id/lihatSemuaFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.maktabah.maktabahyarsi.ui.search.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
-    <fragment
-        android:id="@+id/settingFragment"
-        android:name="com.maktabah.maktabahyarsi.ui.setting.SettingFragment"
-        android:label="fragment_setting"
-        tools:layout="@layout/fragment_setting" />
     <fragment
         android:id="@+id/onboardingFragment"
         android:name="com.maktabah.maktabahyarsi.ui.onboarding.OnboardingFragment"
@@ -67,9 +68,9 @@
     </fragment>
     <fragment
         android:id="@+id/subBabAqidah"
-        android:name="com.maktabah.maktabahyarsi.ui.home.SubBabAqidah"
+        android:name="com.maktabah.maktabahyarsi.ui.home.category.CategoryFragment"
         android:label="fragment_sub_bab_aqidah"
-        tools:layout="@layout/fragment_sub_bab_aqidah" />
+        tools:layout="@layout/fragment_category" />
     <fragment
         android:id="@+id/riwayatFragment"
         android:name="com.maktabah.maktabahyarsi.ui.riwayat.RiwayatFragment"
@@ -93,7 +94,7 @@
         android:id="@+id/editProfileFragment"
         android:name="com.maktabah.maktabahyarsi.ui.profile.editprofile.EditProfileFragment"
         android:label="fragment_edit_profile"
-        tools:layout="@layout/fragment_edit_profile" >
+        tools:layout="@layout/fragment_edit_profile">
         <action
             android:id="@+id/action_editProfileFragment_to_editUsernameBottomSheetFragment"
             app:destination="@id/editUsernameBottomSheetFragment" />
@@ -111,4 +112,28 @@
         android:name="com.maktabah.maktabahyarsi.ui.profile.editprofile.EditPasswordBottomSheetFragment"
         android:label="fragment_edit_password_bottom_sheet"
         tools:layout="@layout/fragment_edit_password_bottom_sheet" />
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.maktabah.maktabahyarsi.ui.home.category.CategoryFragment"
+        android:label="fragment_category"
+        tools:layout="@layout/fragment_category">
+
+        <argument
+            android:name="id"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+        <action
+            android:id="@+id/action_categoryFragment_self"
+            app:destination="@id/categoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/lihatSemuaFragment"
+        android:name="com.maktabah.maktabahyarsi.ui.home.lihatsemua.LihatSemuaFragment"
+        android:label="fragment_lihat_semua"
+        tools:layout="@layout/fragment_lihat_semua" >
+        <argument
+            android:name="sort"
+            app:argType="string" />
+    </fragment>
 </navigation>
