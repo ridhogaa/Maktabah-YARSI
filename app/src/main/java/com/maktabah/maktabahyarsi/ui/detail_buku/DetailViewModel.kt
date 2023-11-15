@@ -1,4 +1,4 @@
-package com.maktabah.maktabahyarsi.ui.home.lihatsemua
+package com.maktabah.maktabahyarsi.ui.detail_buku
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,19 +13,18 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
 @HiltViewModel
-class LihatSemuaViewModel @Inject constructor(
+class DetailViewModel @Inject constructor(
     private val bookRepository: BookRepository
 ) : ViewModel() {
+
     private val _bookResponse =
         MutableStateFlow<ResultWrapper<GetBookResponse>>(ResultWrapper.Loading())
     val bookResponse = _bookResponse.asStateFlow()
 
-    fun getBook(sort: String) = viewModelScope.launch(Dispatchers.IO) {
-        bookRepository.getBooksBySort(sort).collectLatest {
+    fun getBooksById(id: String) = viewModelScope.launch(Dispatchers.IO) {
+        bookRepository.getBooksById(id).collectLatest {
             _bookResponse.value = it
         }
     }
-
 }

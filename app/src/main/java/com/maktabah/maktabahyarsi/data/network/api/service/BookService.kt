@@ -8,6 +8,10 @@ import retrofit2.http.Query
 interface BookService {
 
     @GET("/api/v1/bibliografi")
-    suspend fun getBooks(@Query("sort") sort: String? = null): GetBookResponse
+    suspend fun getBooks(
+        @Query("sort") sort: String? = null,
+        @Query("id") id: String? = null,
+        @Query("category") category: String? = null,
+    ): GetBookResponse
 
 }

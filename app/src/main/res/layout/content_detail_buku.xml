@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_detail_buku"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/cover_buku"
+            android:layout_width="167dp"
+            android:layout_height="232dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/book_cover"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/customImageView" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/judul_buku"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="bottom"
+            android:text="Islam Nusantara"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@id/tv_oleh"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toTopOf="@id/cover_buku" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_oleh"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Oleh"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@id/tv_pencipta"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@id/judul_buku" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_pencipta"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="top"
+            android:text="Prof. Dr. H. Nasaruddin Umar, MA"
+            android:textColor="@color/green_maktabah"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/cover_buku"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@id/tv_oleh" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_jumlah_buku_terbaca"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="bottom"
+            android:text="275"
+            android:textColor="@color/neutral_950"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_terbaca"
+            app:layout_constraintEnd_toStartOf="@+id/line1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cover_buku" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_terbaca"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Terbaca"
+            android:textColor="@color/neutral_400"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toStartOf="@+id/line1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_jumlah_buku_terbaca" />
+
+        <View
+            android:id="@+id/line1"
+            android:layout_width="2dp"
+            android:layout_height="80dp"
+            android:layout_margin="10dp"
+            android:background="@color/neutral_950"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toStartOf="@id/tv_jumlah_halaman"
+            app:layout_constraintStart_toEndOf="@id/tv_jumlah_buku_terbaca"
+            app:layout_constraintTop_toBottomOf="@+id/cover_buku" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_jumlah_halaman"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="bottom"
+            android:text="124"
+            android:textColor="@color/neutral_950"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_halaman"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/cover_buku" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_halaman"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Jumlah Halaman"
+            android:textColor="@color/neutral_400"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/tv_jumlah_halaman" />
+
+        <View
+            android:id="@+id/line2"
+            android:layout_width="2dp"
+            android:layout_height="80dp"
+            android:layout_margin="10dp"
+            android:background="@color/neutral_950"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toStartOf="@id/tv_tahun_rilis"
+            app:layout_constraintStart_toEndOf="@id/tv_jumlah_halaman"
+            app:layout_constraintTop_toBottomOf="@+id/cover_buku" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_tahun_rilis"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="bottom"
+            android:text="2010"
+            android:textColor="@color/neutral_950"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_tahun"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/line2"
+            app:layout_constraintTop_toBottomOf="@+id/cover_buku" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_tahun"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Rilis"
+            android:textColor="@color/neutral_400"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/line2"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tahun_rilis" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Description"
+            android:textColor="@color/neutral_950"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_terbaca" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_description_buku"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_regular"
+            android:justificationMode="inter_word"
+            android:text="\t\t\tBuku Islam Nusantara oleh Prof. Dr. H. Nasaruddin Umar, MA adalah sebuah karya yang menggambarkan peran Islam dalam konteks budaya, sejarah, dan masyarakat di wilayah Nusantara, yang meliputi Indonesia dan sebagian dari wilayah tetangga seperti Malaysia dan Filipina. Buku ini menjelaskan bagaimana Islam tumbuh dan berkembang di wilayah ini seiring waktu dan bagaimana ajaran Islam menyatu dengan budaya-budaya lokal."
+            android:textColor="@color/neutral_950"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_description"
+            app:layout_constraintStart_toStartOf="@+id/tv_description"
+            app:layout_constraintTop_toBottomOf="@id/tv_description"
+            tools:ignore="UnusedAttribute" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

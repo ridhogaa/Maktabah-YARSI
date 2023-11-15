@@ -1,4 +1,4 @@
-package com.maktabah.maktabahyarsi.ui.home.lihatsemua.adapter
+package com.maktabah.maktabahyarsi.ui.home.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -12,7 +12,7 @@ import com.maktabah.maktabahyarsi.databinding.ItemBukuGridBinding
 
 
 class BookGridAdapter(
-
+    private val itemClick: (DataItemBook) -> Unit
 ) : RecyclerView.Adapter<BookGridAdapter.GridViewHolder>() {
 
     private val differ = AsyncListDiffer(this,
@@ -35,7 +35,7 @@ class BookGridAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): BookGridAdapter.GridViewHolder =
+    ): GridViewHolder =
         GridViewHolder(
             ItemBukuGridBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -44,7 +44,7 @@ class BookGridAdapter(
             )
         )
 
-    override fun onBindViewHolder(holder: BookGridAdapter.GridViewHolder, position: Int) =
+    override fun onBindViewHolder(holder: GridViewHolder, position: Int) =
         holder.bind(differ.currentList[position])
 
     override fun getItemCount(): Int = differ.currentList.size
@@ -58,6 +58,9 @@ class BookGridAdapter(
                 tvJumlahHalaman.text =
                     itemView.context.getString(R.string.halaman, book.page.toString())
                 coverBuku.load(book.imageUrl)
+                root.setOnClickListener {
+                    itemClick(book)
+                }
             }
         }
     }

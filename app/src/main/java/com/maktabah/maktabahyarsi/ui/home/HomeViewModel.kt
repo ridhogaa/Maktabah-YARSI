@@ -42,13 +42,13 @@ class HomeViewModel @Inject constructor(
     }
 
     fun getLatestBook() = viewModelScope.launch(Dispatchers.IO) {
-        bookRepository.getBooks("createdAt").collectLatest {
+        bookRepository.getBooksBySort("createdAt").collectLatest {
             _latestBookResponse.value = it
         }
     }
 
     fun getRecommendedBook() = viewModelScope.launch(Dispatchers.IO) {
-        bookRepository.getBooks("total").collectLatest {
+        bookRepository.getBooksBySort("total").collectLatest {
             _recommendBookResponse.value = it
         }
     }

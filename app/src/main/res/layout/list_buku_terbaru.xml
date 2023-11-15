@@ -34,10 +34,6 @@
 
             <include layout="@layout/shimmer_item_buku_linear_horizontal" />
 
-            <include layout="@layout/shimmer_item_buku_linear_horizontal" />
-
-            <include layout="@layout/shimmer_item_buku_linear_horizontal" />
-
         </LinearLayout>
 
     </com.facebook.shimmer.ShimmerFrameLayout>

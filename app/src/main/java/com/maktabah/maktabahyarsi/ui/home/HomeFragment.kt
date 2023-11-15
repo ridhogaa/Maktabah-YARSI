@@ -18,6 +18,7 @@ import com.maktabah.maktabahyarsi.R
 import com.maktabah.maktabahyarsi.databinding.FragmentHomeBinding
 import com.maktabah.maktabahyarsi.ui.home.adapter.BookLinearAdapter
 import com.maktabah.maktabahyarsi.ui.home.adapter.CategoryHomeAdapter
+import com.maktabah.maktabahyarsi.ui.home.lihatsemua.LihatSemuaFragmentDirections
 import com.maktabah.maktabahyarsi.ui.home.slider.ModelSlider
 import com.maktabah.maktabahyarsi.ui.home.slider.SliderAdapter
 import com.maktabah.maktabahyarsi.utils.safeNavigate
@@ -37,6 +38,8 @@ class HomeFragment : Fragment() {
             {
                 if (it.subcategories.isNotEmpty()) {
                     navigateToCategory(it.id)
+                } else {
+                    navigateToContentCategory(it.id, it.name)
                 }
             }, {
                 navigateToCategory()
@@ -45,11 +48,15 @@ class HomeFragment : Fragment() {
     }
 
     private val latestBookLinearAdapter: BookLinearAdapter by lazy {
-        BookLinearAdapter()
+        BookLinearAdapter {
+            navigateToDetail(it.id)
+        }
     }
 
     private val recommendBookLinearAdapter: BookLinearAdapter by lazy {
-        BookLinearAdapter()
+        BookLinearAdapter {
+            navigateToDetail(it.id)
+        }
     }
 
     override fun onCreateView(
@@ -92,6 +99,14 @@ class HomeFragment : Fragment() {
         )
     }
 
+    private fun navigateToContentCategory(id: String, name: String) {
+        findNavController().safeNavigate(
+            HomeFragmentDirections.actionHomeFragmentToCategoryContentFragment(
+                id, name
+            )
+        )
+    }
+
     private fun navigateToAllBook(sort: String) {
         findNavController().safeNavigate(
             HomeFragmentDirections.actionHomeFragmentToLihatSemuaFragment(
@@ -99,6 +114,13 @@ class HomeFragment : Fragment() {
             )
         )
     }
+
+    private fun navigateToDetail(id: String) =
+        findNavController().safeNavigate(
+            HomeFragmentDirections.actionHomeFragmentToDetailFragment(
+                id
+            )
+        )
 
     private fun setUpSlider() = with(binding) {
         val arraySlider = arrayListOf(

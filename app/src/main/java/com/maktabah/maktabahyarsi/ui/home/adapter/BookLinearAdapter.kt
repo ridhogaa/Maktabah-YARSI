@@ -12,7 +12,7 @@ import com.maktabah.maktabahyarsi.databinding.ItemBukuLinearHorizontalBinding
 
 
 class BookLinearAdapter(
-
+    private val itemClick: (DataItemBook) -> Unit
 ) : RecyclerView.Adapter<BookLinearAdapter.LinearViewHolder>() {
 
     private val differ = AsyncListDiffer(this,
@@ -58,6 +58,9 @@ class BookLinearAdapter(
                 tvJumlahHalaman.text =
                     itemView.context.getString(R.string.halaman, book.page.toString())
                 coverBuku.load(book.imageUrl)
+                root.setOnClickListener {
+                    itemClick(book)
+                }
             }
         }
     }

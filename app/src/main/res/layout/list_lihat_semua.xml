@@ -31,9 +31,9 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <include layout="@layout/shimmer_item_grid" />
+            <include layout="@layout/shimmer_item_buku_grid" />
 
-            <include layout="@layout/shimmer_item_grid" />
+            <include layout="@layout/shimmer_item_buku_grid" />
         </LinearLayout>
 
     </com.facebook.shimmer.ShimmerFrameLayout>

@@ -5,36 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_buku_rekomendasi"
+    <include
+        android:id="@+id/content_detail_buku"
+        layout="@layout/content_detail_buku"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:itemCount="3"
-        tools:listitem="@layout/item_buku_linear_horizontal" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/shimmer_buku_rekomendasi"
+        android:id="@+id/shimmer_content_detail_buku_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <include
+            android:id="@+id/shimmer_content_detail_buku"
+            layout="@layout/shimmer_content_detail_buku"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <include layout="@layout/shimmer_item_buku_linear_horizontal" />
-
-            <include layout="@layout/shimmer_item_buku_linear_horizontal" />
-
-        </LinearLayout>
+            android:layout_height="wrap_content" />
 
     </com.facebook.shimmer.ShimmerFrameLayout>
 

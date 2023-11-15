@@ -1,4 +1,4 @@
-package com.maktabah.maktabahyarsi.ui.home.category.adapter
+package com.maktabah.maktabahyarsi.ui.home.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -34,7 +34,7 @@ class SubCategoryAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): SubCategoryAdapter.GridViewHolder =
+    ): GridViewHolder =
         GridViewHolder(
             ItemCategoryBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -43,7 +43,7 @@ class SubCategoryAdapter(
             )
         )
 
-    override fun onBindViewHolder(holder: SubCategoryAdapter.GridViewHolder, position: Int) =
+    override fun onBindViewHolder(holder: GridViewHolder, position: Int) =
         holder.bind(differ.currentList[position])
 
     override fun getItemCount(): Int = differ.currentList.size

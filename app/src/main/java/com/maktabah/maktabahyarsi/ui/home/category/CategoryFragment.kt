@@ -14,9 +14,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.maktabah.maktabahyarsi.databinding.FragmentCategoryBinding
-import com.maktabah.maktabahyarsi.ui.home.HomeFragmentDirections
-import com.maktabah.maktabahyarsi.ui.home.category.adapter.CategoryAdapter
-import com.maktabah.maktabahyarsi.ui.home.category.adapter.SubCategoryAdapter
+import com.maktabah.maktabahyarsi.ui.home.adapter.CategoryAdapter
+import com.maktabah.maktabahyarsi.ui.home.adapter.SubCategoryAdapter
 import com.maktabah.maktabahyarsi.utils.safeNavigate
 import com.maktabah.maktabahyarsi.wrapper.proceedWhen
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,12 +33,14 @@ class CategoryFragment : Fragment() {
         CategoryAdapter {
             if (it.subcategories.isNotEmpty()) {
                 navigateSelf(it.id)
+            } else {
+                navigateToContentCategory(it.id, it.name)
             }
         }
     }
     private val subCategoryAdapter: SubCategoryAdapter by lazy {
         SubCategoryAdapter {
-
+            navigateToContentCategory(it.id, it.name)
         }
     }
 
@@ -66,6 +67,14 @@ class CategoryFragment : Fragment() {
         findNavController().safeNavigate(
             CategoryFragmentDirections.actionCategoryFragmentSelf(
                 id
+            )
+        )
+    }
+
+    private fun navigateToContentCategory(id: String, name: String) {
+        findNavController().safeNavigate(
+            CategoryFragmentDirections.actionCategoryFragmentToCategoryContentFragment(
+                id, name
             )
         )
     }

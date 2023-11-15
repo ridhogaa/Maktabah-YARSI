@@ -13,7 +13,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.maktabah.maktabahyarsi.databinding.FragmentLihatSemuaBinding
-import com.maktabah.maktabahyarsi.ui.home.lihatsemua.adapter.BookGridAdapter
+import com.maktabah.maktabahyarsi.ui.home.adapter.BookGridAdapter
+import com.maktabah.maktabahyarsi.utils.safeNavigate
 import com.maktabah.maktabahyarsi.wrapper.proceedWhen
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -27,7 +28,9 @@ class LihatSemuaFragment : Fragment() {
     private val viewModel: LihatSemuaViewModel by viewModels()
     private val navArgs: LihatSemuaFragmentArgs by navArgs()
     private val bookGridAdapter: BookGridAdapter by lazy {
-        BookGridAdapter()
+        BookGridAdapter {
+            navigateToDetail(it.id)
+        }
     }
 
     override fun onCreateView(
@@ -51,6 +54,13 @@ class LihatSemuaFragment : Fragment() {
     }
 
     private fun navigateBack() = findNavController().popBackStack()
+
+    private fun navigateToDetail(id: String) =
+        findNavController().safeNavigate(
+            LihatSemuaFragmentDirections.actionLihatSemuaFragmentToDetailFragment(
+                id
+            )
+        )
 
     private fun getData() = with(viewModel) {
         getBook(navArgs.sort)
