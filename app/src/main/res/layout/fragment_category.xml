@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="?attr/background"
     tools:context=".ui.home.category.CategoryFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,6 +33,7 @@
             android:fontFamily="@font/poppins_bold"
             android:text="Kategori Lainnya"
             android:textSize="16sp"
+            android:textColor="?attr/color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

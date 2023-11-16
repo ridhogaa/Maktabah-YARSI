@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="?attr/background"
     tools:context=".ui.home.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -87,6 +88,7 @@
                     android:fontFamily="@font/poppins_bold"
                     android:text="Buku Terbaru"
                     android:textSize="16sp"
+                    android:textColor="?attr/color"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -107,6 +109,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:text="Lihat Semua"
                     android:textSize="16dp"
+                    android:textColor="?attr/color"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/chevron_right_buku_terbaru"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -143,6 +146,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_bold"
                     android:text="Rekomendasi Buku"
+                    android:textColor="?attr/color"
                     android:textSize="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -164,6 +168,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:text="Lihat Semua"
                     android:textSize="16dp"
+                    android:textColor="?attr/color"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/chevron_right_rekomendasi"
                     app:layout_constraintTop_toTopOf="parent" />

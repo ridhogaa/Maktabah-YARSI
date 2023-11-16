@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="?attr/background"
     tools:context=".ui.visitorcounter.VisitorCounterFragment">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -23,7 +24,7 @@
                 android:fontFamily="@font/poppins_semibold"
                 android:gravity="center"
                 android:text="Visitor Counter"
-                android:textColor="@color/neutral_950"
+                android:textColor="?attr/color"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -56,7 +57,7 @@
             android:fontFamily="@font/poppins_bold"
             android:gravity="center"
             android:text="Statistics"
-            android:textColor="@color/neutral_950"
+            android:textColor="?attr/color"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -178,6 +179,7 @@
             android:fontFamily="@font/poppins_semibold"
             android:text="Pengguna Aktif"
             android:textSize="16sp"
+            android:textColor="?attr/color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/hsv_cg" />
@@ -206,6 +208,7 @@
             android:layout_marginEnd="30dp"
             android:fontFamily="@font/poppins_regular"
             android:text="User"
+            android:textColor="?attr/color"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
