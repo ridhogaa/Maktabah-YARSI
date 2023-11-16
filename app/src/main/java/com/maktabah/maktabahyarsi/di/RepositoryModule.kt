@@ -8,6 +8,8 @@ import com.maktabah.maktabahyarsi.data.repository.CategoryRepository
 import com.maktabah.maktabahyarsi.data.repository.CategoryRepositoryImpl
 import com.maktabah.maktabahyarsi.data.repository.UserRepository
 import com.maktabah.maktabahyarsi.data.repository.UserRepositoryImpl
+import com.maktabah.maktabahyarsi.data.repository.VisitorCounterRepository
+import com.maktabah.maktabahyarsi.data.repository.VisitorCounterRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -28,5 +30,8 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun provideBookRepository(bookRepositoryImpl: BookRepositoryImpl): BookRepository
+
+    @Binds
+    abstract fun provideVisitorCounterRepository(visitorCounterRepositoryImpl: VisitorCounterRepositoryImpl): VisitorCounterRepository
 
 }

@@ -12,8 +12,62 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         app:layout_constraintBottom_toTopOf="@id/sv_home"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/logo_maktabah"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:scaleType="fitStart"
+            android:src="@drawable/maktabah_yarsi_logo"
+            app:layout_constraintBottom_toTopOf="@id/search_view"
+            app:layout_constraintEnd_toStartOf="@id/iv_eye"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_eye"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@drawable/eye"
+            app:layout_constraintBottom_toTopOf="@id/search_view"
+            app:layout_constraintEnd_toStartOf="@id/tv_visitor_counter"
+            app:layout_constraintStart_toEndOf="@id/logo_maktabah"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_visitor_counter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:padding="10dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@id/search_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_eye"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="0" />
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_tv_visitor_counter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:padding="10dp"
+            app:layout_constraintBottom_toTopOf="@id/search_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_eye"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <View
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@color/background" />
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search_view"
@@ -26,7 +80,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/logo_maktabah"
             app:showDividers="none" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -74,6 +74,7 @@ class HomeFragment : Fragment() {
         setRecyclerViewLatestBook()
         setRecyclerViewRecommendBook()
         seeAllBookClickListener()
+        setObserveDataVisitor()
     }
 
     private fun seeAllBookClickListener() = with(binding) {
@@ -139,6 +140,7 @@ class HomeFragment : Fragment() {
         getAllCategory()
         getLatestBook()
         getRecommendedBook()
+        getVisitorCounter()
     }
 
     private fun setRecyclerViewCategory() {
@@ -236,6 +238,38 @@ class HomeFragment : Fragment() {
                         doOnError = { err ->
                             rvBukuRekomendasi.isVisible = false
                             shimmerBukuRekomendasi.isVisible = true
+                        }
+                    )
+                }
+            }
+        }
+    }
+
+    private fun setObserveDataVisitor() = with(binding) {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.visitorResponse.collectLatest {
+                    it.proceedWhen(
+                        doOnSuccess = { result ->
+                            tvVisitorCounter.visibility = View.VISIBLE
+                            shimmerTvVisitorCounter.visibility = View.GONE
+                            var totalPengguna = 0
+                            result.payload?.data?.let { data ->
+                                repeat(data.size) { i ->
+                                    data[i]?.let { item ->
+                                        totalPengguna += item.total!!
+                                    }
+                                }
+                            }
+                            tvVisitorCounter.text = totalPengguna.toString()
+                        },
+                        doOnLoading = {
+                            tvVisitorCounter.visibility = View.INVISIBLE
+                            shimmerTvVisitorCounter.visibility = View.VISIBLE
+                        },
+                        doOnError = { err ->
+                            tvVisitorCounter.visibility = View.INVISIBLE
+                            shimmerTvVisitorCounter.visibility = View.VISIBLE
                         }
                     )
                 }

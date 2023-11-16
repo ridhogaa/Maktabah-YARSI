@@ -12,10 +12,13 @@ import com.maktabah.maktabahyarsi.data.network.api.datasource.CategoryApiDataSou
 import com.maktabah.maktabahyarsi.data.network.api.datasource.CategoryApiDataSourceImpl
 import com.maktabah.maktabahyarsi.data.network.api.datasource.UserApiDataSource
 import com.maktabah.maktabahyarsi.data.network.api.datasource.UserApiDataSourceImpl
+import com.maktabah.maktabahyarsi.data.network.api.datasource.VisitorCounterApiDataSource
+import com.maktabah.maktabahyarsi.data.network.api.datasource.VisitorCounterApiDataSourceImpl
 import com.maktabah.maktabahyarsi.data.network.api.service.AuthService
 import com.maktabah.maktabahyarsi.data.network.api.service.BookService
 import com.maktabah.maktabahyarsi.data.network.api.service.CategoryService
 import com.maktabah.maktabahyarsi.data.network.api.service.UserService
+import com.maktabah.maktabahyarsi.data.network.api.service.VisitorCounterService
 import com.maktabah.maktabahyarsi.utils.PreferenceDataStoreHelper
 import com.maktabah.maktabahyarsi.utils.PreferenceDataStoreHelperImpl
 import dagger.Binds
@@ -49,6 +52,11 @@ object DataSourceModule {
     @Provides
     fun provideBookApiDataSource(bookService: BookService): BookApiDataSource =
         BookApiDataSourceImpl(bookService)
+
+    @Singleton
+    @Provides
+    fun provideVisitorCounterApiDataSource(visitorCounterService: VisitorCounterService): VisitorCounterApiDataSource =
+        VisitorCounterApiDataSourceImpl(visitorCounterService)
 
     @Singleton
     @Provides

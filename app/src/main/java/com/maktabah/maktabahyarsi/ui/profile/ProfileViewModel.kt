@@ -32,4 +32,9 @@ class ProfileViewModel @Inject constructor(
                 _userResponse.value = it
             }
     }
+
+    fun removeSession() = viewModelScope.launch(Dispatchers.IO) {
+        userPreferenceDataSource.removeIdPref()
+        userPreferenceDataSource.removeTokenPref()
+    }
 }

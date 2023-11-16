@@ -87,6 +87,11 @@
         <action
             android:id="@+id/action_profileFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/nav_main"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
@@ -118,9 +123,9 @@
 
         <argument
             android:name="id"
+            android:defaultValue="null"
             app:argType="string"
-            app:nullable="true"
-            android:defaultValue="null" />
+            app:nullable="true" />
         <action
             android:id="@+id/action_categoryFragment_self"
             app:destination="@id/categoryFragment" />
@@ -132,7 +137,7 @@
         android:id="@+id/lihatSemuaFragment"
         android:name="com.maktabah.maktabahyarsi.ui.home.lihatsemua.LihatSemuaFragment"
         android:label="fragment_lihat_semua"
-        tools:layout="@layout/fragment_lihat_semua" >
+        tools:layout="@layout/fragment_lihat_semua">
         <argument
             android:name="sort"
             app:argType="string" />
@@ -144,7 +149,7 @@
         android:id="@+id/categoryContentFragment"
         android:name="com.maktabah.maktabahyarsi.ui.home.category.CategoryContentFragment"
         android:label="fragment_category_content"
-        tools:layout="@layout/fragment_category_content" >
+        tools:layout="@layout/fragment_category_content">
         <argument
             android:name="id"
             app:argType="string" />
@@ -159,7 +164,7 @@
         android:id="@+id/detailFragment"
         android:name="com.maktabah.maktabahyarsi.ui.detail_buku.DetailFragment"
         android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" >
+        tools:layout="@layout/fragment_detail">
         <argument
             android:name="id"
             app:argType="string" />

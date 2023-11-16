@@ -6,8 +6,10 @@ import com.maktabah.maktabahyarsi.data.network.api.model.auth.LoginRequestBody
 import com.maktabah.maktabahyarsi.data.network.api.model.auth.LoginResponse
 import com.maktabah.maktabahyarsi.data.network.api.model.book.GetBookResponse
 import com.maktabah.maktabahyarsi.data.network.api.model.category.GetCategoryResponse
+import com.maktabah.maktabahyarsi.data.network.api.model.visitor.GetVisitorCounterResponse
 import com.maktabah.maktabahyarsi.data.repository.BookRepository
 import com.maktabah.maktabahyarsi.data.repository.CategoryRepository
+import com.maktabah.maktabahyarsi.data.repository.VisitorCounterRepository
 import com.maktabah.maktabahyarsi.wrapper.ResultWrapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -20,7 +22,8 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val categoryRepository: CategoryRepository,
-    private val bookRepository: BookRepository
+    private val bookRepository: BookRepository,
+    private val visitorCounterRepository: VisitorCounterRepository
 ) : ViewModel() {
 
     private val _categoryResponse =
@@ -34,6 +37,10 @@ class HomeViewModel @Inject constructor(
     private val _recommendBookResponse =
         MutableStateFlow<ResultWrapper<GetBookResponse>>(ResultWrapper.Loading())
     val recommendBookResponse = _recommendBookResponse.asStateFlow()
+
+    private val _visitorResponse =
+        MutableStateFlow<ResultWrapper<GetVisitorCounterResponse>>(ResultWrapper.Loading())
+    val visitorResponse = _visitorResponse.asStateFlow()
 
     fun getAllCategory() = viewModelScope.launch(Dispatchers.IO) {
         categoryRepository.getAllCategory().collectLatest {
@@ -50,6 +57,12 @@ class HomeViewModel @Inject constructor(
     fun getRecommendedBook() = viewModelScope.launch(Dispatchers.IO) {
         bookRepository.getBooksBySort("total").collectLatest {
             _recommendBookResponse.value = it
+        }
+    }
+
+    fun getVisitorCounter() = viewModelScope.launch(Dispatchers.IO) {
+        visitorCounterRepository.getVisitorCounter("november", "2023").collectLatest {
+            _visitorResponse.value = it
         }
     }
 }

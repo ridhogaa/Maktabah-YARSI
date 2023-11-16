@@ -26,7 +26,7 @@ class UserPreferenceDataSourceImpl @Inject constructor(
         preferenceDataStoreHelper.getPreference(PREF_USER_TOKEN, "")
 
     override suspend fun setUserTokenPref(token: String) =
-        preferenceDataStoreHelper.putPreference(PREF_USER_TOKEN, "Bearer $token")
+        preferenceDataStoreHelper.putPreference(PREF_USER_TOKEN, token)
 
     override fun getUserIdPrefFlow(): Flow<String> =
         preferenceDataStoreHelper.getPreference(PREF_USER_ID, "")

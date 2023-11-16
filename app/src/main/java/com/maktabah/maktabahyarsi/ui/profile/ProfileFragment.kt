@@ -1,6 +1,7 @@
 package com.maktabah.maktabahyarsi.ui.profile
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,6 +42,21 @@ class ProfileFragment : Fragment() {
         getData()
         navigateToEditProfile()
         observeCurrentUser()
+        navigateToAbout()
+        navigateLogout()
+    }
+
+    private fun navigateToAbout() = with(binding) {
+        groupAbout.setOnClickListener {
+
+        }
+    }
+
+    private fun navigateLogout() = with(binding) {
+        btnKeluar.setOnClickListener {
+            viewModel.removeSession()
+            findNavController().safeNavigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment())
+        }
     }
 
     private fun getData() {

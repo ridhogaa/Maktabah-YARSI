@@ -22,6 +22,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "BASE_URL", "\"http://192.168.0.145:3000\"")
+        buildConfigField("String", "SIGNING_KEY", "\"maktabahyarsi\"")
     }
 
     buildTypes {
@@ -109,7 +110,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.2")
 
     // Charts
-    implementation("com.github.STRAIBERRY-AI-INC:Straiberry-charts:1.1.0")
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
     // Firebase
     implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
@@ -121,5 +122,5 @@ dependencies {
     // jwt
     implementation("io.jsonwebtoken:jjwt-api:0.11.2")
     implementation("io.jsonwebtoken:jjwt-impl:0.11.2")
-
+    implementation("io.jsonwebtoken:jjwt-jackson:0.11.2")
 }

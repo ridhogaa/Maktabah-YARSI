@@ -5,6 +5,7 @@ import com.maktabah.maktabahyarsi.data.network.api.service.AuthService
 import com.maktabah.maktabahyarsi.data.network.api.service.BookService
 import com.maktabah.maktabahyarsi.data.network.api.service.CategoryService
 import com.maktabah.maktabahyarsi.data.network.api.service.UserService
+import com.maktabah.maktabahyarsi.data.network.api.service.VisitorCounterService
 import com.maktabah.maktabahyarsi.utils.JwtUtils
 import dagger.Module
 import dagger.Provides
@@ -58,4 +59,10 @@ object NetworkModule {
     @Singleton
     fun provideBookService(retrofit: Retrofit): BookService =
         retrofit.create(BookService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideVisitorCounterService(retrofit: Retrofit): VisitorCounterService =
+        retrofit.create(VisitorCounterService::class.java)
+
 }
