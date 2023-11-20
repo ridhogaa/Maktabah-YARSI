@@ -15,6 +15,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.maktabah.maktabahyarsi.data.network.api.model.user.GetUserByIdResponse
 import com.maktabah.maktabahyarsi.databinding.FragmentProfileBinding
+import com.maktabah.maktabahyarsi.utils.decodeJwtPayload
 import com.maktabah.maktabahyarsi.utils.safeNavigate
 import com.maktabah.maktabahyarsi.wrapper.proceedWhen
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,7 +41,6 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getData()
-        navigateToEditProfile()
         observeCurrentUser()
         navigateToAbout()
         navigateLogout()
@@ -54,16 +54,22 @@ class ProfileFragment : Fragment() {
 
     private fun navigateLogout() = with(binding) {
         btnKeluar.setOnClickListener {
-            viewModel.removeSession()
-            findNavController().safeNavigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment())
+            findNavController().safeNavigate(ProfileFragmentDirections.actionProfileFragmentToAlertKeluarDialogFragment())
         }
     }
 
     private fun getData() {
-        viewModel.getUserById()
+        viewModel.getUserTokenPrefFlow.observe(viewLifecycleOwner) {
+            if (it.isNotEmpty()) {
+                viewModel.getUserById()
+                navigateToEditProfile(it)
+            } else {
+                navigateToEditProfile(it)
+            }
+        }
     }
 
-    private fun observeCurrentUser() = with(binding) {
+    private fun observeCurrentUser() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.userResponse.collectLatest {
@@ -76,7 +82,11 @@ class ProfileFragment : Fragment() {
                         doOnLoading = {
                         },
                         doOnError = {
-
+                            Toast.makeText(
+                                requireContext(),
+                                "${it.exception?.message}",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     )
                 }
@@ -88,9 +98,13 @@ class ProfileFragment : Fragment() {
         tvNama.text = data.data.username
     }
 
-    private fun navigateToEditProfile() = with(binding) {
+    private fun navigateToEditProfile(token: String) = with(binding) {
         groupProfile.setOnClickListener {
-            findNavController().safeNavigate(ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment())
+            if (token.isNotBlank()) {
+                findNavController().safeNavigate(ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment())
+            } else {
+                findNavController().safeNavigate(ProfileFragmentDirections.actionProfileFragmentToGuestDialogFragment())
+            }
         }
     }
 

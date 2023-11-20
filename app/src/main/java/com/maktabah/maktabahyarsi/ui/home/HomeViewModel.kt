@@ -1,7 +1,9 @@
 package com.maktabah.maktabahyarsi.ui.home
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.maktabah.maktabahyarsi.data.local.datastore.UserPreferenceDataSource
 import com.maktabah.maktabahyarsi.data.network.api.model.auth.LoginRequestBody
 import com.maktabah.maktabahyarsi.data.network.api.model.auth.LoginResponse
 import com.maktabah.maktabahyarsi.data.network.api.model.book.GetBookResponse
@@ -23,7 +25,8 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val categoryRepository: CategoryRepository,
     private val bookRepository: BookRepository,
-    private val visitorCounterRepository: VisitorCounterRepository
+    private val visitorCounterRepository: VisitorCounterRepository,
+    private val userPreferenceDataSource: UserPreferenceDataSource
 ) : ViewModel() {
 
     private val _categoryResponse =

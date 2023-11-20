@@ -1,5 +1,6 @@
 package com.maktabah.maktabahyarsi.ui.register
 
+import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.content.IntentSender
 import android.os.Bundle
@@ -23,8 +24,12 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.CommonStatusCodes
+import com.google.gson.JsonObject
 import com.maktabah.maktabahyarsi.R
 import com.maktabah.maktabahyarsi.data.network.api.model.auth.RegisterRequestBody
 import com.maktabah.maktabahyarsi.databinding.FragmentRegisterBinding
@@ -41,44 +46,20 @@ class RegisterFragment : Fragment() {
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
     private val viewModel: RegisterViewModel by viewModels()
-    private lateinit var oneTapClient: SignInClient
-    private lateinit var signUpRequest: BeginSignInRequest
+    private lateinit var client: GoogleSignInClient
 
     private val signInResultHandler =
-        registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { activityResult: ActivityResult ->
-            when (activityResult.resultCode) {
-                RESULT_OK -> {
-                    try {
-                        val idToken =
-                            oneTapClient.getSignInCredentialFromIntent(activityResult.data).googleIdToken
-                        when {
-                            idToken != null -> {
-                                // TODO - Got an ID token from Google. Use it to authenticate with Firebase
-                                Log.d("TEST_TOKEN", "Got ID token. $idToken")
-                            }
-
-                            else -> {
-                                Log.d("TEST_TOKEN", "No ID token!") // Shouldn't happen
-                            }
-                        }
-                    } catch (e: ApiException) {
-                        when (e.statusCode) {
-                            CommonStatusCodes.CANCELED -> {
-                                Log.d("TEST_TOKEN", "One-tap dialog was closed.")
-                            }
-
-                            CommonStatusCodes.NETWORK_ERROR -> {
-                                Log.d("TEST_TOKEN", "One-tap encountered a network error.")
-                            }
-
-                            else -> {
-                                Log.d(
-                                    "TEST_TOKEN",
-                                    "Couldn't get credential from result: ${e.message}"
-                                )
-                            }
-                        }
-                    }
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+                try {
+                    val account = task.getResult(ApiException::class.java)!!
+                    val jsonObject = JsonObject()
+                    jsonObject.addProperty("token", account.idToken!!)
+                    viewModel.registerWithGoogle(jsonObject)
+                    observeResultRegisterWithGoogle()
+                } catch (e: ApiException) {
+                    Log.w("TAG", "Google sign in failed", e)
                 }
             }
         }
@@ -113,31 +94,50 @@ class RegisterFragment : Fragment() {
         }
     }
 
-    private fun registerWithGoogle() = with(binding) {
-        oneTapClient = Identity.getSignInClient(requireActivity())
-        signUpRequest = BeginSignInRequest.builder()
-            .setGoogleIdTokenRequestOptions(
-                BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
-                    .setSupported(true)
-                    .setServerClientId(getString(R.string.web_client_id))
-                    .setFilterByAuthorizedAccounts(false)
-                    .build()
-            )
+    private fun registerWithGoogle(): Unit = with(binding) {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.web_client_id))
+            .requestEmail()
             .build()
+        client = GoogleSignIn.getClient(requireActivity(), gso)
         btnRegisterGoogle.setOnClickListener {
-            oneTapClient.beginSignIn(signUpRequest)
-                .addOnSuccessListener(requireActivity()) { result ->
-                    try {
-                        signInResultHandler.launch(
-                            IntentSenderRequest.Builder(result.pendingIntent.intentSender).build()
-                        )
-                    } catch (e: IntentSender.SendIntentException) {
-                        e.printStackTrace()
-                    }
+            signInResultHandler.launch(client.signInIntent)
+        }
+    }
+
+    private fun observeResultRegisterWithGoogle() = with(binding) {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                viewModel.registerGoogleResponse.collectLatest {
+                    it.proceedWhen(
+                        doOnSuccess = { success ->
+                            pbLoadingGoogle.isVisible = false
+                            btnRegisterGoogle.isVisible = true
+                            btnRegisterGoogle.isEnabled = false
+                            Toast.makeText(
+                                requireContext(),
+                                success.message.orEmpty(),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            navigateToLogin()
+                        },
+                        doOnLoading = {
+                            pbLoadingGoogle.isVisible = true
+                            btnRegisterGoogle.isVisible = false
+                        },
+                        doOnError = {
+                            pbLoadingGoogle.isVisible = false
+                            btnRegisterGoogle.isVisible = true
+                            btnRegisterGoogle.isEnabled = true
+                            Toast.makeText(
+                                requireContext(),
+                                "Register Failed: ${it.exception?.message.orEmpty()}",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    )
                 }
-                .addOnFailureListener(requireActivity()) { e ->
-                    e.printStackTrace()
-                }
+            }
         }
     }
 
@@ -151,10 +151,15 @@ class RegisterFragment : Fragment() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.registerResponse.collectLatest {
                     it.proceedWhen(
-                        doOnSuccess = {
+                        doOnSuccess = { success ->
                             pbLoading.isVisible = false
                             btnRegister.isVisible = true
                             btnRegister.isEnabled = false
+                            Toast.makeText(
+                                requireContext(),
+                                success.message.orEmpty(),
+                                Toast.LENGTH_SHORT
+                            ).show()
                             navigateToLogin()
                         },
                         doOnLoading = {
@@ -185,7 +190,7 @@ class RegisterFragment : Fragment() {
         val callbacks: OnBackPressedCallback =
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                   navigateToLogin()
+                    navigateToLogin()
                 }
             }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callbacks)

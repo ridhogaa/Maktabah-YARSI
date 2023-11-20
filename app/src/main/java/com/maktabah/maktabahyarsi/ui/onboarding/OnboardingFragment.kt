@@ -7,11 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.maktabah.maktabahyarsi.R
 import com.maktabah.maktabahyarsi.databinding.FragmentOnboardingBinding
+import com.maktabah.maktabahyarsi.utils.isJwtExpired
 import com.maktabah.maktabahyarsi.utils.safeNavigate
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -36,16 +40,25 @@ class OnboardingFragment : Fragment() {
         doneWithTvLewati()
     }
 
-    private fun checkDoneWithOnboardingAndIsLoggedIn() =
-        viewModel.getOnboardingPref.observe(viewLifecycleOwner) { isDone ->
-            viewModel.getUserTokenPrefFlow.observe(viewLifecycleOwner) { token ->
-                if (token.isNotEmpty() && isDone == true) {
-                    navigateToMain()
-                } else if (token.isEmpty() && isDone == true) {
-                    navigateToLogin()
+    private fun checkDoneWithOnboardingAndIsLoggedIn() = with(viewModel) {
+        lifecycleScope.launch {
+            getOnboardingPref.collectLatest { isDone ->
+                getUserTokenPrefFlow.collectLatest { token ->
+                    if (token.isNotEmpty() && isDone) {
+                        if (token.isJwtExpired()) {
+                            removeSession()
+                            navigateToLogin()
+                        } else {
+                            navigateToMain()
+                        }
+                    } else if (token.isEmpty() && isDone) {
+                        navigateToLogin()
+                    }
                 }
             }
         }
+    }
+
 
     private fun doneWithFab() = with(binding) {
         fabDone.setOnClickListener {

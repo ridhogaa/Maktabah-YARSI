@@ -88,10 +88,11 @@
             android:id="@+id/action_profileFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
         <action
-            android:id="@+id/action_profileFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
-            app:popUpTo="@id/nav_main"
-            app:popUpToInclusive="true" />
+            android:id="@+id/action_profileFragment_to_alertKeluarDialogFragment"
+            app:destination="@id/alertKeluarDialogFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_guestDialogFragment"
+            app:destination="@id/guestDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
@@ -169,4 +170,19 @@
             android:name="id"
             app:argType="string" />
     </fragment>
+    <dialog
+        android:id="@+id/alertKeluarDialogFragment"
+        android:name="com.maktabah.maktabahyarsi.ui.profile.AlertKeluarDialogFragment"
+        android:label="AlertKeluarDialogFragment">
+        <action
+            android:id="@+id/action_alertKeluarDialogFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/nav_main"
+            app:popUpToInclusive="true" />
+    </dialog>
+    <dialog
+        android:id="@+id/guestDialogFragment"
+        android:name="com.maktabah.maktabahyarsi.ui.guest.GuestDialogFragment"
+        android:label="fragment_guest_dialog"
+        tools:layout="@layout/fragment_guest_dialog" />
 </navigation>

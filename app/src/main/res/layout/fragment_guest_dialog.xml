@@ -6,44 +6,53 @@
     android:layout_height="wrap_content"
     android:background="@drawable/rounded_white"
     android:padding="20dp"
-    tools:context=".ui.profile.AlertKeluarDialogFragment">
+    tools:context=".ui.guest.GuestDialogFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_keluar"
+        android:id="@+id/tv_peringatan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_regular"
-        android:text="Apakah anda yakin untuk keluar?"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Peringatan"
         android:textColor="@color/black"
-        android:textSize="16dp"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/icon_alert_triangle"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/alert_triangle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_peringatan" />
+
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_ya"
+        android:id="@+id/tv_desc_peringatan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/poppins_regular"
-        android:text="Ya"
+        android:text="Anda masuk hanya sebagai tamu, login terlebih dahulu supaya kamu bisa memakai fitur ini!"
+        android:textColor="@color/black"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/icon_alert_triangle" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="OK"
         android:textColor="@color/black"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/tv_tidak"
-        app:layout_constraintTop_toBottomOf="@id/tv_keluar" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_tidak"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/poppins_regular"
-        android:text="Tidak"
-        android:textColor="@color/black"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_keluar" />
-
+        app:layout_constraintTop_toBottomOf="@id/tv_desc_peringatan" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,8 @@
 package com.maktabah.maktabahyarsi.ui.profile
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.maktabah.maktabahyarsi.data.local.datastore.UserPreferenceDataSource
 import com.maktabah.maktabahyarsi.data.network.api.model.user.GetUserByIdResponse
@@ -27,14 +29,17 @@ class ProfileViewModel @Inject constructor(
     val userResponse = _userResponse.asStateFlow()
 
     fun getUserById() = viewModelScope.launch(Dispatchers.IO) {
-        userRepository.getUserById(userPreferenceDataSource.getUserIdPrefFlow().first())
-            .collectLatest {
-                _userResponse.value = it
-            }
+        userRepository.getUserById().collectLatest {
+            _userResponse.value = it
+        }
     }
 
     fun removeSession() = viewModelScope.launch(Dispatchers.IO) {
         userPreferenceDataSource.removeIdPref()
         userPreferenceDataSource.removeTokenPref()
     }
+
+
+    val getUserTokenPrefFlow =
+        userPreferenceDataSource.getUserTokenPrefFlow().asLiveData(Dispatchers.IO)
 }

@@ -60,7 +60,7 @@ class EditProfileFragment : Fragment() {
         viewModel.getUserById()
     }
 
-    private fun observeCurrentUser() = with(binding) {
+    private fun observeCurrentUser() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.userResponse.collectLatest {

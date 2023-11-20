@@ -1,15 +1,12 @@
 package com.maktabah.maktabahyarsi.ui.login
 
 import android.app.Activity
-import android.content.IntentSender
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -18,19 +15,26 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import com.google.android.gms.auth.api.identity.BeginSignInRequest
-import com.google.android.gms.auth.api.identity.Identity
-import com.google.android.gms.auth.api.identity.SignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.common.api.CommonStatusCodes
+import com.google.gson.JsonObject
 import com.maktabah.maktabahyarsi.R
 import com.maktabah.maktabahyarsi.data.network.api.model.auth.LoginRequestBody
 import com.maktabah.maktabahyarsi.databinding.FragmentLoginBinding
+import com.maktabah.maktabahyarsi.utils.getDataJwt
 import com.maktabah.maktabahyarsi.utils.safeNavigate
 import com.maktabah.maktabahyarsi.wrapper.proceedWhen
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -38,44 +42,20 @@ class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
     private val viewModel: LoginViewModel by viewModels()
-    private lateinit var oneTapClient: SignInClient
-    private lateinit var signInRequest: BeginSignInRequest
+    private lateinit var client: GoogleSignInClient
 
     private val signInResultHandler =
-        registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { activityResult: ActivityResult ->
-            when (activityResult.resultCode) {
-                Activity.RESULT_OK -> {
-                    try {
-                        val idToken =
-                            oneTapClient.getSignInCredentialFromIntent(activityResult.data).googleIdToken
-                        when {
-                            idToken != null -> {
-                                // TODO - Got an ID token from Google. Use it to authenticate with Firebase
-                                Log.d("TEST_TOKEN", "Got ID token. $idToken")
-                            }
-
-                            else -> {
-                                Log.d("TEST_TOKEN", "No ID token!") // Shouldn't happen
-                            }
-                        }
-                    } catch (e: ApiException) {
-                        when (e.statusCode) {
-                            CommonStatusCodes.CANCELED -> {
-                                Log.d("TEST_TOKEN", "One-tap dialog was closed.")
-                            }
-
-                            CommonStatusCodes.NETWORK_ERROR -> {
-                                Log.d("TEST_TOKEN", "One-tap encountered a network error.")
-                            }
-
-                            else -> {
-                                Log.d(
-                                    "TEST_TOKEN",
-                                    "Couldn't get credential from result: ${e.message}"
-                                )
-                            }
-                        }
-                    }
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+                try {
+                    val account = task.getResult(ApiException::class.java)!!
+                    val jsonObject = JsonObject()
+                    jsonObject.addProperty("token", account.idToken!!)
+                    viewModel.loginWithGoogle(jsonObject)
+                    observeResultLoginWithGoogle()
+                } catch (e: ApiException) {
+                    Log.w("TAG", "Google sign in failed", e)
                 }
             }
         }
@@ -110,30 +90,54 @@ class LoginFragment : Fragment() {
     }
 
     private fun loginWithGoogle(): Unit = with(binding) {
-        oneTapClient = Identity.getSignInClient(requireActivity())
-        signInRequest = BeginSignInRequest.builder()
-            .setGoogleIdTokenRequestOptions(
-                BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
-                    .setSupported(true)
-                    .setServerClientId(getString(R.string.web_client_id))
-                    .setFilterByAuthorizedAccounts(false)
-                    .build()
-            )
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.web_client_id))
+            .requestEmail()
             .build()
+        client = GoogleSignIn.getClient(requireActivity(), gso)
         btnLoginGoogle.setOnClickListener {
-            oneTapClient.beginSignIn(signInRequest)
-                .addOnSuccessListener(requireActivity()) { result ->
-                    try {
-                        signInResultHandler.launch(
-                            IntentSenderRequest.Builder(result.pendingIntent.intentSender).build()
-                        )
-                    } catch (e: IntentSender.SendIntentException) {
-                        e.printStackTrace()
-                    }
+            signInResultHandler.launch(client.signInIntent)
+        }
+    }
+
+    private fun observeResultLoginWithGoogle() = with(binding) {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                viewModel.loginGoogleResponse.collectLatest {
+                    it.proceedWhen(
+                        doOnSuccess = { success ->
+                            pbLoadingGoogle.isVisible = false
+                            btnLoginGoogle.isVisible = true
+                            btnLoginGoogle.isEnabled = false
+                            success.payload?.data?.accessToken?.token?.let { token ->
+                                viewModel.setUserTokenPref(token)
+                                viewModel.setUserIdPref(token.getDataJwt().getString("id"))
+                            }
+                            viewModel.updateVisitorCounter()
+                            Toast.makeText(
+                                requireContext(),
+                                success.message.orEmpty(),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            navigateToMain()
+                        },
+                        doOnLoading = {
+                            pbLoadingGoogle.isVisible = true
+                            btnLoginGoogle.isVisible = false
+                        },
+                        doOnError = {
+                            pbLoadingGoogle.isVisible = false
+                            btnLoginGoogle.isVisible = true
+                            btnLoginGoogle.isEnabled = true
+                            Toast.makeText(
+                                requireContext(),
+                                "Login Failed: ${it.exception?.message.orEmpty()}",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    )
                 }
-                .addOnFailureListener(requireActivity()) { e ->
-                    e.printStackTrace()
-                }
+            }
         }
     }
 
@@ -146,8 +150,16 @@ class LoginFragment : Fragment() {
                             pbLoading.isVisible = false
                             btnLogin.isVisible = true
                             btnLogin.isEnabled = false
-                            viewModel.setUserTokenPref(success.payload?.data?.accessToken?.token.toString())
-                            viewModel.setUserIdPref(success.payload?.data?.accessToken?.id.toString())
+                            success.payload?.data?.accessToken?.token?.let { token ->
+                                viewModel.setUserTokenPref(token)
+                                viewModel.setUserIdPref(token.getDataJwt().getString("id"))
+                            }
+                            viewModel.updateVisitorCounter()
+                            Toast.makeText(
+                                requireContext(),
+                                success.message.orEmpty(),
+                                Toast.LENGTH_SHORT
+                            ).show()
                             navigateToMain()
                         },
                         doOnLoading = {
@@ -179,6 +191,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun guestLogin(): Unit = binding.tvGuestLogin.setOnClickListener {
+        viewModel.updateVisitorCounter()
         findNavController().safeNavigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
     }
 

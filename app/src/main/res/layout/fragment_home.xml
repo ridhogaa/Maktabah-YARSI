@@ -33,38 +33,38 @@
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
             android:src="@drawable/eye"
-            app:layout_constraintBottom_toTopOf="@id/search_view"
+            app:layout_constraintBottom_toBottomOf="@+id/logo_maktabah"
             app:layout_constraintEnd_toStartOf="@id/tv_visitor_counter"
             app:layout_constraintStart_toEndOf="@id/logo_maktabah"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/logo_maktabah" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_visitor_counter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:fontFamily="@font/poppins_regular"
-            android:padding="10dp"
+            android:gravity="center"
+            android:padding="8dp"
             android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@id/search_view"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_eye"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_eye"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/iv_eye"
             tools:text="0" />
 
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/shimmer_tv_visitor_counter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:fontFamily="@font/poppins_regular"
-            android:padding="10dp"
-            app:layout_constraintBottom_toTopOf="@id/search_view"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_eye"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_eye"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="@+id/iv_eye">
 
             <View
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="@color/background" />
 
         </com.facebook.shimmer.ShimmerFrameLayout>
@@ -73,6 +73,7 @@
             android:id="@+id/search_view"
             android:layout_width="0dp"
             android:layout_height="40dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/bg_search_grey"
             android:clickable="true"
             android:focusable="true"

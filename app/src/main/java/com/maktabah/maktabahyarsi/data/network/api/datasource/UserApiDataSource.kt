@@ -6,13 +6,13 @@ import javax.inject.Inject
 
 
 interface UserApiDataSource {
-    suspend fun getUserById(id: String): GetUserByIdResponse
+    suspend fun getUserById(token: String, id: String): GetUserByIdResponse
 }
 
 class UserApiDataSourceImpl @Inject constructor(
     private val userService: UserService
 ) : UserApiDataSource {
-    override suspend fun getUserById(id: String): GetUserByIdResponse =
-        userService.getUserById(id)
+    override suspend fun getUserById(token: String, id: String): GetUserByIdResponse =
+        userService.getUserById(token, id)
 
 }

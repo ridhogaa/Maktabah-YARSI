@@ -17,10 +17,15 @@ class OnboardingViewModel @Inject constructor(
 ) : ViewModel() {
 
     val getOnboardingPref =
-        onboardingPreferenceDataSource.getOnboardingPrefFlow().asLiveData()
+        onboardingPreferenceDataSource.getOnboardingPrefFlow()
 
     val getUserTokenPrefFlow =
-        userPreferenceDataSource.getUserTokenPrefFlow().asLiveData()
+        userPreferenceDataSource.getUserTokenPrefFlow()
+
+    fun removeSession() = viewModelScope.launch(Dispatchers.IO) {
+        userPreferenceDataSource.removeIdPref()
+        userPreferenceDataSource.removeTokenPref()
+    }
 
     fun setOnboardingPref(isDone: Boolean) = viewModelScope.launch(Dispatchers.IO) {
         onboardingPreferenceDataSource.setOnboardingPref(isDone)
