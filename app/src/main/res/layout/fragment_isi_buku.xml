@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
+    android:backgroundTint="?attr/background"
     android:padding="20dp"
     tools:context=".ui.isi_buku.IsiBuku">
 
@@ -14,134 +14,140 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/icon_back"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/iconback"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_baca_buku"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Baca Buku"
-            android:fontFamily="@font/poppins_bold"
-            android:textSize="16dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/group_judul_buku"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/toolbar">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/judul_buku"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Islam Nusantara"
-            android:fontFamily="@font/poppins_bold"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/oleh"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Oleh"
-            android:fontFamily="@font/poppins_bold"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/judul_buku" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/pencipta"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Prof. Dr. H. Nasaruddin Umar, MA"
-            android:fontFamily="@font/poppins_bold"
-            android:textSize="12sp"
-            android:textColor="@color/green_maktabah"
-            android:layout_marginStart="5dp"
-            app:layout_constraintTop_toBottomOf="@id/judul_buku"
-            app:layout_constraintStart_toEndOf="@id/oleh"/>
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/icon_back"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/iconback"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_baca_buku"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Baca Buku"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textSize="16dp"
+                    android:textColor="?attr/color"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/isi_buku"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        app:layout_constraintTop_toBottomOf="@id/group_judul_buku">
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_bab"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Bab 1 Mengenal Islam"
-            android:fontFamily="@font/poppins_bold"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/group_judul_buku"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_sub_bab"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Bab 1.1 Sebaran Islam ke Indonesia"
-            android:fontFamily="@font/poppins_bold"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_bab"
-            />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/judul_buku"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Islam Nusantara"
+                    android:textColor="?attr/color"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textSize="24sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_isi"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus bibendum, ligula sit amet posuere dignissim, est nisi eleifend libero, eget tempus nisi est eu ante. In varius, justo at condimentum dictum, sapien est fringilla nunc, a tincidunt orci mi at ante. Sed in nunc ut urna fringilla eleifend. Cras bibendum odio quis odio feugiat fringilla. Curabitur ullamcorper tortor a diam vehicula, nec egestas eros scelerisque. Quisque posuere sapien in ipsum venenatis, ut feugiat tellus facilisis. Nulla eleifend nisl facilisis, rhoncus mi in, pellentesque nunc. Nullam non elit ac ex dapibus imperdiet. Sed ac tristique turpis, ut rhoncus dolor. In libero justo, bibendum a ligula eget, scelerisque suscipit purus. Sed porta bibendum purus, ac viverra.        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus bibendum, ligula sit amet posuere dignissim, est nisi eleifend libero, eget tempus nisi est eu ante. In varius, justo at condimentum dictum, sapien est fringilla nunc, a tincidunt orci mi at ante. Sed in nunc ut urna fringilla eleifend. Cras bibendum odio quis odio feugiat fringilla. Curabitur ullamcorper tortor a diam vehicula, nec egestas eros scelerisque. Quisque posuere sapien in ipsum venenatis, ut feugiat tellus facilisis. Nulla eleifend nisl facilisis, rhoncus mi in, pellentesque nunc. Nullam non elit ac ex dapibus imperdiet. Sed ac tristique turpis, ut rhoncus dolor. In libero justo, bibendum a ligula eget, scelerisque suscipit purus. Sed porta bibendum purus, ac viverra.       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus bibendum, ligula sit amet posuere dignissim, est nisi eleifend libero, eget tempus nisi est eu ante. In varius, justo at condimentum dictum, sapien est fringilla nunc, a tincidunt orci mi at ante. Sed in nunc ut urna fringilla eleifend. Cras bibendum odio quis odio feugiat fringilla. Curabitur ullamcorper tortor a diam vehicula, nec egestas eros scelerisque. Quisque posuere sapien in ipsum venenatis, ut feugiat tellus facilisis. Nulla eleifend nisl facilisis, rhoncus mi in, pellentesque nunc. Nullam non elit ac ex dapibus imperdiet. Sed ac tristique turpis, ut rhoncus dolor. In libero justo, bibendum a ligula eget, scelerisque suscipit purus. Sed porta bibendum purus, ac viverra."
-            android:fontFamily="@font/poppins_regular"
-            android:textSize="12sp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_sub_bab"
-            />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/oleh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Oleh"
+                    android:textColor="?attr/color"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/judul_buku" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/pencipta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Prof. Dr. H. Nasaruddin Umar, MA"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textSize="12sp"
+                    android:textColor="@color/green_maktabah"
+                    android:layout_marginStart="5dp"
+                    app:layout_constraintTop_toBottomOf="@id/judul_buku"
+                    app:layout_constraintStart_toEndOf="@id/oleh"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/isi_buku"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                app:layout_constraintTop_toBottomOf="@id/group_judul_buku">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_bab"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Bab 1 Mengenal Islam"
+                    android:textColor="?attr/color"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_sub_bab"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Bab 1.1 Sebaran Islam ke Indonesia"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="?attr/color"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_bab"
+                    />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_isi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus bibendum, ligula sit amet posuere dignissim, est nisi eleifend libero, eget tempus nisi est eu ante. In varius, justo at condimentum dictum, sapien est fringilla nunc, a tincidunt orci mi at ante. Sed in nunc ut urna fringilla eleifend. Cras bibendum odio quis odio feugiat fringilla. Curabitur ullamcorper tortor a diam vehicula, nec egestas eros scelerisque. Quisque posuere sapien in ipsum venenatis, ut feugiat tellus facilisis. Nulla eleifend nisl facilisis, rhoncus mi in, pellentesque nunc. Nullam non elit ac ex dapibus imperdiet. Sed ac tristique turpis, ut rhoncus dolor. In libero justo, bibendum a ligula eget, scelerisque suscipit purus. Sed porta bibendum purus, ac viverra.        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus bibendum, ligula sit amet posuere dignissim, est nisi eleifend libero, eget tempus nisi est eu ante. In varius, justo at condimentum dictum, sapien est fringilla nunc, a tincidunt orci mi at ante. Sed in nunc ut urna fringilla eleifend. Cras bibendum odio quis odio feugiat fringilla. Curabitur ullamcorper tortor a diam vehicula, nec egestas eros scelerisque. Quisque posuere sapien in ipsum venenatis, ut feugiat tellus facilisis. Nulla eleifend nisl facilisis, rhoncus mi in, pellentesque nunc. Nullam non elit ac ex dapibus imperdiet. Sed ac tristique turpis, ut rhoncus dolor. In libero justo, bibendum a ligula eget, scelerisque suscipit purus. Sed porta bibendum purus, ac viverra.       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus bibendum, ligula sit amet posuere dignissim, est nisi eleifend libero, eget tempus nisi est eu ante. In varius, justo at condimentum dictum, sapien est fringilla nunc, a tincidunt orci mi at ante. Sed in nunc ut urna fringilla eleifend. Cras bibendum odio quis odio feugiat fringilla. Curabitur ullamcorper tortor a diam vehicula, nec egestas eros scelerisque. Quisque posuere sapien in ipsum venenatis, ut feugiat tellus facilisis. Nulla eleifend nisl facilisis, rhoncus mi in, pellentesque nunc. Nullam non elit ac ex dapibus imperdiet. Sed ac tristique turpis, ut rhoncus dolor. In libero justo, bibendum a ligula eget, scelerisque suscipit purus. Sed porta bibendum purus, ac viverra."
+                    android:fontFamily="@font/poppins_regular"
+                    android:textSize="12sp"
+                    android:textColor="?attr/color"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_sub_bab"
+                    />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@color/white">
+        android:background="?attr/background">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/next_halaman"
@@ -155,7 +161,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Halaman 2"
+                android:text="Halaman 3"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/neutral_50"
                 android:layout_marginEnd="10dp"

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="?attr/background"
+    tools:context=".ui.about.AboutFragment"
+    android:padding="10dp">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_about"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:text="Tentang"
+                android:textColor="?attr/color"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ic_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/iconback"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_tentang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Tentang"
+        android:textColor="?attr/color"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/app_bar" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_maktabah"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Maktabah YARSI"
+        android:textColor="@color/green_maktabah"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_tentang" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_desc_about"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_regular"
+        android:text="Maktabah YARSI merupakan perpustakaan Islam digital berbahasa Indonesia pertama yang hadir dengan fitur pencarian topik permasalahan berdasarkan kata kunci dari lintas referensi yang terinspirasi dari Maktabah Syamilah. Semua sumber buku dan dokumen yang ditampilkan sudah memiliki wakaf hak cipta sehingga legal untuk dimanfaatkan dan digunakan. Berikut referensi yang digunakan:"
+        android:textColor="?attr/color"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_maktabah" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_sumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_regular"
+        android:layout_marginTop="5dp"
+        android:text="1. Maktabah Syamillah, sebagai inspirasi utama;\n2. Rumah Fiqih Indonesia, sumber buku digital;\n3. Fatwa MUI, sumber dokumen Fatwa; dan\n4. Buku literatur Keislaman API, sumber repositori buku literatur Keislaman"
+        android:textColor="?attr/color"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_desc_about" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_pengembang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_regular"
+        android:layout_marginTop="5dp"
+        android:text="Maktabah YARSI dikembangkan dan dipelihara oleh:\n1. Herika Hayurani\n2. Aya Yahya Maulana\n3. Muhammad Raihan Suryanom\n4. Rizky Yuhari\n5. Dian Purnama Sari\n6. Ridho Gymnatiar Al-Rasyid\n7. Muhammad Rafly Afrizal\n8. Muhammad Madani"
+        android:textColor="?attr/color"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_sumber" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

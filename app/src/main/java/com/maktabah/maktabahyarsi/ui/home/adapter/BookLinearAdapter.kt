@@ -47,7 +47,7 @@ class BookLinearAdapter(
     override fun onBindViewHolder(holder: BookLinearAdapter.LinearViewHolder, position: Int) =
         holder.bind(differ.currentList[position])
 
-    override fun getItemCount(): Int = 6
+    override fun getItemCount(): Int = 0
 
     inner class LinearViewHolder(private val binding: ItemBukuLinearHorizontalBinding) :
         RecyclerView.ViewHolder(binding.root) {

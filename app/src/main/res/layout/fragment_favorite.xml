@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="?attr/background"
     tools:context=".ui.favorite.FavoriteFragment">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -79,7 +80,7 @@
             android:layout_marginStart="10dp"
             android:fontFamily="@font/poppins_medium"
             android:gravity="bottom"
-            android:text="Favorite Kamu"
+            android:text="Kesukaan Kamu"
             android:textColor="@color/neutral_50"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline"
@@ -92,7 +93,7 @@
             android:layout_marginStart="10dp"
             android:fontFamily="@font/poppins_regular"
             android:gravity="top"
-            android:text="Kelompokkan semua buku favorite\nsesukamu"
+            android:text="Kelompokkan semua buku kesukaanmu"
             android:textColor="@color/neutral_50"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
