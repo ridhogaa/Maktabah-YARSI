@@ -13,9 +13,7 @@ interface UserPreferenceDataSource {
     suspend fun setUserTokenPref(token: String)
     fun getUserIdPrefFlow(): Flow<String>
     suspend fun setUserIdPref(idUser: String)
-
     suspend fun removeTokenPref()
-
     suspend fun removeIdPref()
 }
 

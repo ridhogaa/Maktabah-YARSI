@@ -97,6 +97,9 @@
         <action
             android:id="@+id/action_profileFragment_to_guestDialogFragment"
             app:destination="@id/guestDialogFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
@@ -192,4 +195,9 @@
         android:name="com.maktabah.maktabahyarsi.ui.guest.GuestDialogFragment"
         android:label="fragment_guest_dialog"
         tools:layout="@layout/fragment_guest_dialog" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.maktabah.maktabahyarsi.ui.about.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
 </navigation>

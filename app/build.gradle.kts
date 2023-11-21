@@ -22,7 +22,6 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "BASE_URL", "\"http://192.168.0.145:3000\"")
-        buildConfigField("String", "SIGNING_KEY", "\"maktabahyarsi\"")
     }
 
     buildTypes {
@@ -66,7 +65,7 @@ dependencies {
     implementation("androidx.room:room-ktx:2.5.1")
 
     // SplashScreenAPI
-    implementation("androidx.core:core-splashscreen:1.0.0-rc01")
+    implementation("androidx.core:core-splashscreen:1.0.0")
 
     // CardView & RecyclerView
     implementation("androidx.cardview:cardview:1.0.0")

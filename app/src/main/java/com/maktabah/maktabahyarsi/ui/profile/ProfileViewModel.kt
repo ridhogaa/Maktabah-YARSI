@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.maktabah.maktabahyarsi.data.local.datastore.ThemePreferenceDataSource
 import com.maktabah.maktabahyarsi.data.local.datastore.UserPreferenceDataSource
 import com.maktabah.maktabahyarsi.data.network.api.model.user.GetUserByIdResponse
 import com.maktabah.maktabahyarsi.data.repository.UserRepository
@@ -21,7 +22,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
     private val userRepository: UserRepository,
-    private val userPreferenceDataSource: UserPreferenceDataSource
+    private val userPreferenceDataSource: UserPreferenceDataSource,
+    private val themePreferenceDataSource: ThemePreferenceDataSource
 ) : ViewModel() {
 
     private val _userResponse =
@@ -39,6 +41,11 @@ class ProfileViewModel @Inject constructor(
         userPreferenceDataSource.removeTokenPref()
     }
 
+    fun setTheme(isDarkMode: Boolean) = viewModelScope.launch(Dispatchers.IO) {
+        themePreferenceDataSource.setTheme(isDarkMode)
+    }
+
+    val getTheme = themePreferenceDataSource.getTheme().asLiveData(Dispatchers.IO)
 
     val getUserTokenPrefFlow =
         userPreferenceDataSource.getUserTokenPrefFlow().asLiveData(Dispatchers.IO)

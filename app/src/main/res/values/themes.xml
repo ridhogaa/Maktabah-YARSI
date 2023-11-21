@@ -12,23 +12,22 @@
         <item name="colorSecondaryVariant">@color/green_maktabah</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:navigationBarColor">@color/black_pearl_transparent</item>
+        <item name="android:statusBarColor">@color/black_pearl_transparent</item>
         <item name="background">@color/white</item>
         <item name="searchViewStyle">@color/neutral_200</item>
         <item name="color">@color/black</item>
-
-
-
         <!-- Customize your theme here. -->
     </style>
 
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/white</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/splash_wrapper</item>
-        <item name="windowSplashScreenAnimationDuration">100</item>
+        <item name="windowSplashScreenAnimationDuration">2000</item>
+        <item name="postSplashScreenTheme">@style/Base.Theme.MaktabahYARSI</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:navigationBarColor">@color/black_pearl_transparent</item>
-        <item name="postSplashScreenTheme">@style/Base.Theme.MaktabahYARSI</item>
     </style>
 
     <style name="Theme.MaktabahYARSI" parent="Base.Theme.MaktabahYARSI" />

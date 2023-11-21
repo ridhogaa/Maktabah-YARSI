@@ -15,7 +15,7 @@ import com.maktabah.maktabahyarsi.R
 
 class CustomAuthTextInputEditText : TextInputEditText {
 
-    private lateinit var textInputLayout: TextInputLayout
+    private var textInputLayout: TextInputLayout? = null
 
     constructor(context: Context) : super(context) {
         init()
@@ -47,21 +47,21 @@ class CustomAuthTextInputEditText : TextInputEditText {
                 when (inputType) {
                     0x00000021 -> {
                         if (!Patterns.EMAIL_ADDRESS.matcher(text.toString()).matches()) {
-                            textInputLayout.error =
+                            textInputLayout?.error =
                                 context.getString(R.string.email_invalid_format)
                         }
                     }
 
                     0x00000081 -> {
                         if (text.toString().length < 5) {
-                            textInputLayout.error =
+                            textInputLayout?.error =
                                 context.getString(R.string.password_invalid_format)
                         }
                     }
 
                     0x00000061 -> {
                         if (text.toString().length < 5) {
-                            textInputLayout.error =
+                            textInputLayout?.error =
                                 context.getString(R.string.username_invalid_format)
                         }
                     }
@@ -72,7 +72,7 @@ class CustomAuthTextInputEditText : TextInputEditText {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                textInputLayout.isErrorEnabled = false
+                textInputLayout?.isErrorEnabled = false
                 handler.removeCallbacks(inputFinishChecker)
             }
 
