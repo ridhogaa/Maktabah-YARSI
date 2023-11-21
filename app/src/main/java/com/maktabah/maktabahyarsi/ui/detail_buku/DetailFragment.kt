@@ -1,10 +1,6 @@
 package com.maktabah.maktabahyarsi.ui.detail_buku
 
-import android.content.Context
 import android.os.Bundle
-import android.text.Spannable
-import android.text.SpannableString
-import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,17 +9,20 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import coil.load
 import com.maktabah.maktabahyarsi.R
 import com.maktabah.maktabahyarsi.data.network.api.model.book.DataItemBook
 import com.maktabah.maktabahyarsi.databinding.FragmentDetailBinding
-import com.maktabah.maktabahyarsi.ui.home.lihatsemua.LihatSemuaFragmentArgs
+import com.maktabah.maktabahyarsi.utils.safeNavigate
+import com.maktabah.maktabahyarsi.utils.showSnackBar
 import com.maktabah.maktabahyarsi.wrapper.proceedWhen
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
@@ -32,10 +31,10 @@ class DetailFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: DetailViewModel by viewModels()
     private val navArgs: DetailFragmentArgs by navArgs()
+    private var isFavorite by Delegates.notNull<Boolean>()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDetailBinding.inflate(inflater, container, false)
         return binding.root
@@ -58,40 +57,46 @@ class DetailFragment : Fragment() {
 
     private fun getData() = with(viewModel) {
         getBooksById(navArgs.id)
+        isFavorite(navArgs.id)
     }
 
     private fun setObserveDataBook() = with(binding) {
         lifecycleScope.launch {
             repeatOnLifecycle(androidx.lifecycle.Lifecycle.State.STARTED) {
                 viewModel.bookResponse.collectLatest {
-                    it.proceedWhen(
-                        doOnSuccess = { result ->
-                            listDetailBuku.contentDetailBuku.contentDetailBuku.isVisible = true
-                            listDetailBuku.shimmerContentDetailBukuLayout.isVisible = false
-                            result.payload?.let { payload ->
-                                bindToViewBook(payload.data[0])
-                            }
-                            btnFavorite.visibility = View.VISIBLE
-                            btnMulaiMembaca.visibility = View.VISIBLE
-                            starFavorite.visibility = View.VISIBLE
-                        },
-                        doOnLoading = {
-                            listDetailBuku.contentDetailBuku.contentDetailBuku.isVisible = false
-                            listDetailBuku.shimmerContentDetailBukuLayout.isVisible = true
-                            btnFavorite.visibility = View.INVISIBLE
-                            btnMulaiMembaca.visibility = View.INVISIBLE
-                            starFavorite.visibility = View.INVISIBLE
-                        },
-                        doOnError = { err ->
-                            listDetailBuku.contentDetailBuku.contentDetailBuku.isVisible = false
-                            listDetailBuku.shimmerContentDetailBukuLayout.isVisible = true
-                            btnFavorite.visibility = View.INVISIBLE
-                            btnMulaiMembaca.visibility = View.INVISIBLE
-                            starFavorite.visibility = View.INVISIBLE
+                    it.proceedWhen(doOnSuccess = { result ->
+                        listDetailBuku.contentDetailBuku.contentDetailBuku.isVisible = true
+                        listDetailBuku.shimmerContentDetailBukuLayout.isVisible = false
+                        result.payload?.let { payload ->
+                            bindToViewBook(payload.data[0])
+                            selectFavorite(payload.data[0])
                         }
-                    )
+                        btnFavorite.visibility = View.VISIBLE
+                        btnMulaiMembaca.visibility = View.VISIBLE
+                        starFavorite.visibility = View.VISIBLE
+                    }, doOnLoading = {
+                        listDetailBuku.contentDetailBuku.contentDetailBuku.isVisible = false
+                        listDetailBuku.shimmerContentDetailBukuLayout.isVisible = true
+                        btnFavorite.visibility = View.INVISIBLE
+                        btnMulaiMembaca.visibility = View.INVISIBLE
+                        starFavorite.visibility = View.INVISIBLE
+                    }, doOnError = { err ->
+                        listDetailBuku.contentDetailBuku.contentDetailBuku.isVisible = false
+                        listDetailBuku.shimmerContentDetailBukuLayout.isVisible = true
+                        btnFavorite.visibility = View.INVISIBLE
+                        btnMulaiMembaca.visibility = View.INVISIBLE
+                        starFavorite.visibility = View.INVISIBLE
+                    })
                 }
             }
+        }
+        viewModel.isFavorite.observe(viewLifecycleOwner) {
+            if (it == true) {
+                starFavorite.setImageResource(R.drawable.favoritebook_gold)
+            } else {
+                starFavorite.setImageResource(R.drawable.favoritebook_green)
+            }
+            isFavorite = it
         }
     }
 
@@ -105,6 +110,33 @@ class DetailFragment : Fragment() {
             tvTahunRilis.text = data.total.toString()
             tvDescriptionBuku.text = data.description
         }
+
+    private fun selectFavorite(data: DataItemBook) = with(binding) {
+        viewModel.getUserTokenPrefFlow.observe(viewLifecycleOwner) { token ->
+            btnFavorite.setOnClickListener {
+                if (token.isNotEmpty()) {
+                    if (!isFavorite) {
+                        viewModel.addFavorite(
+                            data.id, data.title, data.description, data.page, data.imageUrl, true
+                        )
+                        starFavorite.setImageResource(R.drawable.favoritebook_gold)
+                        isFavorite = true
+                        showSnackBar(requireView(), "Berhasil menambahkan ke favorite")
+                    } else {
+                        viewModel.removeFavorite(
+                            data.id, data.title, data.description, data.page, data.imageUrl, true
+                        )
+                        starFavorite.setImageResource(R.drawable.favoritebook_green)
+                        isFavorite = false
+                        showSnackBar(requireView(), "Berhasil menghapus dari favorite")
+                    }
+                } else {
+                    it.findNavController()
+                        .safeNavigate(DetailFragmentDirections.actionDetailFragmentToGuestDialogFragment())
+                }
+            }
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

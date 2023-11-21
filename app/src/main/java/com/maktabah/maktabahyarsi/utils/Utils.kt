@@ -2,9 +2,11 @@ package com.maktabah.maktabahyarsi.utils
 
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.IdRes
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
+import com.google.android.material.snackbar.Snackbar
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import org.json.JSONObject
@@ -53,4 +55,9 @@ fun String.isJwtExpired(): Boolean {
 }
 
 fun String.getDataJwt(): JSONObject = JSONObject(this.decodeJwtPayload())
+
+fun showSnackBar(view: View, text: String) =
+    Snackbar.make(view, text, Snackbar.LENGTH_SHORT)
+        .show()
+
 

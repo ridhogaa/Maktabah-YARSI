@@ -116,7 +116,7 @@ class RegisterFragment : Fragment() {
                             btnRegisterGoogle.isEnabled = false
                             Toast.makeText(
                                 requireContext(),
-                                success.message.orEmpty(),
+                                success.payload?.message,
                                 Toast.LENGTH_SHORT
                             ).show()
                             navigateToLogin()
@@ -157,7 +157,7 @@ class RegisterFragment : Fragment() {
                             btnRegister.isEnabled = false
                             Toast.makeText(
                                 requireContext(),
-                                success.message.orEmpty(),
+                                success.payload?.message,
                                 Toast.LENGTH_SHORT
                             ).show()
                             navigateToLogin()

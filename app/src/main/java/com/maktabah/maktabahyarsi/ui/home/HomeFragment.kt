@@ -1,6 +1,7 @@
 package com.maktabah.maktabahyarsi.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.maktabah.maktabahyarsi.R
+import com.maktabah.maktabahyarsi.data.network.api.model.book.DataItemBook
 import com.maktabah.maktabahyarsi.databinding.FragmentHomeBinding
 import com.maktabah.maktabahyarsi.ui.home.adapter.BookLinearAdapter
 import com.maktabah.maktabahyarsi.ui.home.adapter.CategoryHomeAdapter
@@ -48,15 +50,25 @@ class HomeFragment : Fragment() {
     }
 
     private val latestBookLinearAdapter: BookLinearAdapter by lazy {
-        BookLinearAdapter {
-            navigateToDetail(it.id)
-        }
+        BookLinearAdapter(
+            {
+                navigateToDetail(it.id)
+            },
+            {
+
+            }
+        )
     }
 
     private val recommendBookLinearAdapter: BookLinearAdapter by lazy {
-        BookLinearAdapter {
-            navigateToDetail(it.id)
-        }
+        BookLinearAdapter(
+            {
+                navigateToDetail(it.id)
+            },
+            {
+
+            }
+        )
     }
 
     override fun onCreateView(

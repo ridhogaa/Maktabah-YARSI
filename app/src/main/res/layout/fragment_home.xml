@@ -32,7 +32,8 @@
             android:id="@+id/iv_eye"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
+            android:padding="8dp"
+            android:scaleType="center"
             android:src="@drawable/eye"
             app:layout_constraintBottom_toBottomOf="@+id/logo_maktabah"
             app:layout_constraintEnd_toStartOf="@id/tv_visitor_counter"
@@ -41,22 +42,21 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_visitor_counter"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
             android:fontFamily="@font/poppins_regular"
-            android:gravity="center"
-            android:padding="8dp"
-            android:visibility="invisible"
+            android:gravity="start|center_vertical"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/iv_eye"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/search_view"
             app:layout_constraintStart_toEndOf="@id/iv_eye"
             app:layout_constraintTop_toTopOf="@+id/iv_eye"
-            tools:text="0" />
+            tools:text="10000" />
 
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/shimmer_tv_visitor_counter"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
+            android:layout_height="0dp"
             android:fontFamily="@font/poppins_regular"
             app:layout_constraintBottom_toBottomOf="@+id/iv_eye"
             app:layout_constraintEnd_toEndOf="parent"
@@ -83,6 +83,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/logo_maktabah"
+            app:searchIcon="@drawable/ic_search_24"
             app:showDividers="none" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -141,8 +142,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_bold"
                     android:text="Buku Terbaru"
-                    android:textSize="16sp"
                     android:textColor="?attr/color"
+                    android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -162,8 +163,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
                     android:text="Lihat Semua"
-                    android:textSize="16dp"
                     android:textColor="?attr/color"
+                    android:textSize="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/chevron_right_buku_terbaru"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -220,8 +221,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
                     android:text="Lihat Semua"
-                    android:textSize="16dp"
                     android:textColor="?attr/color"
+                    android:textSize="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/chevron_right_rekomendasi"
                     app:layout_constraintTop_toTopOf="parent" />

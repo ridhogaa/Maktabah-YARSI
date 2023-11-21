@@ -67,7 +67,7 @@
         android:id="@+id/star_favorite"
         android:layout_width="28dp"
         android:layout_height="28dp"
-        android:src="@drawable/favoritbook_green"
+        android:src="@drawable/favoritebook_green"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/btn_favorite"
         app:layout_constraintEnd_toEndOf="@+id/btn_favorite"

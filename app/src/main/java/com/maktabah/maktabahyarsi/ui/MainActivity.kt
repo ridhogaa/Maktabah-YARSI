@@ -44,7 +44,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.favoriteFragment -> hideBottomNav(false)
                 R.id.profileFragment -> hideBottomNav(false)
                 R.id.alertKeluarDialogFragment -> hideBottomNav(false)
-                R.id.guestDialogFragment -> hideBottomNav(false)
                 else -> hideBottomNav(true)
             }
         }

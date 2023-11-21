@@ -116,7 +116,7 @@ class LoginFragment : Fragment() {
                             viewModel.updateVisitorCounter()
                             Toast.makeText(
                                 requireContext(),
-                                success.message.orEmpty(),
+                                success.payload?.message,
                                 Toast.LENGTH_SHORT
                             ).show()
                             navigateToMain()
@@ -157,7 +157,7 @@ class LoginFragment : Fragment() {
                             viewModel.updateVisitorCounter()
                             Toast.makeText(
                                 requireContext(),
-                                success.message.orEmpty(),
+                                success.payload?.message,
                                 Toast.LENGTH_SHORT
                             ).show()
                             navigateToMain()
