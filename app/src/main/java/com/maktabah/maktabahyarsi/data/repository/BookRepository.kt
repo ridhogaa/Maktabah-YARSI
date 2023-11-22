@@ -14,6 +14,7 @@ interface BookRepository {
     suspend fun getBooksBySort(sort: String? = null): Flow<ResultWrapper<GetBookResponse>>
     suspend fun getBooksById(id: String? = null): Flow<ResultWrapper<GetBookResponse>>
     suspend fun getBooksByCategory(category: String? = null): Flow<ResultWrapper<GetBookResponse>>
+    suspend fun getBooksBySubCategory(subCategory: String? = null): Flow<ResultWrapper<GetBookResponse>>
     suspend fun addFavorite(favorite: FavoriteBookEntity)
     suspend fun removeFavorite(favorite: FavoriteBookEntity)
     suspend fun getAllFavorites(idUser: String): Flow<ResultWrapper<List<FavoriteBookEntity>>>
@@ -37,6 +38,11 @@ class BookRepositoryImpl @Inject constructor(
     override suspend fun getBooksByCategory(category: String?): Flow<ResultWrapper<GetBookResponse>> =
         proceedFlow {
             bookApiDataSource.getBooksByCategory(category)
+        }
+
+    override suspend fun getBooksBySubCategory(subCategory: String?): Flow<ResultWrapper<GetBookResponse>> =
+        proceedFlow {
+            bookApiDataSource.getBooksBySubCategory(subCategory)
         }
 
     override suspend fun addFavorite(favorite: FavoriteBookEntity) =

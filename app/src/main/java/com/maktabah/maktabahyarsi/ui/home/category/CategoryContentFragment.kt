@@ -1,6 +1,7 @@
 package com.maktabah.maktabahyarsi.ui.home.category
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -61,7 +62,7 @@ class CategoryContentFragment : Fragment() {
     )
 
     private fun getData() = with(viewModel) {
-        getBooksByCategory(navArgs.id)
+        getBooksBySubCategory(navArgs.id)
     }
 
     private fun setRecyclerViewBook() {

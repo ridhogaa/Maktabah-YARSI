@@ -27,7 +27,7 @@ class SubCategoryAdapter(
                 oldItem: DataItemSubCategory,
                 newItem: DataItemSubCategory,
             ): Boolean {
-                return oldItem.hashCode() == newItem.hashCode()
+                return oldItem.id == newItem.id
             }
         })
 

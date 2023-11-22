@@ -29,7 +29,7 @@ class BookLinearAdapter(
                 oldItem: DataItemBook,
                 newItem: DataItemBook,
             ): Boolean {
-                return oldItem.hashCode() == newItem.hashCode()
+                return oldItem.id == newItem.id
             }
         })
 

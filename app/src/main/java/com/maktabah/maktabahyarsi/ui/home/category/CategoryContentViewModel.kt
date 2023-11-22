@@ -30,4 +30,14 @@ class CategoryContentViewModel @Inject constructor(
             }
         }
     }
+
+    fun getBooksBySubCategory(subCategory: String) = viewModelScope.launch(Dispatchers.IO) {
+        bookRepository.getBooksBySubCategory(subCategory).collectLatest {
+            if (it.payload?.data?.isEmpty() == true) {
+                _bookResponse.value = ResultWrapper.Empty()
+            } else {
+                _bookResponse.value = it
+            }
+        }
+    }
 }

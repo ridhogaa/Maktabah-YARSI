@@ -9,6 +9,7 @@ interface BookApiDataSource {
     suspend fun getBooksBySort(sort: String? = null): GetBookResponse
     suspend fun getBooksById(id: String? = null): GetBookResponse
     suspend fun getBooksByCategory(category: String? = null): GetBookResponse
+    suspend fun getBooksBySubCategory(subCategory: String? = null): GetBookResponse
 }
 
 class BookApiDataSourceImpl @Inject constructor(
@@ -22,5 +23,8 @@ class BookApiDataSourceImpl @Inject constructor(
 
     override suspend fun getBooksByCategory(category: String?): GetBookResponse =
         bookService.getBooks(category = category)
+
+    override suspend fun getBooksBySubCategory(subCategory: String?): GetBookResponse =
+        bookService.getBooks(subCategory = subCategory)
 
 }
