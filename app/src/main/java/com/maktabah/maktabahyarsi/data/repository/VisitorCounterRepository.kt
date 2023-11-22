@@ -9,10 +9,7 @@ import javax.inject.Inject
 
 
 interface VisitorCounterRepository {
-    suspend fun getVisitorCounter(
-        month: String,
-        year: String
-    ): Flow<ResultWrapper<GetVisitorCounterResponse>>
+    suspend fun getVisitorCounter(): Flow<ResultWrapper<GetVisitorCounterResponse>>
 
     suspend fun updateVisitorCounter()
 
@@ -21,12 +18,9 @@ interface VisitorCounterRepository {
 class VisitorCounterRepositoryImpl @Inject constructor(
     private val visitorCounterApiDataSource: VisitorCounterApiDataSource
 ) : VisitorCounterRepository {
-    override suspend fun getVisitorCounter(
-        month: String,
-        year: String
-    ): Flow<ResultWrapper<GetVisitorCounterResponse>> =
+    override suspend fun getVisitorCounter(): Flow<ResultWrapper<GetVisitorCounterResponse>> =
         proceedFlow {
-            visitorCounterApiDataSource.getVisitorCounter(month, year)
+            visitorCounterApiDataSource.getVisitorCounter()
         }
 
     override suspend fun updateVisitorCounter() =

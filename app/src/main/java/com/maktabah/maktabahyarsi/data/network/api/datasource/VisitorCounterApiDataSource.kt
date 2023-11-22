@@ -6,10 +6,7 @@ import javax.inject.Inject
 
 
 interface VisitorCounterApiDataSource {
-    suspend fun getVisitorCounter(
-        month: String,
-        year: String
-    ): GetVisitorCounterResponse
+    suspend fun getVisitorCounter(): GetVisitorCounterResponse
 
     suspend fun updateVisitorCounter()
 }
@@ -18,8 +15,8 @@ class VisitorCounterApiDataSourceImpl @Inject constructor(
     private val visitorCounterService: VisitorCounterService
 ) : VisitorCounterApiDataSource {
 
-    override suspend fun getVisitorCounter(month: String, year: String): GetVisitorCounterResponse =
-        visitorCounterService.getVisitorCounter(month, year)
+    override suspend fun getVisitorCounter(): GetVisitorCounterResponse =
+        visitorCounterService.getVisitorCounter()
 
     override suspend fun updateVisitorCounter() =
         visitorCounterService.updateVisitorCounter()

@@ -14,4 +14,10 @@ interface UserService {
         @Path("id") id: String
     ): GetUserByIdResponse
 
+    @GET("/api/v1/users/{id}")
+    suspend fun updateUserById(
+        @Header("Authorization") token: String,
+        @Path("id") id: String
+    ): GetUserByIdResponse
+
 }

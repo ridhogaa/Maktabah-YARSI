@@ -7,12 +7,14 @@ import androidx.annotation.IdRes
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import com.google.android.material.snackbar.Snackbar
-import io.jsonwebtoken.Claims
-import io.jsonwebtoken.Jwts
 import org.json.JSONObject
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.Base64
+import java.util.Calendar
 import java.util.Date
-
+import java.util.Locale
 
 fun NavController.safeNavigate(
     @IdRes currentDestinationId: Int,
@@ -60,4 +62,8 @@ fun showSnackBar(view: View, text: String) =
     Snackbar.make(view, text, Snackbar.LENGTH_SHORT)
         .show()
 
+fun getMonthNow(): String =
+    SimpleDateFormat("MMMM", Locale.getDefault()).format(Calendar.getInstance().time).lowercase()
 
+fun getYearNow(): String =
+    SimpleDateFormat("YYYY", Locale.getDefault()).format(Calendar.getInstance().time).lowercase()

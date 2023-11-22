@@ -71,7 +71,7 @@ class HomeViewModel @Inject constructor(
     }
 
     fun getVisitorCounter() = viewModelScope.launch(Dispatchers.IO) {
-        visitorCounterRepository.getVisitorCounter("november", "2023").collectLatest {
+        visitorCounterRepository.getVisitorCounter().collectLatest {
             _visitorResponse.value = it
         }
     }
