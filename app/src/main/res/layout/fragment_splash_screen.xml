@@ -4,41 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.splashscreen.SplashScreen"
-    android:backgroundTint="?attr/background">
+    android:backgroundTint="?attr/background"
+    tools:context=".ui.splashscreen.SplashScreenFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/logo_maktabah"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/icon_maktabah"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:src="@drawable/logo_maktabah_yarsi_buku"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tv_maktabah"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_maktabah"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Maktabah Yarsi"
-            android:fontFamily="@font/poppins_bold"
-            android:textSize="24sp"
-            android:textColor="?attr/color"
             android:layout_marginStart="5dp"
-            app:layout_constraintStart_toEndOf="@id/icon_maktabah"
-            app:layout_constraintTop_toTopOf="parent"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Maktabah Yarsi"
+            android:textColor="?attr/color"
+            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/icon_maktabah"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

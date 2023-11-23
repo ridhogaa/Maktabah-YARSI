@@ -13,8 +13,7 @@ import com.maktabah.maktabahyarsi.databinding.ItemBukuGridBinding
 
 
 class FavoriteAdapter(
-    private val itemClick: (FavoriteBookEntity) -> Unit,
-    private val itemFavoriteClick: (FavoriteBookEntity) -> Unit,
+    private val itemClick: (FavoriteBookEntity) -> Unit
 ) : RecyclerView.Adapter<FavoriteAdapter.GridViewHolder>() {
 
     private val differ = AsyncListDiffer(this,
@@ -30,7 +29,7 @@ class FavoriteAdapter(
                 oldItem: FavoriteBookEntity,
                 newItem: FavoriteBookEntity,
             ): Boolean {
-                return oldItem.hashCode() == newItem.hashCode()
+                return oldItem.id == newItem.id
             }
         }
     )
@@ -52,7 +51,6 @@ class FavoriteAdapter(
 
     override fun getItemCount(): Int = differ.currentList.size
 
-
     inner class GridViewHolder(
         private val binding: ItemBukuGridBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -66,10 +64,6 @@ class FavoriteAdapter(
                 coverBuku.load(book.imageUrl)
                 root.setOnClickListener {
                     itemClick(book)
-                }
-                iconFavoriteFill.setImageResource(R.drawable.favoritebook_gold)
-                iconFavoriteFill.setOnClickListener {
-                    itemFavoriteClick(book)
                 }
             }
         }

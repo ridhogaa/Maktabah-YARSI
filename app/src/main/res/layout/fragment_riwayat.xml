@@ -76,7 +76,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/background_header"
             tools:itemCount="8"
-            tools:listitem="@layout/item_linear_buku" />
+            tools:listitem="@layout/item_buku_linear_vertical" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

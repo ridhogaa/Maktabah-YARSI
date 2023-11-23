@@ -52,7 +52,7 @@ class EditProfileFragment : Fragment() {
 
     private fun actionBack() = with(binding) {
         iconBack.setOnClickListener {
-            findNavController().popBackStack()
+            findNavController().safeNavigate(EditProfileFragmentDirections.actionEditProfileFragmentToProfileFragment())
         }
     }
 
@@ -69,11 +69,6 @@ class EditProfileFragment : Fragment() {
                             success.payload?.let { data ->
                                 setData(data)
                             }
-                        },
-                        doOnLoading = {
-                        },
-                        doOnError = {
-
                         }
                     )
                 }

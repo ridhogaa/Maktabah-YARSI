@@ -30,25 +30,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val splashScreen = installSplashScreen()
-        splashScreen.setOnExitAnimationListener { splashScreenProvider ->
-            val fadeOut = ObjectAnimator.ofFloat(splashScreenProvider.view, View.ALPHA, 0f)
-            fadeOut.duration = 1000L // Or your desired duration
-            fadeOut.doOnEnd { splashScreenProvider.remove() }
-            fadeOut.start()
-        }
-
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        lifecycleScope.launch {
-            viewModel.getTheme.collect { isDarkModeActive ->
-                val theme = if (isDarkModeActive == true) {
-                    MODE_NIGHT_YES
-                } else MODE_NIGHT_NO
 
-                setDefaultNightMode(theme)
-            }
-        }
         val navHostFragment =
             binding.fragmentContainerView.getFragment<Fragment>() as NavHostFragment
 
@@ -63,6 +47,16 @@ class MainActivity : AppCompatActivity() {
                 R.id.alertKeluarDialogFragment -> hideBottomNav(false)
                 else -> hideBottomNav(true)
             }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.getTheme.observe(this@MainActivity) { isDarkModeActive ->
+            val theme = if (isDarkModeActive) {
+                MODE_NIGHT_YES
+            } else MODE_NIGHT_NO
+            setDefaultNightMode(theme)
         }
     }
 

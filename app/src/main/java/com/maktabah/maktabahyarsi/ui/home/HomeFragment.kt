@@ -50,25 +50,15 @@ class HomeFragment : Fragment() {
     }
 
     private val latestBookLinearAdapter: BookLinearAdapter by lazy {
-        BookLinearAdapter(
-            {
-                navigateToDetail(it.id)
-            },
-            {
-
-            }
-        )
+        BookLinearAdapter {
+            navigateToDetail(it.id)
+        }
     }
 
     private val recommendBookLinearAdapter: BookLinearAdapter by lazy {
-        BookLinearAdapter(
-            {
-                navigateToDetail(it.id)
-            },
-            {
-
-            }
-        )
+        BookLinearAdapter {
+            navigateToDetail(it.id)
+        }
     }
 
     override fun onCreateView(

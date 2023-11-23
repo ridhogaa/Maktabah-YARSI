@@ -30,7 +30,6 @@ class OnboardingFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentOnboardingBinding.inflate(layoutInflater, container, false)
-        checkDoneWithOnboardingAndIsLoggedIn()
         return binding.root
     }
 
@@ -40,26 +39,6 @@ class OnboardingFragment : Fragment() {
         doneWithFab()
         doneWithTvLewati()
     }
-
-    private fun checkDoneWithOnboardingAndIsLoggedIn() = with(viewModel) {
-        lifecycleScope.launch {
-            getOnboardingPref.collectLatest { isDone ->
-                getUserTokenPrefFlow.collectLatest { token ->
-                    if (token.isNotEmpty() && isDone) {
-                        if (token.isJwtExpired()) {
-                            removeSession()
-                            navigateToLogin()
-                        } else {
-                            navigateToMain()
-                        }
-                    } else if (token.isEmpty() && isDone) {
-                        navigateToLogin()
-                    }
-                }
-            }
-        }
-    }
-
 
     private fun doneWithFab() = with(binding) {
         fabDone.setOnClickListener {
@@ -77,9 +56,6 @@ class OnboardingFragment : Fragment() {
 
     private fun navigateToLogin() =
         findNavController().safeNavigate(OnboardingFragmentDirections.actionOnboardingFragmentToLoginFragment())
-
-    private fun navigateToMain() =
-        findNavController().safeNavigate(OnboardingFragmentDirections.actionOnboardingFragmentToHomeFragment())
 
     override fun onDestroyView() {
         super.onDestroyView()

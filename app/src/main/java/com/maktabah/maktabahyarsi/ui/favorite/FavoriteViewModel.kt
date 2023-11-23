@@ -42,27 +42,6 @@ class FavoriteViewModel @Inject constructor(
             }
     }
 
-    fun removeFavorite(
-        id: String,
-        title: String,
-        desc: String,
-        page: Int,
-        imageUrl: String,
-        isFavorite: Boolean,
-    ) = viewModelScope.launch(Dispatchers.IO) {
-        bookRepository.removeFavorite(
-            FavoriteBookEntity(
-                id,
-                title,
-                desc,
-                page,
-                imageUrl,
-                userPreferenceDataSource.getUserIdPrefFlow().first(),
-                isFavorite
-            )
-        )
-    }
-
     val getUserTokenPrefFlow =
         userPreferenceDataSource.getUserTokenPrefFlow().asLiveData(Dispatchers.IO)
 }

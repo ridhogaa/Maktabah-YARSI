@@ -5,8 +5,8 @@
     android:layout_height="260dp"
     android:layout_margin="10dp"
     android:elevation="4dp"
-    app:cardCornerRadius="8dp"
-    app:cardBackgroundColor="@color/white">
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -55,7 +55,7 @@
             android:text="Buku ini meliputi berbagai tentang islam meliputi tauhid, syariat, dan lainnya."
             android:textAlignment="textStart"
             android:textSize="8sp"
-            app:layout_constraintBottom_toTopOf="@id/icon_favorite_fill"
+            app:layout_constraintBottom_toTopOf="@id/icon_file"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_judul_buku" />
@@ -65,11 +65,13 @@
             android:layout_width="10dp"
             android:layout_height="10dp"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:scaleType="fitCenter"
             android:src="@drawable/file"
-            app:layout_constraintBottom_toBottomOf="@+id/icon_favorite_fill"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/icon_favorite_fill" />
+            app:layout_constraintTop_toBottomOf="@id/tv_desc_buku" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_jumlah_halaman"
@@ -80,21 +82,9 @@
             android:padding="2dp"
             android:text="124 Halaman"
             android:textSize="8sp"
-            app:layout_constraintBottom_toBottomOf="@+id/icon_favorite_fill"
+            app:layout_constraintBottom_toBottomOf="@+id/icon_file"
             app:layout_constraintStart_toEndOf="@+id/icon_file"
-            app:layout_constraintTop_toTopOf="@+id/icon_favorite_fill" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/icon_favorite_fill"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/favoritebook_fill"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_desc_buku" />
+            app:layout_constraintTop_toTopOf="@+id/icon_file" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

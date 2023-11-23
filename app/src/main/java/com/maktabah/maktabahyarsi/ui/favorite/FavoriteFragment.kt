@@ -28,25 +28,13 @@ class FavoriteFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: FavoriteViewModel by viewModels()
     private val favoriteAdapter: FavoriteAdapter by lazy {
-        FavoriteAdapter(
-            {
-                findNavController().safeNavigate(
-                    FavoriteFragmentDirections.actionFavoriteFragmentToDetailFragment(
-                        it.id
-                    )
+        FavoriteAdapter {
+            findNavController().safeNavigate(
+                FavoriteFragmentDirections.actionFavoriteFragmentToDetailFragment(
+                    it.id
                 )
-            }, { data ->
-                viewModel.removeFavorite(
-                    data.id,
-                    data.title,
-                    data.desc,
-                    data.page,
-                    data.imageUrl,
-                    data.isFavorite
-                )
-                getData()
-            }
-        )
+            )
+        }
     }
 
     override fun onCreateView(

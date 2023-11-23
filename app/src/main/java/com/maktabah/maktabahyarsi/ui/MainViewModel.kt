@@ -11,5 +11,5 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val themePreferenceDataSource: ThemePreferenceDataSource
 ) : ViewModel() {
-    val getTheme = themePreferenceDataSource.getTheme()
+    val getTheme = themePreferenceDataSource.getTheme().asLiveData(Dispatchers.IO)
 }

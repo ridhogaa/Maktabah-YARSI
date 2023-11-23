@@ -12,8 +12,7 @@ import com.maktabah.maktabahyarsi.databinding.ItemBukuLinearHorizontalBinding
 
 
 class BookLinearAdapter(
-    private val itemClick: (DataItemBook) -> Unit,
-    private val onFavClick: (DataItemBook) -> Unit
+    private val itemClick: (DataItemBook) -> Unit
 ) : RecyclerView.Adapter<BookLinearAdapter.LinearViewHolder>() {
 
     private val differ = AsyncListDiffer(this,
@@ -55,7 +54,6 @@ class BookLinearAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(book: DataItemBook) {
             with(binding) {
-//                iconFavoriteFill.setImageResource(if (isFavorite) R.drawable.favoritebook_gold else R.drawable.favoritebook_fill)
                 tvJudulBuku.text = book.title
                 tvDescBuku.text = book.description
                 tvJumlahHalaman.text =
@@ -63,9 +61,6 @@ class BookLinearAdapter(
                 coverBuku.load(book.imageUrl)
                 root.setOnClickListener {
                     itemClick(book)
-                }
-                iconFavoriteFill.setOnClickListener {
-                    onFavClick(book)
                 }
             }
         }

@@ -1,4 +1,4 @@
-package com.maktabah.maktabahyarsi.ui.onboarding
+package com.maktabah.maktabahyarsi.ui.splashscreen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -12,10 +12,18 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class OnboardingViewModel @Inject constructor(
+class SplashScreenViewModel @Inject constructor(
     private val onboardingPreferenceDataSource: OnboardingPreferenceDataSource,
+    private val userPreferenceDataSource: UserPreferenceDataSource,
 ) : ViewModel() {
-    fun setOnboardingPref(isDone: Boolean) = viewModelScope.launch(Dispatchers.IO) {
-        onboardingPreferenceDataSource.setOnboardingPref(isDone)
+    val getOnboardingPref =
+        onboardingPreferenceDataSource.getOnboardingPrefFlow().asLiveData(Dispatchers.IO)
+
+    val getUserTokenPrefFlow =
+        userPreferenceDataSource.getUserTokenPrefFlow().asLiveData(Dispatchers.IO)
+
+    fun removeSession() = viewModelScope.launch(Dispatchers.IO) {
+        userPreferenceDataSource.removeIdPref()
+        userPreferenceDataSource.removeTokenPref()
     }
 }

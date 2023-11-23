@@ -113,19 +113,10 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.2")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.2")
 
-    // Charts
-    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
-
     // Firebase
     implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
     implementation("com.google.firebase:firebase-analytics")
 
     // coil
     implementation("io.coil-kt:coil:2.4.0")
-
-    // jwt
-    implementation("io.jsonwebtoken:jjwt-api:0.11.2")
-    implementation("io.jsonwebtoken:jjwt-impl:0.11.2")
-    implementation("io.jsonwebtoken:jjwt-jackson:0.11.2")
-    implementation("com.auth0.android:jwtdecode:2.0.0")
 }
