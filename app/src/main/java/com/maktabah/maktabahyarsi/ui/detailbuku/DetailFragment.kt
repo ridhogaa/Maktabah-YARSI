@@ -1,4 +1,4 @@
-package com.maktabah.maktabahyarsi.ui.detail_buku
+package com.maktabah.maktabahyarsi.ui.detailbuku
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,10 +12,10 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import coil.load
 import com.maktabah.maktabahyarsi.R
 import com.maktabah.maktabahyarsi.data.network.api.model.book.DataItemBook
 import com.maktabah.maktabahyarsi.databinding.FragmentDetailBinding
+import com.maktabah.maktabahyarsi.utils.loadImage
 import com.maktabah.maktabahyarsi.utils.safeNavigate
 import com.maktabah.maktabahyarsi.utils.showSnackBar
 import com.maktabah.maktabahyarsi.wrapper.proceedWhen
@@ -67,13 +67,13 @@ class DetailFragment : Fragment() {
                     it.proceedWhen(doOnSuccess = { result ->
                         listDetailBuku.contentDetailBuku.contentDetailBuku.isVisible = true
                         listDetailBuku.shimmerContentDetailBukuLayout.isVisible = false
+                        btnFavorite.visibility = View.VISIBLE
+                        btnMulaiMembaca.visibility = View.VISIBLE
+                        starFavorite.visibility = View.VISIBLE
                         result.payload?.let { payload ->
                             bindToViewBook(payload.data[0])
                             selectFavorite(payload.data[0])
                         }
-                        btnFavorite.visibility = View.VISIBLE
-                        btnMulaiMembaca.visibility = View.VISIBLE
-                        starFavorite.visibility = View.VISIBLE
                     }, doOnLoading = {
                         listDetailBuku.contentDetailBuku.contentDetailBuku.isVisible = false
                         listDetailBuku.shimmerContentDetailBukuLayout.isVisible = true
@@ -102,7 +102,7 @@ class DetailFragment : Fragment() {
 
     private fun bindToViewBook(data: DataItemBook) =
         with(binding.listDetailBuku.contentDetailBuku) {
-            coverBuku.load(data.imageUrl)
+            coverBuku.loadImage(coverBuku.context, data.imageUrl)
             judulBuku.text = data.title
             tvPencipta.text = data.creator
             tvJumlahBukuTerbaca.text = data.total.toString()
@@ -135,8 +135,31 @@ class DetailFragment : Fragment() {
                         .safeNavigate(DetailFragmentDirections.actionDetailFragmentToGuestDialogFragment())
                 }
             }
+            btnMulaiMembaca.setOnClickListener {
+                if (token.isNotEmpty()) {
+                    viewModel.addHistory(
+                        data.id,
+                        data.title,
+                        data.description,
+                        data.page,
+                        data.creator,
+                        data.imageUrl,
+                        true
+                    )
+                    navigateToContentBook(data.id)
+                } else {
+                    navigateToContentBook(data.id)
+                }
+            }
         }
     }
+
+    private fun navigateToContentBook(id: String) =
+        findNavController().safeNavigate(
+            DetailFragmentDirections.actionDetailFragmentToContentBukuFragment(
+                id
+            )
+        )
 
     override fun onDestroyView() {
         super.onDestroyView()

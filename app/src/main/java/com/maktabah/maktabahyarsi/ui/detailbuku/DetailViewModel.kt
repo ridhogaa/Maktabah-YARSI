@@ -1,4 +1,4 @@
-package com.maktabah.maktabahyarsi.ui.detail_buku
+package com.maktabah.maktabahyarsi.ui.detailbuku
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,13 +6,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.maktabah.maktabahyarsi.data.local.database.entity.FavoriteBookEntity
+import com.maktabah.maktabahyarsi.data.local.database.entity.HistoryBookEntity
 import com.maktabah.maktabahyarsi.data.local.datastore.UserPreferenceDataSource
 import com.maktabah.maktabahyarsi.data.network.api.model.book.GetBookResponse
 import com.maktabah.maktabahyarsi.data.repository.BookRepository
 import com.maktabah.maktabahyarsi.wrapper.ResultWrapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -37,6 +37,29 @@ class DetailViewModel @Inject constructor(
         bookRepository.getBooksById(id).collectLatest {
             _bookResponse.value = it
         }
+    }
+
+    fun addHistory(
+        id: String,
+        title: String,
+        desc: String,
+        page: Int,
+        creator: String,
+        imageUrl: String,
+        isHistory: Boolean
+    ) = viewModelScope.launch(Dispatchers.IO) {
+        bookRepository.addHistory(
+            HistoryBookEntity(
+                id,
+                title,
+                desc,
+                page,
+                creator,
+                imageUrl,
+                userPreferenceDataSource.getUserIdPrefFlow().first(),
+                isHistory
+            )
+        )
     }
 
     fun addFavorite(

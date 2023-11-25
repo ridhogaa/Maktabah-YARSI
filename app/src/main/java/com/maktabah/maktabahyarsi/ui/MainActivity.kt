@@ -1,6 +1,5 @@
 package com.maktabah.maktabahyarsi.ui
 
-import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -8,17 +7,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode
-import androidx.core.animation.doOnEnd
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.maktabah.maktabahyarsi.R
 import com.maktabah.maktabahyarsi.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {

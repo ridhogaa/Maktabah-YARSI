@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="14dp"
@@ -18,6 +19,7 @@
             android:layout_width="100dp"
             android:layout_height="140dp"
             android:layout_marginEnd="20dp"
+            android:contentDescription="@null"
             android:scaleType="centerCrop"
             android:src="@drawable/coverbook"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -32,24 +34,37 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/poppins_bold"
-            android:text="Buku Pintar Islam"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cover_buku"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Buku Pintar Islam" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_oleh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Oleh"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@id/tv_penulis_buku"
+            app:layout_constraintStart_toEndOf="@+id/cover_buku"
+            app:layout_constraintTop_toBottomOf="@id/tv_judul_buku" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_penulis_buku"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="4dp"
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/poppins_medium"
-            android:text="Oleh Prof. Dr. H. Nasaruddin Umar, MA"
+            android:textColor="@color/primary_500"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/cover_buku"
-            app:layout_constraintTop_toBottomOf="@id/tv_judul_buku" />
+            app:layout_constraintStart_toEndOf="@+id/tv_oleh"
+            app:layout_constraintTop_toBottomOf="@id/tv_judul_buku"
+            tools:text="Prof. Dr. H. Nasaruddin Umar, MA" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_desc_buku"
@@ -60,11 +75,11 @@
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/poppins_regular"
             android:maxLines="4"
-            android:text="Buku Islam Nusantara oleh Prof. Dr. H. Nasaruddin Umar, MA adalah sebuah karya yang menggambarkan peran Islam dalam konteks budaya, sejarah, dan masyarakat di wilayaah Nusantara seperti indonesia... "
             android:textSize="8sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cover_buku"
-            app:layout_constraintTop_toBottomOf="@id/tv_penulis_buku" />
+            app:layout_constraintTop_toBottomOf="@id/tv_oleh"
+            tools:text="Buku Islam Nusantara oleh Prof. Dr. H. Nasaruddin Umar, MA adalah sebuah karya yang menggambarkan peran Islam dalam konteks budaya, sejarah, dan masyarakat di wilayaah Nusantara seperti indonesia... " />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/icon_file"
@@ -85,11 +100,11 @@
             android:fontFamily="@font/poppins_regular"
             android:gravity="start|center_vertical"
             android:padding="2dp"
-            android:text="124 Halaman"
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="@+id/icon_file"
             app:layout_constraintStart_toEndOf="@+id/icon_file"
-            app:layout_constraintTop_toTopOf="@+id/icon_file" />
+            app:layout_constraintTop_toTopOf="@+id/icon_file"
+            tools:text="124 Halaman" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

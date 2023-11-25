@@ -1,8 +1,11 @@
 package com.maktabah.maktabahyarsi.di
 
 import com.maktabah.maktabahyarsi.data.local.database.dao.FavoriteBookDao
+import com.maktabah.maktabahyarsi.data.local.database.dao.HistoryBookDao
 import com.maktabah.maktabahyarsi.data.local.database.datasource.FavoriteBookDataSource
 import com.maktabah.maktabahyarsi.data.local.database.datasource.FavoriteBookDataSourceImpl
+import com.maktabah.maktabahyarsi.data.local.database.datasource.HistoryBookDataSource
+import com.maktabah.maktabahyarsi.data.local.database.datasource.HistoryBookDataSourceImpl
 import com.maktabah.maktabahyarsi.data.local.datastore.OnboardingPreferenceDataSource
 import com.maktabah.maktabahyarsi.data.local.datastore.OnboardingPreferenceDataSourceImpl
 import com.maktabah.maktabahyarsi.data.local.datastore.ThemePreferenceDataSource
@@ -67,6 +70,11 @@ object DataSourceModule {
     @Provides
     fun provideFavoriteBookDataSource(favoriteBookDao: FavoriteBookDao): FavoriteBookDataSource =
         FavoriteBookDataSourceImpl(favoriteBookDao)
+
+    @Singleton
+    @Provides
+    fun provideHistoryBookDataSource(historyBookDao: HistoryBookDao): HistoryBookDataSource =
+        HistoryBookDataSourceImpl(historyBookDao)
 
     @Singleton
     @Provides

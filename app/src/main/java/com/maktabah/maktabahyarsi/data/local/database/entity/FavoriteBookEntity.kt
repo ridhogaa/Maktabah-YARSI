@@ -7,7 +7,6 @@ import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
 @Entity("favorite_book")
-@Parcelize
 data class FavoriteBookEntity(
     @PrimaryKey
     @ColumnInfo(name = "id_buku")
@@ -30,4 +29,4 @@ data class FavoriteBookEntity(
 
     @ColumnInfo(name = "is_favorite")
     var isFavorite: Boolean
-) : Parcelable
+)

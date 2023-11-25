@@ -7,7 +7,6 @@
     android:backgroundTint="?attr/background"
     tools:context=".ui.riwayat.RiwayatFragment">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -62,21 +61,15 @@
             app:layout_constraintBottom_toBottomOf="@+id/background_header"
             app:layout_constraintEnd_toEndOf="@+id/background_header" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_riwayat_buku"
+        <include
+            android:id="@+id/list_riwayat_buku"
+            layout="@layout/list_riwayat_buku"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/background_header"
-            tools:itemCount="8"
-            tools:listitem="@layout/item_buku_linear_vertical" />
+            app:layout_constraintTop_toBottomOf="@id/background_header" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

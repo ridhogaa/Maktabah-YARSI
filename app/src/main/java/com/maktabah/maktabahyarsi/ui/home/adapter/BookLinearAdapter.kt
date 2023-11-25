@@ -5,11 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
 import com.maktabah.maktabahyarsi.R
 import com.maktabah.maktabahyarsi.data.network.api.model.book.DataItemBook
 import com.maktabah.maktabahyarsi.databinding.ItemBukuLinearHorizontalBinding
-
+import com.maktabah.maktabahyarsi.utils.loadImage
 
 class BookLinearAdapter(
     private val itemClick: (DataItemBook) -> Unit
@@ -58,7 +57,7 @@ class BookLinearAdapter(
                 tvDescBuku.text = book.description
                 tvJumlahHalaman.text =
                     itemView.context.getString(R.string.halaman, book.page.toString())
-                coverBuku.load(book.imageUrl)
+                coverBuku.loadImage(itemView.context, book.imageUrl)
                 root.setOnClickListener {
                     itemClick(book)
                 }

@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:backgroundTint="?attr/background"
-    tools:context=".ui.detail_buku.DetailFragment"
-    tools:ignore="ExtraText">
+    tools:context=".ui.detailbuku.DetailFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbar"
@@ -30,11 +29,11 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="24dp"
             android:fontFamily="@font/poppins_bold"
             android:text="Detail Buku"
-            android:textSize="16sp"
             android:textColor="?attr/color"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

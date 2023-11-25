@@ -5,12 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
 import com.maktabah.maktabahyarsi.R
 import com.maktabah.maktabahyarsi.data.local.database.entity.FavoriteBookEntity
-import com.maktabah.maktabahyarsi.data.network.api.model.book.DataItemBook
 import com.maktabah.maktabahyarsi.databinding.ItemBukuGridBinding
-
+import com.maktabah.maktabahyarsi.utils.loadImage
 
 class FavoriteAdapter(
     private val itemClick: (FavoriteBookEntity) -> Unit
@@ -61,7 +59,7 @@ class FavoriteAdapter(
                 tvDescBuku.text = book.desc
                 tvJumlahHalaman.text =
                     itemView.context.getString(R.string.halaman, book.page.toString())
-                coverBuku.load(book.imageUrl)
+                coverBuku.loadImage(itemView.context, book.imageUrl)
                 root.setOnClickListener {
                     itemClick(book)
                 }

@@ -19,6 +19,9 @@ data class HistoryBookEntity(
     @ColumnInfo(name = "jumlah_halaman")
     val page: Int,
 
+    @ColumnInfo(name = "creator")
+    val creator: String,
+
     @ColumnInfo(name = "cover_buku")
     val imageUrl: String,
 

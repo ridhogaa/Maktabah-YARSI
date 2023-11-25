@@ -1,4 +1,4 @@
-package com.maktabah.maktabahyarsi.ui.home.adapter
+package com.maktabah.maktabahyarsi.ui.riwayat.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,56 +6,60 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.maktabah.maktabahyarsi.R
-import com.maktabah.maktabahyarsi.data.network.api.model.book.DataItemBook
-import com.maktabah.maktabahyarsi.databinding.ItemBukuGridBinding
+import com.maktabah.maktabahyarsi.data.local.database.entity.HistoryBookEntity
+import com.maktabah.maktabahyarsi.databinding.ItemBukuLinearVerticalBinding
 import com.maktabah.maktabahyarsi.utils.loadImage
 
-class BookGridAdapter(
-    private val itemClick: (DataItemBook) -> Unit
-) : RecyclerView.Adapter<BookGridAdapter.GridViewHolder>() {
+class RiwayatAdapter(
+    private val itemClick: (HistoryBookEntity) -> Unit
+) : RecyclerView.Adapter<RiwayatAdapter.LinearViewHolder>() {
 
     private val differ = AsyncListDiffer(this,
-        object : DiffUtil.ItemCallback<DataItemBook>() {
+        object : DiffUtil.ItemCallback<HistoryBookEntity>() {
             override fun areItemsTheSame(
-                oldItem: DataItemBook,
-                newItem: DataItemBook,
+                oldItem: HistoryBookEntity,
+                newItem: HistoryBookEntity,
             ): Boolean {
                 return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(
-                oldItem: DataItemBook,
-                newItem: DataItemBook,
+                oldItem: HistoryBookEntity,
+                newItem: HistoryBookEntity,
             ): Boolean {
                 return oldItem.id == newItem.id
             }
-        })
+        }
+    )
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): GridViewHolder =
-        GridViewHolder(
-            ItemBukuGridBinding.inflate(
+    ): LinearViewHolder =
+        LinearViewHolder(
+            ItemBukuLinearVerticalBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
             )
         )
 
-    override fun onBindViewHolder(holder: GridViewHolder, position: Int) =
+    override fun onBindViewHolder(holder: LinearViewHolder, position: Int) =
         holder.bind(differ.currentList[position])
 
     override fun getItemCount(): Int = differ.currentList.size
 
-    inner class GridViewHolder(private val binding: ItemBukuGridBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(book: DataItemBook) {
+    inner class LinearViewHolder(
+        private val binding: ItemBukuLinearVerticalBinding,
+    ) : RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(book: HistoryBookEntity) {
             with(binding) {
                 tvJudulBuku.text = book.title
-                tvDescBuku.text = book.description
+                tvDescBuku.text = book.desc
                 tvJumlahHalaman.text =
                     itemView.context.getString(R.string.halaman, book.page.toString())
+                tvPenulisBuku.text = book.creator
                 coverBuku.loadImage(itemView.context, book.imageUrl)
                 root.setOnClickListener {
                     itemClick(book)
@@ -64,7 +68,7 @@ class BookGridAdapter(
         }
     }
 
-    fun setData(data: List<DataItemBook>) {
+    fun setData(data: List<HistoryBookEntity>) {
         differ.submitList(data)
     }
 
