@@ -1,7 +1,9 @@
 package com.maktabah.maktabahyarsi.data.repository
 
 import com.maktabah.maktabahyarsi.data.local.database.datasource.FavoriteBookDataSource
+import com.maktabah.maktabahyarsi.data.local.database.datasource.HistoryBookDataSource
 import com.maktabah.maktabahyarsi.data.local.database.entity.FavoriteBookEntity
+import com.maktabah.maktabahyarsi.data.local.database.entity.HistoryBookEntity
 import com.maktabah.maktabahyarsi.data.network.api.datasource.BookApiDataSource
 import com.maktabah.maktabahyarsi.data.network.api.model.book.GetBookResponse
 import com.maktabah.maktabahyarsi.wrapper.ResultWrapper
@@ -19,11 +21,14 @@ interface BookRepository {
     suspend fun removeFavorite(favorite: FavoriteBookEntity)
     suspend fun getAllFavorites(idUser: String): Flow<ResultWrapper<List<FavoriteBookEntity>>>
     suspend fun isFavorite(id: String, idUser: String): Boolean
+    suspend fun addOrUpdateHistory(historyBookEntity: HistoryBookEntity)
+    suspend fun getAllHistories(idUser: String): Flow<ResultWrapper<List<HistoryBookEntity>>>
 }
 
 class BookRepositoryImpl @Inject constructor(
     private val bookApiDataSource: BookApiDataSource,
-    private val favoriteBookDataSource: FavoriteBookDataSource
+    private val favoriteBookDataSource: FavoriteBookDataSource,
+    private val historyBookDataSource: HistoryBookDataSource
 ) : BookRepository {
     override suspend fun getBooksBySort(sort: String?): Flow<ResultWrapper<GetBookResponse>> =
         proceedFlow {
@@ -69,4 +74,31 @@ class BookRepositoryImpl @Inject constructor(
     override suspend fun isFavorite(id: String, idUser: String): Boolean =
         favoriteBookDataSource.isFavorite(id, idUser)
 
+    override suspend fun addOrUpdateHistory(historyBookEntity: HistoryBookEntity) {
+        if (historyBookDataSource.isHistory(historyBookEntity.id, historyBookEntity.idUser)) {
+            historyBookDataSource.updateDate(
+                historyBookEntity.id,
+                historyBookEntity.idUser,
+                historyBookEntity.date
+            )
+        } else {
+            historyBookDataSource.addHistory(historyBookEntity)
+        }
+    }
+
+    override suspend fun getAllHistories(idUser: String): Flow<ResultWrapper<List<HistoryBookEntity>>> =
+        proceedFlow {
+            historyBookDataSource.getAllHistories(idUser).map {
+                HistoryBookEntity(
+                    it.id,
+                    it.title,
+                    it.desc,
+                    it.page,
+                    it.creator,
+                    it.imageUrl,
+                    it.idUser,
+                    it.date
+                )
+            }
+        }
 }

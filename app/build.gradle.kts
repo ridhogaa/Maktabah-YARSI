@@ -64,9 +64,6 @@ dependencies {
     ksp("androidx.room:room-compiler:2.5.1")
     implementation("androidx.room:room-ktx:2.5.1")
 
-    // SplashScreenAPI
-    implementation("androidx.core:core-splashscreen:1.0.0")
-
     // CardView & RecyclerView
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("androidx.recyclerview:recyclerview:1.3.1")
@@ -117,6 +114,4 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
     implementation("com.google.firebase:firebase-analytics")
 
-    // coil
-    implementation("io.coil-kt:coil:2.4.0")
 }

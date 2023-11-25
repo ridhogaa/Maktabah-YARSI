@@ -1,29 +1,31 @@
 package com.maktabah.maktabahyarsi.utils
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Build
-import android.os.Bundle
 import android.view.View
-import androidx.annotation.IdRes
+import android.widget.ImageView
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.snackbar.Snackbar
+import com.maktabah.maktabahyarsi.R
 import org.json.JSONObject
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.Base64
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
-fun NavController.safeNavigate(
-    @IdRes currentDestinationId: Int,
-    @IdRes id: Int,
-    args: Bundle? = null
-) {
-    if (currentDestinationId == currentDestination?.id) {
-        navigate(id, args)
-    }
+fun ImageView.loadImage(context: Context, url: String?) {
+    Glide.with(context)
+        .load(url)
+        .placeholder(R.drawable.no_image_placeholder)
+        .error(R.drawable.no_image_placeholder)
+        .skipMemoryCache(true)
+        .diskCacheStrategy(DiskCacheStrategy.ALL)
+        .into(this)
 }
 
 fun NavController.safeNavigate(direction: NavDirections) {
@@ -67,3 +69,6 @@ fun getMonthNow(): String =
 
 fun getYearNow(): String =
     SimpleDateFormat("YYYY", Locale.getDefault()).format(Calendar.getInstance().time).lowercase()
+
+@SuppressLint("ConstantLocale")
+val currentDate: String = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault()).format(Calendar.getInstance().time)
