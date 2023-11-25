@@ -28,6 +28,6 @@ data class HistoryBookEntity(
     @ColumnInfo(name = "id_user")
     val idUser: String,
 
-    @ColumnInfo(name = "is_history")
-    var isHistory: Boolean
+    @ColumnInfo(name = "date")
+    var date: String
 )

@@ -8,6 +8,8 @@ import javax.inject.Inject
 interface HistoryBookDataSource {
     suspend fun addHistory(historyBookEntity: HistoryBookEntity)
     suspend fun getAllHistories(idUser: String): List<HistoryBookEntity>
+    suspend fun isHistory(id: String, idUser: String): Boolean
+    suspend fun updateDate(id: String, idUser: String, date: String)
 }
 
 class HistoryBookDataSourceImpl @Inject constructor(
@@ -18,4 +20,10 @@ class HistoryBookDataSourceImpl @Inject constructor(
 
     override suspend fun getAllHistories(idUser: String): List<HistoryBookEntity> =
         historyBookDao.getAllHistories(idUser)
+
+    override suspend fun isHistory(id: String, idUser: String): Boolean =
+        historyBookDao.isHistory(id, idUser)
+
+    override suspend fun updateDate(id: String, idUser: String, date: String) =
+        historyBookDao.updateDate(id, idUser, date)
 }

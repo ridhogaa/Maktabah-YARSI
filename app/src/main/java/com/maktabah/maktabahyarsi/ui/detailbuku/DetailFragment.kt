@@ -137,14 +137,13 @@ class DetailFragment : Fragment() {
             }
             btnMulaiMembaca.setOnClickListener {
                 if (token.isNotEmpty()) {
-                    viewModel.addHistory(
+                    viewModel.addOrUpdateHistory(
                         data.id,
                         data.title,
                         data.description,
                         data.page,
                         data.creator,
                         data.imageUrl,
-                        true
                     )
                     navigateToContentBook(data.id)
                 } else {

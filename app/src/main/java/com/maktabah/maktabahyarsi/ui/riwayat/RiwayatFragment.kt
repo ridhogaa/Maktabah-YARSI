@@ -28,10 +28,18 @@ class RiwayatFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: RiwayatViewModel by viewModels()
     private val riwayatAdapter: RiwayatAdapter by lazy {
-        RiwayatAdapter {
+        RiwayatAdapter { data ->
+            viewModel.addOrUpdateHistory(
+                data.id,
+                data.title,
+                data.desc,
+                data.page,
+                data.creator,
+                data.imageUrl,
+            )
             findNavController().safeNavigate(
                 RiwayatFragmentDirections.actionRiwayatFragmentToContentBukuFragment(
-                    it.id
+                    data.id
                 )
             )
         }

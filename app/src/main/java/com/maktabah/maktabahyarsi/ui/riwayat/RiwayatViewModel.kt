@@ -7,6 +7,7 @@ import com.maktabah.maktabahyarsi.data.local.database.entity.FavoriteBookEntity
 import com.maktabah.maktabahyarsi.data.local.database.entity.HistoryBookEntity
 import com.maktabah.maktabahyarsi.data.local.datastore.UserPreferenceDataSource
 import com.maktabah.maktabahyarsi.data.repository.BookRepository
+import com.maktabah.maktabahyarsi.utils.currentDate
 import com.maktabah.maktabahyarsi.wrapper.ResultWrapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -37,6 +38,28 @@ class RiwayatViewModel @Inject constructor(
                     }
                 }
             }
+    }
+
+    fun addOrUpdateHistory(
+        id: String,
+        title: String,
+        desc: String,
+        page: Int,
+        creator: String,
+        imageUrl: String
+    ) = viewModelScope.launch(Dispatchers.IO) {
+        bookRepository.addOrUpdateHistory(
+            HistoryBookEntity(
+                id,
+                title,
+                desc,
+                page,
+                creator,
+                imageUrl,
+                userPreferenceDataSource.getUserIdPrefFlow().first(),
+                currentDate
+            )
+        )
     }
 
     val getUserTokenPrefFlow =

@@ -1,5 +1,6 @@
 package com.maktabah.maktabahyarsi.utils
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
 import android.view.View
@@ -68,3 +69,6 @@ fun getMonthNow(): String =
 
 fun getYearNow(): String =
     SimpleDateFormat("YYYY", Locale.getDefault()).format(Calendar.getInstance().time).lowercase()
+
+@SuppressLint("ConstantLocale")
+val currentDate: String = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault()).format(Calendar.getInstance().time)

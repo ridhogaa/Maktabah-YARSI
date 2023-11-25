@@ -10,6 +10,7 @@ import com.maktabah.maktabahyarsi.data.local.database.entity.HistoryBookEntity
 import com.maktabah.maktabahyarsi.data.local.datastore.UserPreferenceDataSource
 import com.maktabah.maktabahyarsi.data.network.api.model.book.GetBookResponse
 import com.maktabah.maktabahyarsi.data.repository.BookRepository
+import com.maktabah.maktabahyarsi.utils.currentDate
 import com.maktabah.maktabahyarsi.wrapper.ResultWrapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -39,16 +40,15 @@ class DetailViewModel @Inject constructor(
         }
     }
 
-    fun addHistory(
+    fun addOrUpdateHistory(
         id: String,
         title: String,
         desc: String,
         page: Int,
         creator: String,
-        imageUrl: String,
-        isHistory: Boolean
+        imageUrl: String
     ) = viewModelScope.launch(Dispatchers.IO) {
-        bookRepository.addHistory(
+        bookRepository.addOrUpdateHistory(
             HistoryBookEntity(
                 id,
                 title,
@@ -57,7 +57,7 @@ class DetailViewModel @Inject constructor(
                 creator,
                 imageUrl,
                 userPreferenceDataSource.getUserIdPrefFlow().first(),
-                isHistory
+                currentDate
             )
         )
     }

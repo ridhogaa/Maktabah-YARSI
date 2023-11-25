@@ -21,7 +21,7 @@ interface BookRepository {
     suspend fun removeFavorite(favorite: FavoriteBookEntity)
     suspend fun getAllFavorites(idUser: String): Flow<ResultWrapper<List<FavoriteBookEntity>>>
     suspend fun isFavorite(id: String, idUser: String): Boolean
-    suspend fun addHistory(historyBookEntity: HistoryBookEntity)
+    suspend fun addOrUpdateHistory(historyBookEntity: HistoryBookEntity)
     suspend fun getAllHistories(idUser: String): Flow<ResultWrapper<List<HistoryBookEntity>>>
 }
 
@@ -74,8 +74,17 @@ class BookRepositoryImpl @Inject constructor(
     override suspend fun isFavorite(id: String, idUser: String): Boolean =
         favoriteBookDataSource.isFavorite(id, idUser)
 
-    override suspend fun addHistory(historyBookEntity: HistoryBookEntity) =
-        historyBookDataSource.addHistory(historyBookEntity)
+    override suspend fun addOrUpdateHistory(historyBookEntity: HistoryBookEntity) {
+        if (historyBookDataSource.isHistory(historyBookEntity.id, historyBookEntity.idUser)) {
+            historyBookDataSource.updateDate(
+                historyBookEntity.id,
+                historyBookEntity.idUser,
+                historyBookEntity.date
+            )
+        } else {
+            historyBookDataSource.addHistory(historyBookEntity)
+        }
+    }
 
     override suspend fun getAllHistories(idUser: String): Flow<ResultWrapper<List<HistoryBookEntity>>> =
         proceedFlow {
@@ -88,9 +97,8 @@ class BookRepositoryImpl @Inject constructor(
                     it.creator,
                     it.imageUrl,
                     it.idUser,
-                    it.isHistory
+                    it.date
                 )
             }
         }
-
 }
