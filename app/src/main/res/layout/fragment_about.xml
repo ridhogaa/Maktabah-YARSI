@@ -117,7 +117,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="10dp"
         android:fontFamily="@font/poppins_regular"
-        android:text="Maktabah YARSI dikembangkan dan dipelihara oleh:\n1. Herika Hayurani\n2. Aya Yahya Maulana\n3. Muhammad Raihan Suryanom\n4. Rizky Yuhari\n5. Dian Purnama Sari\n6. Ridho Gymnatiar Al Rasyid\n7. Muhammad Rafly Afrizal\n8. Muhammad Madani"
+        android:text="Maktabah YARSI dikembangkan dan dipelihara oleh:\n1. Herika Hayurani\n2. Aya Yahya Maulana\n3. Muhammad Raihan Suryanom\n4. Rizky Yuhari\n5. Dian Purnama Sari\n6. Ridho Gymnastiar Al Rasyid\n7. Muhammad Rafly Afrizal\n8. Muhammad Madani"
         android:textColor="?attr/color"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
