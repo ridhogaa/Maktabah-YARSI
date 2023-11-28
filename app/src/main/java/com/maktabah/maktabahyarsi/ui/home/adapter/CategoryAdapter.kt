@@ -53,11 +53,11 @@ class CategoryAdapter(
         fun bind(category: DataItemCategory) {
             with(binding) {
                 tvNameCategory.text = category.name
-                tvJumlahBuku.text =
-                    itemView.context.getString(
-                        R.string.category_buku_format,
-                        category.total.toString()
-                    )
+//                tvJumlahBuku.text =
+//                    itemView.context.getString(
+//                        R.string.category_buku_format,
+//                        category.subcategories.size.toString()
+//                    )
                 root.setOnClickListener {
                     itemClick(category)
                 }

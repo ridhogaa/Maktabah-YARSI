@@ -2,8 +2,6 @@ package com.maktabah.maktabahyarsi.data.network.api.model.book
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
-import com.maktabah.maktabahyarsi.data.network.api.model.category.DataItemCategory
-import com.maktabah.maktabahyarsi.data.network.api.model.category.DataItemSubCategory
 
 @Keep
 data class GetBookResponse(
@@ -58,8 +56,14 @@ data class DataItemBook(
     val title: String,
 
     @field:SerializedName("category")
-    val category: List<DataItemCategory>,
+    val category: List<Any>,
 
-    @field:SerializedName("sub_category")
-    val subCategory: List<DataItemSubCategory>
+    @field:SerializedName("subcategory_id")
+    val subcategoryId: String,
+
+    @field:SerializedName("category_id")
+    val categoryId: String,
+
+    @field:SerializedName("publisher")
+    val publisher: String
 )

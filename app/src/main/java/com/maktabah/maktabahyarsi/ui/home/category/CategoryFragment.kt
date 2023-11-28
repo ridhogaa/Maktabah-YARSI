@@ -32,7 +32,7 @@ class CategoryFragment : Fragment() {
     private val categoryAdapter: CategoryAdapter by lazy {
         CategoryAdapter {
             if (it.subcategories.isNotEmpty()) {
-                navigateSelf(it.id)
+                navigateSelf(it.name)
             } else {
                 navigateToContentCategory(it.id, it.name)
             }
@@ -83,7 +83,7 @@ class CategoryFragment : Fragment() {
 
     private fun getData() = with(viewModel) {
         if (navArgs.id != null) {
-            getSubCategoryByCategoryId(navArgs.id!!)
+            getCategoryByName(navArgs.id!!)
             setRecyclerViewSubCategory()
         } else {
             getAllCategory()
@@ -142,7 +142,7 @@ class CategoryFragment : Fragment() {
                             rvCategory.isVisible = true
                             shimmerCategory.isVisible = false
                             result.payload?.let { payload ->
-                                subCategoryAdapter.setData(payload.data)
+                                subCategoryAdapter.setData(payload.data.subcategories)
                             }
                         },
                         doOnLoading = {

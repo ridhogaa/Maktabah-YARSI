@@ -3,7 +3,7 @@ package com.maktabah.maktabahyarsi.ui.home.category
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.maktabah.maktabahyarsi.data.network.api.model.category.GetCategoryResponse
-import com.maktabah.maktabahyarsi.data.network.api.model.category.GetSubCategoryResponse
+import com.maktabah.maktabahyarsi.data.network.api.model.category.sub.GetSubCategoryResponse
 import com.maktabah.maktabahyarsi.data.repository.CategoryRepository
 import com.maktabah.maktabahyarsi.wrapper.ResultWrapper
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -33,8 +33,8 @@ class CategoryViewModel @Inject constructor(
         }
     }
 
-    fun getSubCategoryByCategoryId(id: String) = viewModelScope.launch(Dispatchers.IO) {
-        categoryRepository.getSubCategoryByCategoryId(id).collectLatest {
+    fun getCategoryByName(name: String) = viewModelScope.launch(Dispatchers.IO) {
+        categoryRepository.getCategoryByName(name).collectLatest {
             _subCategoryResponse.value = it
         }
     }
