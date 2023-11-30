@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.maktabah.maktabahyarsi.R
 import com.maktabah.maktabahyarsi.data.network.api.model.book.DataItemBook
+import com.maktabah.maktabahyarsi.data.network.api.model.book.DataItemBookById
 import com.maktabah.maktabahyarsi.databinding.FragmentDetailBinding
 import com.maktabah.maktabahyarsi.utils.loadImage
 import com.maktabah.maktabahyarsi.utils.safeNavigate
@@ -71,8 +72,8 @@ class DetailFragment : Fragment() {
                         btnMulaiMembaca.visibility = View.VISIBLE
                         starFavorite.visibility = View.VISIBLE
                         result.payload?.let { payload ->
-                            bindToViewBook(payload.data[0])
-                            selectFavorite(payload.data[0])
+                            bindToViewBook(payload.data)
+                            selectFavorite(payload.data)
                         }
                     }, doOnLoading = {
                         listDetailBuku.contentDetailBuku.contentDetailBuku.isVisible = false
@@ -100,7 +101,7 @@ class DetailFragment : Fragment() {
         }
     }
 
-    private fun bindToViewBook(data: DataItemBook) =
+    private fun bindToViewBook(data: DataItemBookById) =
         with(binding.listDetailBuku.contentDetailBuku) {
             coverBuku.loadImage(coverBuku.context, data.imageUrl)
             judulBuku.text = data.title
@@ -111,7 +112,7 @@ class DetailFragment : Fragment() {
             tvDescriptionBuku.text = data.description
         }
 
-    private fun selectFavorite(data: DataItemBook) = with(binding) {
+    private fun selectFavorite(data: DataItemBookById) = with(binding) {
         viewModel.getUserTokenPrefFlow.observe(viewLifecycleOwner) { token ->
             btnFavorite.setOnClickListener {
                 if (token.isNotEmpty()) {

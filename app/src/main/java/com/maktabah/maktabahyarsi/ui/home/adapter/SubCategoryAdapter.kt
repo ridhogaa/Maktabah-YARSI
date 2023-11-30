@@ -6,27 +6,25 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.maktabah.maktabahyarsi.R
-import com.maktabah.maktabahyarsi.data.network.api.model.category.sub.DataSubCategory
-import com.maktabah.maktabahyarsi.data.network.api.model.category.sub.SubcategoriesItem
+import com.maktabah.maktabahyarsi.data.network.api.model.category.DataItemSubcategory
 import com.maktabah.maktabahyarsi.databinding.ItemCategoryBinding
 
-
 class SubCategoryAdapter(
-    private val itemClick: (SubcategoriesItem) -> Unit
+    private val itemClick: (DataItemSubcategory) -> Unit
 ) : RecyclerView.Adapter<SubCategoryAdapter.GridViewHolder>() {
 
     private val differ = AsyncListDiffer(this,
-        object : DiffUtil.ItemCallback<SubcategoriesItem>() {
+        object : DiffUtil.ItemCallback<DataItemSubcategory>() {
             override fun areItemsTheSame(
-                oldItem: SubcategoriesItem,
-                newItem: SubcategoriesItem,
+                oldItem: DataItemSubcategory,
+                newItem: DataItemSubcategory,
             ): Boolean {
                 return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(
-                oldItem: SubcategoriesItem,
-                newItem: SubcategoriesItem,
+                oldItem: DataItemSubcategory,
+                newItem: DataItemSubcategory,
             ): Boolean {
                 return oldItem.id == newItem.id
             }
@@ -51,14 +49,14 @@ class SubCategoryAdapter(
 
     inner class GridViewHolder(private val binding: ItemCategoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(category: SubcategoriesItem) {
+        fun bind(category: DataItemSubcategory) {
             with(binding) {
                 tvNameCategory.text = category.name
-//                tvJumlahBuku.text =
-//                    itemView.context.getString(
-//                        R.string.category_buku_format,
-//                        ""
-//                    )
+                tvJumlahBuku.text =
+                    itemView.context.getString(
+                        R.string.category_buku_format,
+                        category.total.toString()
+                    )
                 root.setOnClickListener {
                     itemClick(category)
                 }
@@ -66,7 +64,7 @@ class SubCategoryAdapter(
         }
     }
 
-    fun setData(data: List<SubcategoriesItem>) {
+    fun setData(data: List<DataItemSubcategory>) {
         differ.submitList(data)
     }
 

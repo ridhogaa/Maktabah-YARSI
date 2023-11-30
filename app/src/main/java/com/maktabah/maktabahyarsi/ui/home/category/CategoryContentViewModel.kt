@@ -21,18 +21,8 @@ class CategoryContentViewModel @Inject constructor(
         MutableStateFlow<ResultWrapper<GetBookResponse>>(ResultWrapper.Loading())
     val bookResponse = _bookResponse.asStateFlow()
 
-    fun getBooksByCategory(category: String) = viewModelScope.launch(Dispatchers.IO) {
-        bookRepository.getBooksByCategory(category).collectLatest {
-            if (it.payload?.data?.isEmpty() == true) {
-                _bookResponse.value = ResultWrapper.Empty()
-            } else {
-                _bookResponse.value = it
-            }
-        }
-    }
-
-    fun getBooksBySubCategory(subCategory: String) = viewModelScope.launch(Dispatchers.IO) {
-        bookRepository.getBooksBySubCategory(subCategory).collectLatest {
+    fun getBooksByCategory(id: String) = viewModelScope.launch(Dispatchers.IO) {
+        bookRepository.getBooksByCategory(id).collectLatest {
             if (it.payload?.data?.isEmpty() == true) {
                 _bookResponse.value = ResultWrapper.Empty()
             } else {

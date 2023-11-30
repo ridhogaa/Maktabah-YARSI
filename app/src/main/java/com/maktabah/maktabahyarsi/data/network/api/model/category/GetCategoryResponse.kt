@@ -2,7 +2,6 @@ package com.maktabah.maktabahyarsi.data.network.api.model.category
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
-import com.maktabah.maktabahyarsi.data.network.api.model.category.sub.SubcategoriesItem
 
 @Keep
 data class GetCategoryResponse(
@@ -23,23 +22,29 @@ data class GetCategoryResponse(
 @Keep
 data class SubcategoriesItem(
 
+    @field:SerializedName("total")
+    val total: Int,
+
     @field:SerializedName("name")
     val name: String,
 
-    @field:SerializedName("id")
+    @field:SerializedName("_id")
     val id: String,
 
-    @field:SerializedName("subcategories")
-    val subcategories: List<SubcategoriesItem>
+    @field:SerializedName("category")
+    val category: String
 )
 
 @Keep
 data class DataItemCategory(
 
+    @field:SerializedName("total")
+    val total: Int,
+
     @field:SerializedName("name")
     val name: String,
 
-    @field:SerializedName("id")
+    @field:SerializedName("_id")
     val id: String,
 
     @field:SerializedName("subcategories")
