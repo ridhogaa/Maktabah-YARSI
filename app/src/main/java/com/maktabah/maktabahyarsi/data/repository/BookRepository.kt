@@ -7,6 +7,7 @@ import com.maktabah.maktabahyarsi.data.local.database.entity.HistoryBookEntity
 import com.maktabah.maktabahyarsi.data.network.api.datasource.BookApiDataSource
 import com.maktabah.maktabahyarsi.data.network.api.model.book.GetBookByIdResponse
 import com.maktabah.maktabahyarsi.data.network.api.model.book.GetBookResponse
+import com.maktabah.maktabahyarsi.data.network.api.model.book.GetListContentBookResponse
 import com.maktabah.maktabahyarsi.wrapper.ResultWrapper
 import com.maktabah.maktabahyarsi.wrapper.proceedFlow
 import kotlinx.coroutines.flow.Flow
@@ -17,6 +18,8 @@ interface BookRepository {
     suspend fun getBooksBySort(sort: String? = null): Flow<ResultWrapper<GetBookResponse>>
     suspend fun getBooksById(id: String): Flow<ResultWrapper<GetBookByIdResponse>>
     suspend fun getBooksByCategory(id: String): Flow<ResultWrapper<GetBookResponse>>
+    suspend fun getContentsBook(id: String): Flow<ResultWrapper<GetListContentBookResponse>>
+
     suspend fun addFavorite(favorite: FavoriteBookEntity)
     suspend fun removeFavorite(favorite: FavoriteBookEntity)
     suspend fun getAllFavorites(idUser: String): Flow<ResultWrapper<List<FavoriteBookEntity>>>
@@ -45,6 +48,10 @@ class BookRepositoryImpl @Inject constructor(
             bookApiDataSource.getBooksByCategoryId(id)
         }
 
+    override suspend fun getContentsBook(id: String): Flow<ResultWrapper<GetListContentBookResponse>> =
+        proceedFlow {
+            bookApiDataSource.getContentsBook(id)
+        }
 
     override suspend fun addFavorite(favorite: FavoriteBookEntity) =
         favoriteBookDataSource.addFavorite(favorite)
