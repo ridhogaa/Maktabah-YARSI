@@ -6,8 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.sidesheet.SideSheetBehavior
 import com.google.android.material.sidesheet.SideSheetCallback
 import com.google.android.material.sidesheet.SideSheetDialog
@@ -17,14 +23,23 @@ import com.maktabah.maktabahyarsi.databinding.FragmentContentBukuBinding
 import com.maktabah.maktabahyarsi.databinding.FragmentDetailBinding
 import com.maktabah.maktabahyarsi.ui.detailbuku.DetailFragmentArgs
 import com.maktabah.maktabahyarsi.ui.detailbuku.DetailViewModel
+import com.maktabah.maktabahyarsi.ui.detailbuku.contentbuku.adapter.ContentAdapter
+import com.maktabah.maktabahyarsi.wrapper.proceedWhen
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import kotlin.properties.Delegates
 
+@AndroidEntryPoint
 class ContentBukuFragment : Fragment() {
 
     private var _binding: FragmentContentBukuBinding? = null
     private val binding get() = _binding!!
     private val viewModel: ContentBukuViewModel by viewModels()
     private val navArgs: ContentBukuFragmentArgs by navArgs()
+    private val contentAdapter: ContentAdapter by lazy {
+        ContentAdapter()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -35,22 +50,37 @@ class ContentBukuFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        getData()
         showSideSheet()
+    }
+
+    private fun getData() = with(viewModel) {
+        getContentsBook(navArgs.id)
+    }
+
+    private fun setObserveDataContent() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.contentResponse.collectLatest {
+                    it.proceedWhen(
+                        doOnSuccess = { result ->
+                            result.payload?.let { payload ->
+                                contentAdapter.setData(payload.data.sub)
+                            }
+                        },
+                        doOnLoading = {
+                        },
+                        doOnError = { err ->
+                        }
+                    )
+                }
+            }
+        }
     }
 
     private fun showSideSheet() = with(binding) {
         iconNav.setOnClickListener {
             val sideSheetDialog = SideSheetDialog(requireContext())
-
-// Standard side sheets have the following states:
-// STATE_EXPANDED: The side sheet is visible at its maximum height
-// and it is neither dragging nor settling (see below).
-// STATE_HIDDEN: The side sheet is no longer visible and
-// can only be re-shown programmatically.
-// STATE_DRAGGING: The user is actively dragging the side sheet.
-// STATE_SETTLING: The side sheet is settling to a specific height
-// after a drag/swipe gesture. This will be the peek height, expanded height,
-// or 0, in case the user action caused the side sheet to hide.
 
             sideSheetDialog.behavior.addCallback(object : SideSheetCallback() {
                 override fun onStateChanged(sheet: View, newState: Int) {
@@ -66,6 +96,11 @@ class ContentBukuFragment : Fragment() {
             val inflater =
                 DaftarIsiSideSheetDialogBinding.inflate(LayoutInflater.from(requireContext()))
 
+            inflater.rvDaftarIsi.apply {
+                layoutManager = LinearLayoutManager(requireContext())
+                adapter = this@ContentBukuFragment.contentAdapter
+            }
+            setObserveDataContent()
 
             sideSheetDialog.setCancelable(false)
             sideSheetDialog.setCanceledOnTouchOutside(true)
