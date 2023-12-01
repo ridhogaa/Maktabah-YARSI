@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.maktabah.maktabahyarsi.data.local.database.entity.FavoriteBookEntity
 import com.maktabah.maktabahyarsi.data.local.database.entity.HistoryBookEntity
 import com.maktabah.maktabahyarsi.data.local.datastore.UserPreferenceDataSource
-import com.maktabah.maktabahyarsi.data.network.api.model.book.GetBookResponse
+import com.maktabah.maktabahyarsi.data.network.api.model.book.GetBookByIdResponse
 import com.maktabah.maktabahyarsi.data.repository.BookRepository
 import com.maktabah.maktabahyarsi.utils.currentDate
 import com.maktabah.maktabahyarsi.wrapper.ResultWrapper
@@ -28,7 +28,7 @@ class DetailViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _bookResponse =
-        MutableStateFlow<ResultWrapper<GetBookResponse>>(ResultWrapper.Loading())
+        MutableStateFlow<ResultWrapper<GetBookByIdResponse>>(ResultWrapper.Loading())
     val bookResponse = _bookResponse.asStateFlow()
 
     private val _isFavorite = MutableLiveData<Boolean>()
