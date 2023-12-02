@@ -6,26 +6,25 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.maktabah.maktabahyarsi.R
-import com.maktabah.maktabahyarsi.data.network.api.model.category.DataItemSubCategory
+import com.maktabah.maktabahyarsi.data.network.api.model.category.DataItemSubcategory
 import com.maktabah.maktabahyarsi.databinding.ItemCategoryBinding
 
-
 class SubCategoryAdapter(
-    private val itemClick: (DataItemSubCategory) -> Unit
+    private val itemClick: (DataItemSubcategory) -> Unit
 ) : RecyclerView.Adapter<SubCategoryAdapter.GridViewHolder>() {
 
     private val differ = AsyncListDiffer(this,
-        object : DiffUtil.ItemCallback<DataItemSubCategory>() {
+        object : DiffUtil.ItemCallback<DataItemSubcategory>() {
             override fun areItemsTheSame(
-                oldItem: DataItemSubCategory,
-                newItem: DataItemSubCategory,
+                oldItem: DataItemSubcategory,
+                newItem: DataItemSubcategory,
             ): Boolean {
                 return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(
-                oldItem: DataItemSubCategory,
-                newItem: DataItemSubCategory,
+                oldItem: DataItemSubcategory,
+                newItem: DataItemSubcategory,
             ): Boolean {
                 return oldItem.id == newItem.id
             }
@@ -50,7 +49,7 @@ class SubCategoryAdapter(
 
     inner class GridViewHolder(private val binding: ItemCategoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(category: DataItemSubCategory) {
+        fun bind(category: DataItemSubcategory) {
             with(binding) {
                 tvNameCategory.text = category.name
                 tvJumlahBuku.text =
@@ -65,7 +64,7 @@ class SubCategoryAdapter(
         }
     }
 
-    fun setData(data: List<DataItemSubCategory>) {
+    fun setData(data: List<DataItemSubcategory>) {
         differ.submitList(data)
     }
 

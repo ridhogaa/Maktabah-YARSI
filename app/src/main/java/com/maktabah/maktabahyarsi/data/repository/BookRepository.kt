@@ -5,6 +5,7 @@ import com.maktabah.maktabahyarsi.data.local.database.datasource.HistoryBookData
 import com.maktabah.maktabahyarsi.data.local.database.entity.FavoriteBookEntity
 import com.maktabah.maktabahyarsi.data.local.database.entity.HistoryBookEntity
 import com.maktabah.maktabahyarsi.data.network.api.datasource.BookApiDataSource
+import com.maktabah.maktabahyarsi.data.network.api.model.book.GetBookByIdResponse
 import com.maktabah.maktabahyarsi.data.network.api.model.book.GetBookResponse
 import com.maktabah.maktabahyarsi.wrapper.ResultWrapper
 import com.maktabah.maktabahyarsi.wrapper.proceedFlow
@@ -14,9 +15,8 @@ import javax.inject.Inject
 
 interface BookRepository {
     suspend fun getBooksBySort(sort: String? = null): Flow<ResultWrapper<GetBookResponse>>
-    suspend fun getBooksById(id: String? = null): Flow<ResultWrapper<GetBookResponse>>
-    suspend fun getBooksByCategory(category: String? = null): Flow<ResultWrapper<GetBookResponse>>
-    suspend fun getBooksBySubCategory(subCategory: String? = null): Flow<ResultWrapper<GetBookResponse>>
+    suspend fun getBooksById(id: String): Flow<ResultWrapper<GetBookByIdResponse>>
+    suspend fun getBooksByCategory(id: String): Flow<ResultWrapper<GetBookResponse>>
     suspend fun addFavorite(favorite: FavoriteBookEntity)
     suspend fun removeFavorite(favorite: FavoriteBookEntity)
     suspend fun getAllFavorites(idUser: String): Flow<ResultWrapper<List<FavoriteBookEntity>>>
@@ -35,20 +35,16 @@ class BookRepositoryImpl @Inject constructor(
             bookApiDataSource.getBooksBySort(sort)
         }
 
-    override suspend fun getBooksById(id: String?): Flow<ResultWrapper<GetBookResponse>> =
+    override suspend fun getBooksById(id: String): Flow<ResultWrapper<GetBookByIdResponse>> =
         proceedFlow {
             bookApiDataSource.getBooksById(id)
         }
 
-    override suspend fun getBooksByCategory(category: String?): Flow<ResultWrapper<GetBookResponse>> =
+    override suspend fun getBooksByCategory(id: String): Flow<ResultWrapper<GetBookResponse>> =
         proceedFlow {
-            bookApiDataSource.getBooksByCategory(category)
+            bookApiDataSource.getBooksByCategoryId(id)
         }
 
-    override suspend fun getBooksBySubCategory(subCategory: String?): Flow<ResultWrapper<GetBookResponse>> =
-        proceedFlow {
-            bookApiDataSource.getBooksBySubCategory(subCategory)
-        }
 
     override suspend fun addFavorite(favorite: FavoriteBookEntity) =
         favoriteBookDataSource.addFavorite(favorite)

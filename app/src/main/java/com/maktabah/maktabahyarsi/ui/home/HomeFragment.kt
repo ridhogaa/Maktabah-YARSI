@@ -37,11 +37,11 @@ class HomeFragment : Fragment() {
     private val viewModel: HomeViewModel by viewModels()
     private val categoryHomeAdapter: CategoryHomeAdapter by lazy {
         CategoryHomeAdapter(
-            {
-                if (it.subcategories.isNotEmpty()) {
-                    navigateToCategory(it.id)
+            { data ->
+                if (data.subcategories.isNotEmpty()) {
+                    navigateToCategory(data.name)
                 } else {
-                    navigateToContentCategory(it.id, it.name)
+                    navigateToContentCategory(data.id, data.name)
                 }
             }, {
                 navigateToCategory()

@@ -62,7 +62,7 @@ class CategoryContentFragment : Fragment() {
     )
 
     private fun getData() = with(viewModel) {
-        getBooksBySubCategory(navArgs.id)
+        getBooksByCategory(navArgs.id)
     }
 
     private fun setRecyclerViewBook() {

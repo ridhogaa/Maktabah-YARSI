@@ -20,6 +20,22 @@ data class GetCategoryResponse(
 )
 
 @Keep
+data class SubcategoriesItem(
+
+    @field:SerializedName("total")
+    val total: Int,
+
+    @field:SerializedName("name")
+    val name: String,
+
+    @field:SerializedName("_id")
+    val id: String,
+
+    @field:SerializedName("category")
+    val category: String
+)
+
+@Keep
 data class DataItemCategory(
 
     @field:SerializedName("total")
@@ -33,20 +49,4 @@ data class DataItemCategory(
 
     @field:SerializedName("subcategories")
     val subcategories: List<SubcategoriesItem>
-)
-
-@Keep
-data class SubcategoriesItem(
-
-    @field:SerializedName("name")
-    val name: String,
-
-    @field:SerializedName("_id")
-    val id: String,
-
-    @field:SerializedName("category")
-    val category: String,
-
-    @field:SerializedName("total")
-    val total: Int,
 )

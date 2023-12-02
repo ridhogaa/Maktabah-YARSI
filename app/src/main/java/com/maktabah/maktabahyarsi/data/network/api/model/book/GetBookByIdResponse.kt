@@ -6,10 +6,10 @@ import com.maktabah.maktabahyarsi.data.network.api.model.category.DataItemCatego
 import com.maktabah.maktabahyarsi.data.network.api.model.category.DataItemSubcategory
 
 @Keep
-data class GetBookResponse(
+data class GetBookByIdResponse(
 
     @field:SerializedName("data")
-    val data: List<DataItemBook>,
+    val data: DataItemBookById,
 
     @field:SerializedName("message")
     val message: String,
@@ -22,7 +22,7 @@ data class GetBookResponse(
 )
 
 @Keep
-data class DataItemBook(
+data class DataItemBookById(
 
     @field:SerializedName("creator")
     val creator: String,
@@ -44,6 +44,9 @@ data class DataItemBook(
 
     @field:SerializedName("title")
     val title: String,
+
+    @field:SerializedName("subcategory_id")
+    val subcategoryId: String,
 
     @field:SerializedName("createdAt")
     val createdAt: String,
@@ -67,8 +70,5 @@ data class DataItemBook(
     val page: Int,
 
     @field:SerializedName("category")
-    val category: List<DataItemCategory>,
-
-    @field:SerializedName("subcategory_id")
-    val subcategoryId: String
+    val category: List<DataItemCategory>
 )

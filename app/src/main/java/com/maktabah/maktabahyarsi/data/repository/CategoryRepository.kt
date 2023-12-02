@@ -2,7 +2,7 @@ package com.maktabah.maktabahyarsi.data.repository
 
 import com.maktabah.maktabahyarsi.data.network.api.datasource.CategoryApiDataSource
 import com.maktabah.maktabahyarsi.data.network.api.model.category.GetCategoryResponse
-import com.maktabah.maktabahyarsi.data.network.api.model.category.GetSubCategoryResponse
+import com.maktabah.maktabahyarsi.data.network.api.model.category.GetSubCategoryByIdCategoryResponse
 import com.maktabah.maktabahyarsi.wrapper.ResultWrapper
 import com.maktabah.maktabahyarsi.wrapper.proceedFlow
 import kotlinx.coroutines.flow.Flow
@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 interface CategoryRepository {
     suspend fun getAllCategory(): Flow<ResultWrapper<GetCategoryResponse>>
-    suspend fun getSubCategoryByCategoryId(id: String): Flow<ResultWrapper<GetSubCategoryResponse>>
+    suspend fun getSubCategoryByIdCategory(id: String): Flow<ResultWrapper<GetSubCategoryByIdCategoryResponse>>
 }
 
 class CategoryRepositoryImpl @Inject constructor(
@@ -20,9 +20,9 @@ class CategoryRepositoryImpl @Inject constructor(
     override suspend fun getAllCategory(): Flow<ResultWrapper<GetCategoryResponse>> =
         proceedFlow { categoryApiDataSource.getAllCategory() }
 
-    override suspend fun getSubCategoryByCategoryId(id: String): Flow<ResultWrapper<GetSubCategoryResponse>> =
+    override suspend fun getSubCategoryByIdCategory(id: String): Flow<ResultWrapper<GetSubCategoryByIdCategoryResponse>> =
         proceedFlow {
-            categoryApiDataSource.getSubCategoryByCategoryId(id)
+            categoryApiDataSource.getSubCategoryByIdCategory(id)
         }
 
 }

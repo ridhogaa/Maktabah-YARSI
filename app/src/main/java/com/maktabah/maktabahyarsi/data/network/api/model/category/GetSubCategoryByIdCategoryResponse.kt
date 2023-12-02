@@ -4,10 +4,10 @@ import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
 @Keep
-data class GetSubCategoryResponse(
+data class GetSubCategoryByIdCategoryResponse(
 
     @field:SerializedName("data")
-    val data: List<DataItemSubCategory>,
+    val data: List<DataItemSubcategory>,
 
     @field:SerializedName("message")
     val message: String,
@@ -20,7 +20,7 @@ data class GetSubCategoryResponse(
 )
 
 @Keep
-data class DataItemSubCategory(
+data class DataItemSubcategory(
 
     @field:SerializedName("total")
     val total: Int,

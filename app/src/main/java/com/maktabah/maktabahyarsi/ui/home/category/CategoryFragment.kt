@@ -83,7 +83,7 @@ class CategoryFragment : Fragment() {
 
     private fun getData() = with(viewModel) {
         if (navArgs.id != null) {
-            getSubCategoryByCategoryId(navArgs.id!!)
+            getSubCategoryByIdCategory(navArgs.id!!)
             setRecyclerViewSubCategory()
         } else {
             getAllCategory()

@@ -3,7 +3,7 @@ package com.maktabah.maktabahyarsi.ui.home.category
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.maktabah.maktabahyarsi.data.network.api.model.category.GetCategoryResponse
-import com.maktabah.maktabahyarsi.data.network.api.model.category.GetSubCategoryResponse
+import com.maktabah.maktabahyarsi.data.network.api.model.category.GetSubCategoryByIdCategoryResponse
 import com.maktabah.maktabahyarsi.data.repository.CategoryRepository
 import com.maktabah.maktabahyarsi.wrapper.ResultWrapper
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,7 +24,7 @@ class CategoryViewModel @Inject constructor(
     val categoryResponse = _categoryResponse.asStateFlow()
 
     private val _subCategoryResponse =
-        MutableStateFlow<ResultWrapper<GetSubCategoryResponse>>(ResultWrapper.Loading())
+        MutableStateFlow<ResultWrapper<GetSubCategoryByIdCategoryResponse>>(ResultWrapper.Loading())
     val subCategoryResponse = _subCategoryResponse.asStateFlow()
 
     fun getAllCategory() = viewModelScope.launch(Dispatchers.IO) {
@@ -33,8 +33,8 @@ class CategoryViewModel @Inject constructor(
         }
     }
 
-    fun getSubCategoryByCategoryId(id: String) = viewModelScope.launch(Dispatchers.IO) {
-        categoryRepository.getSubCategoryByCategoryId(id).collectLatest {
+    fun getSubCategoryByIdCategory(id: String) = viewModelScope.launch(Dispatchers.IO) {
+        categoryRepository.getSubCategoryByIdCategory(id).collectLatest {
             _subCategoryResponse.value = it
         }
     }

@@ -10,9 +10,9 @@
     <string name="desc_2">Kamu bisa akses semua buku dan baca tanpa batas</string>
     <string name="desc_1">Ga perlu ke perpustakaan lagi, kamu bisa buka Pake Gadget kamu</string>
     <string name="lewati">Lewati</string>
-    <string name="email_invalid_format">Please enter correct email</string>
-    <string name="password_invalid_format">Password less than 5 characters</string>
-    <string name="username_invalid_format">Username less than 5 characters</string>
+    <string name="email_invalid_format">Harap masukkan email yang valid</string>
+    <string name="password_invalid_format">Password kurang dari 5 karakter</string>
+    <string name="username_invalid_format">Username kurang dari 5 karakter</string>
     <string name="guest_login">Guest Login</string>
     <string name="tidak_punya_akun">Tidak punya akun?</string>
     <string name="sign_up">Daftar</string>
