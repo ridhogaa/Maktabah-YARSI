@@ -2,6 +2,7 @@ package com.maktabah.maktabahyarsi.ui.detailbuku.contentbuku
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,11 +10,13 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.sidesheet.SideSheetBehavior
 import com.google.android.material.sidesheet.SideSheetCallback
 import com.google.android.material.sidesheet.SideSheetDialog
@@ -24,6 +27,7 @@ import com.maktabah.maktabahyarsi.databinding.FragmentDetailBinding
 import com.maktabah.maktabahyarsi.ui.detailbuku.DetailFragmentArgs
 import com.maktabah.maktabahyarsi.ui.detailbuku.DetailViewModel
 import com.maktabah.maktabahyarsi.ui.detailbuku.contentbuku.adapter.ContentAdapter
+import com.maktabah.maktabahyarsi.ui.detailbuku.contentbuku.adapter.ContentIsiBukuAdapter
 import com.maktabah.maktabahyarsi.wrapper.proceedWhen
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -40,6 +44,7 @@ class ContentBukuFragment : Fragment() {
     private val contentAdapter: ContentAdapter by lazy {
         ContentAdapter()
     }
+    private lateinit var contentViewModel: ContentViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -52,6 +57,7 @@ class ContentBukuFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         getData()
         showSideSheet()
+        getIsiContent()
     }
 
     private fun getData() = with(viewModel) {
@@ -107,6 +113,36 @@ class ContentBukuFragment : Fragment() {
             sideSheetDialog.setContentView(inflater.root)
             sideSheetDialog.show()
         }
+    }
+
+    private fun getIsiContent() {
+        val recyclerView: RecyclerView = binding.rvContent
+        val layoutManager = LinearLayoutManager(requireContext())
+        val adapter = ContentIsiBukuAdapter(emptyList())
+        recyclerView.layoutManager = layoutManager
+        recyclerView.adapter = adapter
+
+        //ganti cara dapet contentID
+        val contentId = ""
+
+        contentViewModel = ViewModelProvider(this).get(ContentViewModel::class.java)
+
+        contentViewModel.contentData.observe(viewLifecycleOwner, Observer { getContentResponse ->
+            getContentResponse?.let {
+                if (it.data != null) {
+                    Log.d("ContentBukuFragment", "Data received: ${it.data}")
+                    adapter.updateData(listOf(it.data))
+                } else {
+                    Log.e("ContentBukuFragment", "Data is null in the response.")
+                }
+            }
+        })
+
+        contentViewModel.errorMessage.observe(viewLifecycleOwner, Observer { errorMessage ->
+
+        })
+
+        contentViewModel.getContent(contentId)
     }
 
     override fun onDestroyView() {
