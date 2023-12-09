@@ -32,6 +32,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
+                android:enabled="true"
+                android:focusable="true"
                 android:showDividers="none"
                 app:expandedHintEnabled="false"
                 app:hintAnimationEnabled="false"
@@ -48,6 +50,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/bg_search_grey"
+                    android:enabled="true"
+                    android:focusable="true"
                     android:imeOptions="actionSearch"
                     android:inputType="text"
                     android:textAppearance="@style/PlaceholderTextAppearance" />

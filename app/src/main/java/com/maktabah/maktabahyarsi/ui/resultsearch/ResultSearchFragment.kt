@@ -1,10 +1,12 @@
 package com.maktabah.maktabahyarsi.ui.resultsearch
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.StringRes
@@ -49,6 +51,7 @@ class ResultSearchFragment : Fragment() {
 
     private fun setUpSectionsPagerAndSetQuery() = binding.run {
         val bundle = Bundle()
+        showSoftKeyboard(etSearch)
         etSearch.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 // Panggil metode pencarian saat pengguna menekan tombol "Submit" pada keyboard
@@ -83,6 +86,14 @@ class ResultSearchFragment : Fragment() {
                 }
             }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callbacks)
+    }
+
+    private fun showSoftKeyboard(view: View) {
+        if (view.requestFocus()) {
+            val inputMethodManager: InputMethodManager =
+                activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
+        }
     }
 
     companion object {
