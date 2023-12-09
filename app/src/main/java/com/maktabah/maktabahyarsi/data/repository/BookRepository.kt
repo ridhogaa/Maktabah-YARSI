@@ -7,6 +7,7 @@ import com.maktabah.maktabahyarsi.data.local.database.entity.HistoryBookEntity
 import com.maktabah.maktabahyarsi.data.network.api.datasource.BookApiDataSource
 import com.maktabah.maktabahyarsi.data.network.api.model.book.GetBookByIdResponse
 import com.maktabah.maktabahyarsi.data.network.api.model.book.GetBookResponse
+import com.maktabah.maktabahyarsi.data.network.api.model.book.GetContentResponse
 import com.maktabah.maktabahyarsi.data.network.api.model.book.GetListContentBookResponse
 import com.maktabah.maktabahyarsi.wrapper.ResultWrapper
 import com.maktabah.maktabahyarsi.wrapper.proceedFlow
@@ -19,7 +20,7 @@ interface BookRepository {
     suspend fun getBooksById(id: String): Flow<ResultWrapper<GetBookByIdResponse>>
     suspend fun getBooksByCategory(id: String): Flow<ResultWrapper<GetBookResponse>>
     suspend fun getContentsBook(id: String): Flow<ResultWrapper<GetListContentBookResponse>>
-
+    suspend fun getContents(id: String): Flow<ResultWrapper<GetContentResponse>>
     suspend fun addFavorite(favorite: FavoriteBookEntity)
     suspend fun removeFavorite(favorite: FavoriteBookEntity)
     suspend fun getAllFavorites(idUser: String): Flow<ResultWrapper<List<FavoriteBookEntity>>>
@@ -51,6 +52,11 @@ class BookRepositoryImpl @Inject constructor(
     override suspend fun getContentsBook(id: String): Flow<ResultWrapper<GetListContentBookResponse>> =
         proceedFlow {
             bookApiDataSource.getContentsBook(id)
+        }
+
+    override suspend fun getContents(id: String): Flow<ResultWrapper<GetContentResponse>> =
+        proceedFlow {
+            bookApiDataSource.getContents(id)
         }
 
     override suspend fun addFavorite(favorite: FavoriteBookEntity) =

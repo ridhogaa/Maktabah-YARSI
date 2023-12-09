@@ -13,6 +13,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,6 +22,7 @@ import com.google.android.material.sidesheet.SideSheetBehavior
 import com.google.android.material.sidesheet.SideSheetCallback
 import com.google.android.material.sidesheet.SideSheetDialog
 import com.maktabah.maktabahyarsi.R
+import com.maktabah.maktabahyarsi.data.network.api.model.book.GetContentResponse
 import com.maktabah.maktabahyarsi.databinding.DaftarIsiSideSheetDialogBinding
 import com.maktabah.maktabahyarsi.databinding.FragmentContentBukuBinding
 import com.maktabah.maktabahyarsi.databinding.FragmentDetailBinding
@@ -55,13 +57,24 @@ class ContentBukuFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        toolBarAction()
         getData()
-        showSideSheet()
         getIsiContent()
+        setObserveDataContentDetail()
+    }
+
+    private fun toolBarAction() = with(binding) {
+        iconBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+        iconNav.setOnClickListener {
+            showSideSheet()
+        }
     }
 
     private fun getData() = with(viewModel) {
         getContentsBook(navArgs.id)
+        getContentDetail(navArgs.id)
     }
 
     private fun setObserveDataContent() {
@@ -84,35 +97,55 @@ class ContentBukuFragment : Fragment() {
         }
     }
 
-    private fun showSideSheet() = with(binding) {
-        iconNav.setOnClickListener {
-            val sideSheetDialog = SideSheetDialog(requireContext())
-
-            sideSheetDialog.behavior.addCallback(object : SideSheetCallback() {
-                override fun onStateChanged(sheet: View, newState: Int) {
-                    if (newState == SideSheetBehavior.STATE_DRAGGING) {
-                        sideSheetDialog.behavior.state = SideSheetBehavior.STATE_EXPANDED
-                    }
+    private fun setObserveDataContentDetail() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.contentDetailResponse.collectLatest {
+                    it.proceedWhen(
+                        doOnSuccess = { result ->
+                            bindViewContent(result.payload)
+                        },
+                        doOnLoading = {
+                        },
+                        doOnError = { err ->
+                        }
+                    )
                 }
-
-                override fun onSlide(sheet: View, slideOffset: Float) {
-                }
-            })
-
-            val inflater =
-                DaftarIsiSideSheetDialogBinding.inflate(LayoutInflater.from(requireContext()))
-
-            inflater.rvDaftarIsi.apply {
-                layoutManager = LinearLayoutManager(requireContext())
-                adapter = this@ContentBukuFragment.contentAdapter
             }
-            setObserveDataContent()
-
-            sideSheetDialog.setCancelable(false)
-            sideSheetDialog.setCanceledOnTouchOutside(true)
-            sideSheetDialog.setContentView(inflater.root)
-            sideSheetDialog.show()
         }
+    }
+
+    private fun bindViewContent(data: GetContentResponse?) = with(binding){
+
+    }
+
+    private fun showSideSheet() = with(binding) {
+        val sideSheetDialog = SideSheetDialog(requireContext())
+
+        sideSheetDialog.behavior.addCallback(object : SideSheetCallback() {
+            override fun onStateChanged(sheet: View, newState: Int) {
+                if (newState == SideSheetBehavior.STATE_DRAGGING) {
+                    sideSheetDialog.behavior.state = SideSheetBehavior.STATE_EXPANDED
+                }
+            }
+
+            override fun onSlide(sheet: View, slideOffset: Float) {
+            }
+        })
+
+        val inflater =
+            DaftarIsiSideSheetDialogBinding.inflate(LayoutInflater.from(requireContext()))
+
+        inflater.rvDaftarIsi.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = this@ContentBukuFragment.contentAdapter
+        }
+        setObserveDataContent()
+
+        sideSheetDialog.setCancelable(false)
+        sideSheetDialog.setCanceledOnTouchOutside(true)
+        sideSheetDialog.setContentView(inflater.root)
+        sideSheetDialog.show()
     }
 
     private fun getIsiContent() {

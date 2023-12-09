@@ -55,8 +55,9 @@
         android:id="@+id/sv_content"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="20dp"
         android:scrollbars="none"
-        app:layout_constraintBottom_toTopOf="@id/btn_next"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
@@ -108,46 +109,13 @@
                 android:id="@+id/rv_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/pencipta"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                tools:listitem="@layout/item_content_buku"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/pencipta"
+                tools:listitem="@layout/item_content_buku" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_prev"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_margin="20dp"
-        android:fontFamily="@font/poppins_regular"
-        android:textAlignment="center"
-        app:cornerRadius="4dp"
-        app:icon="@drawable/back"
-        app:iconGravity="textStart"
-        app:iconSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_next"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sv_content"
-        tools:text="Halaman 2" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_next"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_margin="20dp"
-        android:fontFamily="@font/poppins_regular"
-        android:textAlignment="center"
-        app:cornerRadius="4dp"
-        app:icon="@drawable/next"
-        app:iconGravity="textEnd"
-        app:iconSize="17dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btn_prev"
-        app:layout_constraintTop_toBottomOf="@+id/sv_content"
-        tools:text="Halaman 1" />
 </androidx.constraintlayout.widget.ConstraintLayout>

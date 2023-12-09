@@ -50,6 +50,4 @@ data class SubItem(
 	@field:SerializedName("sub")
 	val sub: List<SubItem>,
 
-
-
 )

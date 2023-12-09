@@ -55,7 +55,7 @@ class WordAdapter(
         fun bind(data: SearchContentResponse.Data) {
             with(binding) {
                 data._source.let {
-                    tvJudulBuku.text = it.text
+                    tvJudulBuku.text = it.heading
                     tvJumlahHalaman.text =
                         itemView.context.getString(R.string.halaman_kata, it.page.toString())
                     tvKataBuku.text = highlightText(query, it.text, tvKataBuku.context)
