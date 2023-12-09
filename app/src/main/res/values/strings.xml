@@ -39,4 +39,7 @@
     <string name="kategori">Kategori</string>
     <string name="lainnya_category">Lainnya</string>
     <string name="halaman">%1$s Halaman</string>
+    <string name="halaman_kata">Halaman %1$s</string>
+    <string name="tab_text_1">Buku</string>
+    <string name="tab_text_2">Kata</string>
 </resources>

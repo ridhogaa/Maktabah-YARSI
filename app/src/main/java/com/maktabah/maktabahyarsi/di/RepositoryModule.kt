@@ -6,6 +6,8 @@ import com.maktabah.maktabahyarsi.data.repository.BookRepository
 import com.maktabah.maktabahyarsi.data.repository.BookRepositoryImpl
 import com.maktabah.maktabahyarsi.data.repository.CategoryRepository
 import com.maktabah.maktabahyarsi.data.repository.CategoryRepositoryImpl
+import com.maktabah.maktabahyarsi.data.repository.SearchRepository
+import com.maktabah.maktabahyarsi.data.repository.SearchRepositoryImpl
 import com.maktabah.maktabahyarsi.data.repository.UserRepository
 import com.maktabah.maktabahyarsi.data.repository.UserRepositoryImpl
 import com.maktabah.maktabahyarsi.data.repository.VisitorCounterRepository
@@ -33,5 +35,8 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun provideVisitorCounterRepository(visitorCounterRepositoryImpl: VisitorCounterRepositoryImpl): VisitorCounterRepository
+
+    @Binds
+    abstract fun provideSearchRepository(searchRepositoryImpl: SearchRepositoryImpl): SearchRepository
 
 }

@@ -1,7 +1,8 @@
 package com.maktabah.maktabahyarsi.ui.home
 
 import android.os.Bundle
-import android.util.Log
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,11 +17,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.maktabah.maktabahyarsi.R
-import com.maktabah.maktabahyarsi.data.network.api.model.book.DataItemBook
 import com.maktabah.maktabahyarsi.databinding.FragmentHomeBinding
 import com.maktabah.maktabahyarsi.ui.home.adapter.BookLinearAdapter
 import com.maktabah.maktabahyarsi.ui.home.adapter.CategoryHomeAdapter
-import com.maktabah.maktabahyarsi.ui.home.lihatsemua.LihatSemuaFragmentDirections
 import com.maktabah.maktabahyarsi.ui.home.slider.ModelSlider
 import com.maktabah.maktabahyarsi.ui.home.slider.SliderAdapter
 import com.maktabah.maktabahyarsi.utils.safeNavigate
@@ -77,6 +76,7 @@ class HomeFragment : Fragment() {
         setRecyclerViewRecommendBook()
         seeAllBookClickListener()
         setObserveDataVisitor()
+        navigateSearch()
     }
 
     private fun seeAllBookClickListener() = with(binding) {
@@ -100,6 +100,16 @@ class HomeFragment : Fragment() {
                 id
             )
         )
+    }
+
+    private fun navigateSearch() {
+        binding.etSearch.run {
+            setOnClickListener {
+                findNavController().safeNavigate(
+                    HomeFragmentDirections.actionHomeFragmentToResultSearchFragment()
+                )
+            }
+        }
     }
 
     private fun navigateToContentCategory(id: String, name: String) {

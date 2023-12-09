@@ -18,29 +18,61 @@
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/ic_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:src="@drawable/iconback"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/search_view"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/search_view" />
 
-            <androidx.appcompat.widget.SearchView
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/search_view"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:background="@drawable/bg_search_view"
-                android:clickable="true"
-                android:elevation="2dp"
+                android:enabled="true"
                 android:focusable="true"
-                android:hint="Cari buku atau kata"
+                android:showDividers="none"
+                app:expandedHintEnabled="false"
+                app:hintAnimationEnabled="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/tv_cari"
                 app:layout_constraintStart_toEndOf="@id/ic_back"
                 app:layout_constraintTop_toTopOf="parent"
-                app:showDividers="none" />
+                app:placeholderText="Cari buku atau kata"
+                app:placeholderTextAppearance="@style/PlaceholderTextAppearance"
+                app:placeholderTextColor="@color/neutral_500">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_search_grey"
+                    android:enabled="true"
+                    android:focusable="true"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:textAppearance="@style/PlaceholderTextAppearance" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <!--            <androidx.appcompat.widget.SearchView-->
+            <!--                android:id="@+id/search_view"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="40dp"-->
+            <!--                android:layout_marginStart="16dp"-->
+            <!--                android:layout_marginEnd="16dp"-->
+            <!--                android:background="@drawable/bg_search_grey"-->
+            <!--                android:clickable="true"-->
+            <!--                android:focusable="true"-->
+            <!--                android:hint="Cari buku atau kata"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                app:layout_constraintEnd_toStartOf="@id/tv_cari"-->
+            <!--                app:layout_constraintStart_toEndOf="@id/ic_back"-->
+            <!--                app:layout_constraintTop_toTopOf="parent"-->
+            <!--                app:showDividers="none" />-->
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_cari"

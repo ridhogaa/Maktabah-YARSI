@@ -18,6 +18,8 @@ import com.maktabah.maktabahyarsi.data.network.api.datasource.BookApiDataSource
 import com.maktabah.maktabahyarsi.data.network.api.datasource.BookApiDataSourceImpl
 import com.maktabah.maktabahyarsi.data.network.api.datasource.CategoryApiDataSource
 import com.maktabah.maktabahyarsi.data.network.api.datasource.CategoryApiDataSourceImpl
+import com.maktabah.maktabahyarsi.data.network.api.datasource.SearchApiDataSource
+import com.maktabah.maktabahyarsi.data.network.api.datasource.SearchApiDataSourceImpl
 import com.maktabah.maktabahyarsi.data.network.api.datasource.UserApiDataSource
 import com.maktabah.maktabahyarsi.data.network.api.datasource.UserApiDataSourceImpl
 import com.maktabah.maktabahyarsi.data.network.api.datasource.VisitorCounterApiDataSource
@@ -25,6 +27,7 @@ import com.maktabah.maktabahyarsi.data.network.api.datasource.VisitorCounterApiD
 import com.maktabah.maktabahyarsi.data.network.api.service.AuthService
 import com.maktabah.maktabahyarsi.data.network.api.service.BookService
 import com.maktabah.maktabahyarsi.data.network.api.service.CategoryService
+import com.maktabah.maktabahyarsi.data.network.api.service.SearchService
 import com.maktabah.maktabahyarsi.data.network.api.service.UserService
 import com.maktabah.maktabahyarsi.data.network.api.service.VisitorCounterService
 import com.maktabah.maktabahyarsi.utils.PreferenceDataStoreHelper
@@ -65,6 +68,11 @@ object DataSourceModule {
     @Provides
     fun provideVisitorCounterApiDataSource(visitorCounterService: VisitorCounterService): VisitorCounterApiDataSource =
         VisitorCounterApiDataSourceImpl(visitorCounterService)
+
+    @Singleton
+    @Provides
+    fun provideSearchApiDataSource(searchService: SearchService): SearchApiDataSource =
+        SearchApiDataSourceImpl(searchService)
 
     @Singleton
     @Provides
