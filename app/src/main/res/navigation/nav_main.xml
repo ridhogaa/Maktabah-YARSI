@@ -22,12 +22,28 @@
         <action
             android:id="@+id/action_homeFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_resultSearchFragment"
+            app:destination="@id/resultSearchFragment" />
     </fragment>
     <fragment
-        android:id="@+id/searchFragment"
-        android:name="com.maktabah.maktabahyarsi.ui.search.SearchFragment"
+        android:id="@+id/resultSearchFragment"
+        android:name="com.maktabah.maktabahyarsi.ui.resultsearch.ResultSearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_result_search" >
+        <action
+            android:id="@+id/action_resultSearchFragment_self"
+            app:destination="@id/resultSearchFragment" />
+        <action
+            android:id="@+id/action_resultSearchFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_resultSearchFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_resultSearchFragment_to_contentBukuFragment"
+            app:destination="@id/contentBukuFragment" />
+    </fragment>
     <fragment
         android:id="@+id/onboardingFragment"
         android:name="com.maktabah.maktabahyarsi.ui.onboarding.OnboardingFragment"
@@ -73,7 +89,7 @@
         android:id="@+id/riwayatFragment"
         android:name="com.maktabah.maktabahyarsi.ui.riwayat.RiwayatFragment"
         android:label="fragment_riwayat"
-        tools:layout="@layout/fragment_riwayat" >
+        tools:layout="@layout/fragment_riwayat">
         <action
             android:id="@+id/action_riwayatFragment_to_contentBukuFragment"
             app:destination="@id/contentBukuFragment" />
@@ -126,7 +142,7 @@
         android:id="@+id/editUsernameBottomSheetFragment"
         android:name="com.maktabah.maktabahyarsi.ui.profile.editprofile.EditUsernameBottomSheetFragment"
         android:label="fragment_edit_username_bottom_sheet"
-        tools:layout="@layout/fragment_edit_username_bottom_sheet" >
+        tools:layout="@layout/fragment_edit_username_bottom_sheet">
         <action
             android:id="@+id/action_editUsernameBottomSheetFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
@@ -135,7 +151,7 @@
         android:id="@+id/editPasswordBottomSheetFragment"
         android:name="com.maktabah.maktabahyarsi.ui.profile.editprofile.EditPasswordBottomSheetFragment"
         android:label="fragment_edit_password_bottom_sheet"
-        tools:layout="@layout/fragment_edit_password_bottom_sheet" >
+        tools:layout="@layout/fragment_edit_password_bottom_sheet">
         <action
             android:id="@+id/action_editPasswordBottomSheetFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
@@ -245,7 +261,7 @@
         android:id="@+id/contentBukuFragment"
         android:name="com.maktabah.maktabahyarsi.ui.detailbuku.contentbuku.ContentBukuFragment"
         android:label="fragment_content_buku"
-        tools:layout="@layout/fragment_content_buku" >
+        tools:layout="@layout/fragment_content_buku">
         <argument
             android:name="id"
             app:argType="string" />

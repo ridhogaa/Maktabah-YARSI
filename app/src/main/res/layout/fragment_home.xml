@@ -83,21 +83,34 @@
 
         </com.facebook.shimmer.ShimmerFrameLayout>
 
-        <androidx.appcompat.widget.SearchView
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/search_view"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="@drawable/bg_search_grey"
-            android:clickable="true"
-            android:focusable="true"
-            android:hint="Cari Buku atau Kata"
+            android:focusable="false"
+            android:showDividers="none"
+            app:expandedHintEnabled="false"
+            app:hintAnimationEnabled="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_maktabah"
-            app:searchIcon="@drawable/ic_search_24"
-            app:showDividers="none" />
+            app:placeholderText="Cari buku atau kata"
+            app:placeholderTextAppearance="@style/PlaceholderTextAppearance"
+            app:placeholderTextColor="@color/neutral_500"
+            app:startIconDrawable="@drawable/ic_search_24">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_search"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_search_grey"
+                android:inputType="text"
+                android:focusable="false"
+                android:textAppearance="@style/PlaceholderTextAppearance" />
+        </com.google.android.material.textfield.TextInputLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

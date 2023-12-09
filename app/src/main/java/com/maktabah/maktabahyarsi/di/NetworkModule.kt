@@ -4,6 +4,7 @@ import com.maktabah.maktabahyarsi.BuildConfig
 import com.maktabah.maktabahyarsi.data.network.api.service.AuthService
 import com.maktabah.maktabahyarsi.data.network.api.service.BookService
 import com.maktabah.maktabahyarsi.data.network.api.service.CategoryService
+import com.maktabah.maktabahyarsi.data.network.api.service.SearchService
 import com.maktabah.maktabahyarsi.data.network.api.service.UserService
 import com.maktabah.maktabahyarsi.data.network.api.service.VisitorCounterService
 import dagger.Module
@@ -62,4 +63,8 @@ object NetworkModule {
     fun provideVisitorCounterService(retrofit: Retrofit): VisitorCounterService =
         retrofit.create(VisitorCounterService::class.java)
 
+    @Provides
+    @Singleton
+    fun provideSearchService(retrofit: Retrofit): SearchService =
+        retrofit.create(SearchService::class.java)
 }
