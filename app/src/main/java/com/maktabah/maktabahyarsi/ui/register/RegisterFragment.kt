@@ -33,6 +33,7 @@ import com.google.gson.JsonObject
 import com.maktabah.maktabahyarsi.R
 import com.maktabah.maktabahyarsi.data.network.api.model.auth.RegisterRequestBody
 import com.maktabah.maktabahyarsi.databinding.FragmentRegisterBinding
+import com.maktabah.maktabahyarsi.utils.getDataJwt
 import com.maktabah.maktabahyarsi.utils.safeNavigate
 import com.maktabah.maktabahyarsi.wrapper.proceedWhen
 import dagger.hilt.android.AndroidEntryPoint
@@ -56,7 +57,7 @@ class RegisterFragment : Fragment() {
                     val account = task.getResult(ApiException::class.java)!!
                     val jsonObject = JsonObject()
                     jsonObject.addProperty("token", account.idToken!!)
-                    viewModel.registerWithGoogle(jsonObject)
+                    viewModel.loginWithGoogle(jsonObject)
                     observeResultRegisterWithGoogle()
                 } catch (e: ApiException) {
                     Log.w("TAG", "Google sign in failed", e)
@@ -108,7 +109,7 @@ class RegisterFragment : Fragment() {
     private fun observeResultRegisterWithGoogle() = with(binding) {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                viewModel.registerGoogleResponse.collectLatest {
+                viewModel.loginGoogleResponse.collectLatest {
                     it.proceedWhen(
                         doOnSuccess = { success ->
                             pbLoadingGoogle.isVisible = false
@@ -119,7 +120,17 @@ class RegisterFragment : Fragment() {
                                 success.payload?.message,
                                 Toast.LENGTH_SHORT
                             ).show()
-                            navigateToLogin()
+                            success.payload?.data?.accessToken?.token?.let { token ->
+                                viewModel.setUserTokenPref(token)
+                                viewModel.setUserIdPref(token.getDataJwt().getString("id"))
+                            }
+                            viewModel.updateVisitorCounter()
+                            Toast.makeText(
+                                requireContext(),
+                                success.payload?.message,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            navigateToHome()
                         },
                         doOnLoading = {
                             pbLoadingGoogle.isVisible = true
@@ -131,7 +142,7 @@ class RegisterFragment : Fragment() {
                             btnRegisterGoogle.isEnabled = true
                             Toast.makeText(
                                 requireContext(),
-                                "Register Failed: ${it.exception?.message.orEmpty()}",
+                                "Sign Failed: ${it.exception?.message.orEmpty()}",
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
@@ -144,6 +155,11 @@ class RegisterFragment : Fragment() {
     private fun navigateToLogin() {
         // TODO : navigate to Login
         findNavController().safeNavigate(RegisterFragmentDirections.actionRegisterFragmentToLoginFragment())
+    }
+
+    private fun navigateToHome() {
+        // TODO : navigate to Home
+        findNavController().safeNavigate(RegisterFragmentDirections.actionRegisterFragmentToHomeFragment())
     }
 
     private fun observeResult() = with(binding) {
@@ -221,6 +237,7 @@ class RegisterFragment : Fragment() {
             }
             if (etPassword.text.toString() != etConfirmPassword.text.toString()) {
                 flag = false
+                Toast.makeText(requireContext(), "Password tidak matching!", Toast.LENGTH_SHORT).show()
             }
             if (tilUsername.isErrorEnabled) {
                 flag = false

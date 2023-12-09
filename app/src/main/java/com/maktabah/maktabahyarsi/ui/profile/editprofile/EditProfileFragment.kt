@@ -11,6 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -21,6 +23,7 @@ import com.maktabah.maktabahyarsi.data.network.api.model.user.GetUserByIdRespons
 import com.maktabah.maktabahyarsi.databinding.FragmentEditProfileBinding
 import com.maktabah.maktabahyarsi.databinding.FragmentProfileBinding
 import com.maktabah.maktabahyarsi.ui.profile.ProfileViewModel
+import com.maktabah.maktabahyarsi.ui.resultsearch.ResultSearchFragmentDirections
 import com.maktabah.maktabahyarsi.utils.safeNavigate
 import com.maktabah.maktabahyarsi.wrapper.proceedWhen
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,6 +42,7 @@ class EditProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentEditProfileBinding.inflate(layoutInflater, container, false)
+        handleOnBackPressed()
         return binding.root
     }
 
@@ -69,11 +73,24 @@ class EditProfileFragment : Fragment() {
                             success.payload?.let { data ->
                                 setData(data)
                             }
+                        },
+                        doOnError = { error ->
+                            Toast.makeText(requireContext(), "${error.exception?.message}", Toast.LENGTH_SHORT).show()
                         }
                     )
                 }
             }
         }
+    }
+
+    private fun handleOnBackPressed() {
+        val callbacks: OnBackPressedCallback =
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    findNavController().safeNavigate(EditProfileFragmentDirections.actionEditProfileFragmentToProfileFragment())
+                }
+            }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callbacks)
     }
 
     private fun setData(data: GetUserByIdResponse) = with(binding) {

@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -22,6 +23,7 @@ import com.maktabah.maktabahyarsi.ui.home.adapter.BookLinearAdapter
 import com.maktabah.maktabahyarsi.ui.home.adapter.CategoryHomeAdapter
 import com.maktabah.maktabahyarsi.ui.home.slider.ModelSlider
 import com.maktabah.maktabahyarsi.ui.home.slider.SliderAdapter
+import com.maktabah.maktabahyarsi.ui.resultsearch.ResultSearchFragmentDirections
 import com.maktabah.maktabahyarsi.utils.safeNavigate
 import com.maktabah.maktabahyarsi.wrapper.proceedWhen
 import dagger.hilt.android.AndroidEntryPoint

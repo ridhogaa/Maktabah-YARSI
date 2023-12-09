@@ -23,8 +23,4 @@
 
     <style name="Theme.MaktabahYARSI" parent="Base.Theme.MaktabahYARSI" />
 
-    <style name="BottomNavigationViewTextStyle">
-        <item name="android:fontFamily">@font/poppins_regular</item>
-        <item name="android:textSize">14sp</item>
-    </style>
 </resources>

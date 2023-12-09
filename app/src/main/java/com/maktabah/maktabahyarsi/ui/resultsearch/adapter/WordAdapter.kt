@@ -58,7 +58,7 @@ class WordAdapter(
                     tvJudulBuku.text = it.heading
                     tvJumlahHalaman.text =
                         itemView.context.getString(R.string.halaman_kata, it.page.toString())
-                    tvKataBuku.text = highlightText(query, it.text, tvKataBuku.context)
+                    tvKataBuku.text = highlightText(query.lowercase(), it.text, tvKataBuku.context)
                 }
                 root.setOnClickListener {
                     itemClick(data)

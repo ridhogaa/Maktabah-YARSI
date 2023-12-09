@@ -18,6 +18,7 @@ import com.maktabah.maktabahyarsi.ui.onboarding.OnboardingFragmentDirections
 import com.maktabah.maktabahyarsi.utils.isJwtExpired
 import com.maktabah.maktabahyarsi.utils.safeNavigate
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -73,6 +74,4 @@ class SplashScreenFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-
 }

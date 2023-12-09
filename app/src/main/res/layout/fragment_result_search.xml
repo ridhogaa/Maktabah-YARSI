@@ -42,7 +42,7 @@
                 app:layout_constraintStart_toEndOf="@id/ic_back"
                 app:layout_constraintTop_toTopOf="parent"
                 app:placeholderText="Cari buku atau kata"
-                app:placeholderTextAppearance="@style/PlaceholderTextAppearance"
+                app:placeholderTextAppearance="@style/PlaceholderTextAppearanceSearch"
                 app:placeholderTextColor="@color/neutral_500">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -54,25 +54,9 @@
                     android:focusable="true"
                     android:imeOptions="actionSearch"
                     android:inputType="text"
-                    android:textAppearance="@style/PlaceholderTextAppearance" />
+                    android:textColor="@color/neutral_500"
+                    android:textAppearance="@style/PlaceholderTextAppearanceSearch" />
             </com.google.android.material.textfield.TextInputLayout>
-
-
-            <!--            <androidx.appcompat.widget.SearchView-->
-            <!--                android:id="@+id/search_view"-->
-            <!--                android:layout_width="0dp"-->
-            <!--                android:layout_height="40dp"-->
-            <!--                android:layout_marginStart="16dp"-->
-            <!--                android:layout_marginEnd="16dp"-->
-            <!--                android:background="@drawable/bg_search_grey"-->
-            <!--                android:clickable="true"-->
-            <!--                android:focusable="true"-->
-            <!--                android:hint="Cari buku atau kata"-->
-            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--                app:layout_constraintEnd_toStartOf="@id/tv_cari"-->
-            <!--                app:layout_constraintStart_toEndOf="@id/ic_back"-->
-            <!--                app:layout_constraintTop_toTopOf="parent"-->
-            <!--                app:showDividers="none" />-->
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_cari"

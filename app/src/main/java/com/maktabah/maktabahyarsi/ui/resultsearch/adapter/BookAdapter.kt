@@ -55,7 +55,7 @@ class BookAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(book: DataItemBook) {
             with(binding) {
-                tvJudulBuku.text = highlightText(query, book.title, tvJudulBuku.context)
+                tvJudulBuku.text = highlightText(query.lowercase(), book.title, tvJudulBuku.context)
                 tvDescBuku.text = book.description
                 tvJumlahHalaman.text =
                     itemView.context.getString(R.string.halaman, book.page.toString())
