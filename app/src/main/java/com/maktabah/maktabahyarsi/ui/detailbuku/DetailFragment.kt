@@ -108,7 +108,7 @@ class DetailFragment : Fragment() {
             tvPencipta.text = data.creator
             tvJumlahBukuTerbaca.text = data.total.toString()
             tvJumlahHalaman.text = data.page.toString()
-            tvTahunRilis.text = data.total.toString()
+            tvTahunRilis.text = data.publisher
             tvDescriptionBuku.text = data.description
         }
 

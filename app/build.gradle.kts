@@ -114,4 +114,7 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
     implementation("com.google.firebase:firebase-analytics")
 
+    // TreeView
+    implementation("io.github.amrdeveloper:treeview:1.1.4")
+
 }

@@ -131,7 +131,7 @@ class LoginFragment : Fragment() {
                             btnLoginGoogle.isEnabled = true
                             Toast.makeText(
                                 requireContext(),
-                                "Login Failed: ${it.exception?.message.orEmpty()}",
+                                "Sign Failed: ${it.exception?.message.orEmpty()}",
                                 Toast.LENGTH_SHORT
                             ).show()
                         }

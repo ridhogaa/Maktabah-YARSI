@@ -1,4 +1,4 @@
-package com.maktabah.maktabahyarsi.ui.home.adapter
+package com.maktabah.maktabahyarsi.ui.resultsearch.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,12 +7,15 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.maktabah.maktabahyarsi.R
 import com.maktabah.maktabahyarsi.data.network.api.model.book.DataItemBook
-import com.maktabah.maktabahyarsi.databinding.ItemBukuLinearHorizontalBinding
+import com.maktabah.maktabahyarsi.databinding.ItemBukuGridBinding
+import com.maktabah.maktabahyarsi.utils.highlightText
 import com.maktabah.maktabahyarsi.utils.loadImage
 
-class BookLinearAdapter(
-    private val itemClick: (DataItemBook) -> Unit
-) : RecyclerView.Adapter<BookLinearAdapter.LinearViewHolder>() {
+
+class BookAdapter(
+    private val itemClick: (DataItemBook) -> Unit,
+    private val query: String = ""
+) : RecyclerView.Adapter<BookAdapter.GridViewHolder>() {
 
     private val differ = AsyncListDiffer(this,
         object : DiffUtil.ItemCallback<DataItemBook>() {
@@ -34,26 +37,25 @@ class BookLinearAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): BookLinearAdapter.LinearViewHolder =
-        LinearViewHolder(
-            ItemBukuLinearHorizontalBinding.inflate(
+    ): GridViewHolder =
+        GridViewHolder(
+            ItemBukuGridBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
             )
         )
 
-    override fun onBindViewHolder(holder: BookLinearAdapter.LinearViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: GridViewHolder, position: Int) =
         holder.bind(differ.currentList[position])
-    }
 
-    override fun getItemCount(): Int = 6
+    override fun getItemCount(): Int = differ.currentList.size
 
-    inner class LinearViewHolder(private val binding: ItemBukuLinearHorizontalBinding) :
+    inner class GridViewHolder(private val binding: ItemBukuGridBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(book: DataItemBook) {
             with(binding) {
-                tvJudulBuku.text = book.title
+                tvJudulBuku.text = highlightText(query.lowercase(), book.title, tvJudulBuku.context)
                 tvDescBuku.text = book.description
                 tvJumlahHalaman.text =
                     itemView.context.getString(R.string.halaman, book.page.toString())
@@ -67,9 +69,5 @@ class BookLinearAdapter(
 
     fun setData(data: List<DataItemBook>) {
         differ.submitList(data)
-    }
-
-    fun refreshList() {
-        notifyItemRangeChanged(0, differ.currentList.size)
     }
 }
