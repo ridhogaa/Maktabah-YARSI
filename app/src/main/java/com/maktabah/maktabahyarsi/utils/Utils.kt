@@ -72,14 +72,14 @@ fun showSnackBar(view: View, text: String) =
         .show()
 
 fun getMonthNow(): String =
-    SimpleDateFormat("MMMM", Locale.getDefault()).format(Calendar.getInstance().time).lowercase()
+    SimpleDateFormat("MMMM", Locale("us")).format(Calendar.getInstance().time).lowercase()
 
 fun getYearNow(): String =
-    SimpleDateFormat("YYYY", Locale.getDefault()).format(Calendar.getInstance().time).lowercase()
+    SimpleDateFormat("YYYY", Locale("us")).format(Calendar.getInstance().time).lowercase()
 
 @SuppressLint("ConstantLocale")
 val currentDate: String =
-    SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault()).format(Calendar.getInstance().time)
+    SimpleDateFormat("dd/MM/yyyy HH:mm", Locale("us")).format(Calendar.getInstance().time)
 
 fun highlightText(search: String?, originalText: String, context: Context): CharSequence? {
     if (search != null && !search.equals("", ignoreCase = true)) {

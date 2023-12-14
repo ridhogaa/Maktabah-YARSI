@@ -1,12 +1,9 @@
 package com.maktabah.maktabahyarsi.ui.home
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -21,9 +18,7 @@ import com.maktabah.maktabahyarsi.R
 import com.maktabah.maktabahyarsi.databinding.FragmentHomeBinding
 import com.maktabah.maktabahyarsi.ui.home.adapter.BookLinearAdapter
 import com.maktabah.maktabahyarsi.ui.home.adapter.CategoryHomeAdapter
-import com.maktabah.maktabahyarsi.ui.home.slider.ModelSlider
-import com.maktabah.maktabahyarsi.ui.home.slider.SliderAdapter
-import com.maktabah.maktabahyarsi.ui.resultsearch.ResultSearchFragmentDirections
+import com.maktabah.maktabahyarsi.ui.home.adapter.AdsAdapter
 import com.maktabah.maktabahyarsi.utils.safeNavigate
 import com.maktabah.maktabahyarsi.wrapper.proceedWhen
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,7 +35,7 @@ class HomeFragment : Fragment() {
         CategoryHomeAdapter(
             { data ->
                 if (data.subcategories.isNotEmpty()) {
-                    navigateToCategory(data.name)
+                    navigateToCategory(data.id)
                 } else {
                     navigateToContentCategory(data.id, data.name)
                 }
@@ -138,16 +133,12 @@ class HomeFragment : Fragment() {
         )
 
     private fun setUpSlider() = with(binding) {
-        val arraySlider = arrayListOf(
-            ModelSlider(R.drawable.img_example), ModelSlider(R.drawable.example)
-        )
-
-        val sliderAdapter = SliderAdapter(arraySlider)
-        carouselRecyclerView.adapter = sliderAdapter
+        val adsAdapter = AdsAdapter(listOf(R.drawable.pict_ads_1, R.drawable.pict_ads_2))
+        carouselRecyclerView.adapter = adsAdapter
 
         val lm = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         carouselRecyclerView.layoutManager = lm
-        carouselRecyclerView.adapter = sliderAdapter
+        carouselRecyclerView.adapter = adsAdapter
     }
 
     private fun getData() = with(viewModel) {

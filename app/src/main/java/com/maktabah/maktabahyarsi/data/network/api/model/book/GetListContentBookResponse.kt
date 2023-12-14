@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
 data class GetListContentBookResponse(
 
 	@field:SerializedName("data")
-	val data: DataItemListContent,
+	val data: List<DataItemListContent>,
 
 	@field:SerializedName("message")
 	val message: String,
@@ -48,6 +48,6 @@ data class SubItem(
 	val page: Int,
 
 	@field:SerializedName("sub")
-	val sub: List<SubItem>,
+	val sub: List<SubItem>? = null,
 
 )

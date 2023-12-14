@@ -1,40 +1,34 @@
 package com.maktabah.maktabahyarsi.ui.detailbuku.contentbuku
 
-import androidx.lifecycle.ViewModelProvider
+//import com.maktabah.maktabahyarsi.ui.detailbuku.contentbuku.adapter.ContentIsiBukuAdapter
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.amrdeveloper.treeview.TreeNode
+import com.amrdeveloper.treeview.TreeViewAdapter
 import com.google.android.material.sidesheet.SideSheetBehavior
 import com.google.android.material.sidesheet.SideSheetCallback
 import com.google.android.material.sidesheet.SideSheetDialog
 import com.maktabah.maktabahyarsi.R
+import com.maktabah.maktabahyarsi.data.network.api.model.book.DataItemListContent
 import com.maktabah.maktabahyarsi.data.network.api.model.book.GetContentResponse
 import com.maktabah.maktabahyarsi.databinding.DaftarIsiSideSheetDialogBinding
 import com.maktabah.maktabahyarsi.databinding.FragmentContentBukuBinding
-import com.maktabah.maktabahyarsi.databinding.FragmentDetailBinding
-import com.maktabah.maktabahyarsi.ui.detailbuku.DetailFragmentArgs
-import com.maktabah.maktabahyarsi.ui.detailbuku.DetailViewModel
-import com.maktabah.maktabahyarsi.ui.detailbuku.contentbuku.adapter.ContentAdapter
-import com.maktabah.maktabahyarsi.ui.detailbuku.contentbuku.adapter.ContentIsiBukuAdapter
+import com.maktabah.maktabahyarsi.databinding.ItemDaftarIsiBinding
+import com.maktabah.maktabahyarsi.ui.detailbuku.contentbuku.adapter.ListOfContentAdapter
 import com.maktabah.maktabahyarsi.wrapper.proceedWhen
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 class ContentBukuFragment : Fragment() {
@@ -43,10 +37,6 @@ class ContentBukuFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: ContentBukuViewModel by viewModels()
     private val navArgs: ContentBukuFragmentArgs by navArgs()
-    private val contentAdapter: ContentAdapter by lazy {
-        ContentAdapter()
-    }
-    private lateinit var contentViewModel: ContentViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -59,7 +49,6 @@ class ContentBukuFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         toolBarAction()
         getData()
-        getIsiContent()
         setObserveDataContentDetail()
     }
 
@@ -75,26 +64,6 @@ class ContentBukuFragment : Fragment() {
     private fun getData() = with(viewModel) {
         getContentsBook(navArgs.id)
         getContentDetail(navArgs.id)
-    }
-
-    private fun setObserveDataContent() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.contentResponse.collectLatest {
-                    it.proceedWhen(
-                        doOnSuccess = { result ->
-                            result.payload?.let { payload ->
-                                contentAdapter.setData(payload.data.sub)
-                            }
-                        },
-                        doOnLoading = {
-                        },
-                        doOnError = { err ->
-                        }
-                    )
-                }
-            }
-        }
     }
 
     private fun setObserveDataContentDetail() {
@@ -115,8 +84,18 @@ class ContentBukuFragment : Fragment() {
         }
     }
 
-    private fun bindViewContent(data: GetContentResponse?) = with(binding){
+    private fun bindViewContent(data: GetContentResponse?) = with(binding) {
 
+    }
+
+    private val treeViewAdapter: TreeViewAdapter by lazy {
+        TreeViewAdapter { v: View?, layout: Int ->
+            FileViewHolder(
+                ItemDaftarIsiBinding.inflate(
+                    LayoutInflater.from(requireContext())
+                )
+            )
+        }
     }
 
     private fun showSideSheet() = with(binding) {
@@ -135,12 +114,33 @@ class ContentBukuFragment : Fragment() {
 
         val inflater =
             DaftarIsiSideSheetDialogBinding.inflate(LayoutInflater.from(requireContext()))
-
         inflater.rvDaftarIsi.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = this@ContentBukuFragment.contentAdapter
+            isNestedScrollingEnabled = false
+            adapter = testadapter
         }
+
         setObserveDataContent()
+
+
+        val javaDirectory = TreeNode("Java", R.layout.item_daftar_isi)
+        javaDirectory.addChild(TreeNode("FileJava1.java", R.layout.item_daftar_isi))
+        javaDirectory.addChild(TreeNode("FileJava2.java", R.layout.item_daftar_isi))
+        javaDirectory.addChild(TreeNode("FileJava3.java", R.layout.item_daftar_isi))
+
+        val fileRoots: MutableList<TreeNode> = ArrayList()
+        fileRoots.add(javaDirectory)
+
+//        treeViewAdapter.updateTreeNodes(fileRoots)
+//
+//        treeViewAdapter.setTreeNodeClickListener { treeNode: TreeNode, nodeView: View? ->
+//
+//        }
+//
+//        treeViewAdapter.setTreeNodeLongClickListener { treeNode: TreeNode, nodeView: View? ->
+//
+//            true
+//        }
 
         sideSheetDialog.setCancelable(false)
         sideSheetDialog.setCanceledOnTouchOutside(true)
@@ -148,34 +148,30 @@ class ContentBukuFragment : Fragment() {
         sideSheetDialog.show()
     }
 
-    private fun getIsiContent() {
-        val recyclerView: RecyclerView = binding.rvContent
-        val layoutManager = LinearLayoutManager(requireContext())
-        val adapter = ContentIsiBukuAdapter(emptyList())
-        recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = adapter
+    private val testadapter: ListOfContentAdapter by lazy {
+        ListOfContentAdapter(
+            {}
+        )
+    }
 
-        //ganti cara dapet contentID
-        val contentId = ""
-
-        contentViewModel = ViewModelProvider(this).get(ContentViewModel::class.java)
-
-        contentViewModel.contentData.observe(viewLifecycleOwner, Observer { getContentResponse ->
-            getContentResponse?.let {
-                if (it.data != null) {
-                    Log.d("ContentBukuFragment", "Data received: ${it.data}")
-                    adapter.updateData(listOf(it.data))
-                } else {
-                    Log.e("ContentBukuFragment", "Data is null in the response.")
+    private fun setObserveDataContent() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.contentResponse.collectLatest {
+                    it.proceedWhen(
+                        doOnSuccess = { result ->
+                            result.payload?.let {
+                                testadapter.setData(it.data)
+                            }
+                        },
+                        doOnLoading = {
+                        },
+                        doOnError = { err ->
+                        }
+                    )
                 }
             }
-        })
-
-        contentViewModel.errorMessage.observe(viewLifecycleOwner, Observer { errorMessage ->
-
-        })
-
-        contentViewModel.getContent(contentId)
+        }
     }
 
     override fun onDestroyView() {

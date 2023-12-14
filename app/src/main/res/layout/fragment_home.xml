@@ -134,6 +134,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="196dp"
                 android:clipChildren="false"
+                tools:listitem="@layout/carousel"
                 android:clipToPadding="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
