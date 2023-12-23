@@ -21,7 +21,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", "BASE_URL", "\"http://192.168.0.145:3000\"")
+        buildConfigField("String", "BASE_URL", "\"http://172.17.33.247:3000\"")
     }
 
     buildTypes {
@@ -114,7 +114,7 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
     implementation("com.google.firebase:firebase-analytics")
 
-    // TreeView
-    implementation("io.github.amrdeveloper:treeview:1.1.4")
+    // Paging
+    implementation("androidx.paging:paging-runtime-ktx:3.1.1")
 
 }

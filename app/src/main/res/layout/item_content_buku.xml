@@ -1,67 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_halaman"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:fontFamily="@font/poppins_bold"
-        android:textColor="?attr/color"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="1" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_bab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:fontFamily="@font/poppins_bold"
-        android:textColor="?attr/color"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Bab 1 Mengenal Islam" />
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_sub_bab"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:fontFamily="@font/poppins_bold"
         android:textColor="?attr/color"
         android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/tv_isi"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_bab"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="Bab 1.1 Sebaran Islam ke Indonesia" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_isi"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:fontFamily="@font/poppins_regular"
         android:justificationMode="inter_word"
         android:textColor="?attr/color"
         android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_sub_bab"
         tools:targetApi="o"
         tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus bibendum, ligula sit amet posuere dignissim, est nisi eleifend libero, eget tempus nisi est eu ante. In varius, justo at condimentum dictum, sapien est fringilla nunc, a tincidunt orci mi at ante. Sed in nunc ut urna fringilla eleifend. Cras bibendum odio quis odio feugiat fringilla. Curabitur ullamcorper tortor a diam vehicula, nec egestas eros scelerisque. Quisque posuere sapien in ipsum venenatis, ut feugiat tellus facilisis. Nulla eleifend nisl facilisis, rhoncus mi in, pellentesque nunc. Nullam non elit ac ex dapibus imperdiet. Sed ac tristique turpis, ut rhoncus dolor. In libero justo, bibendum a ligula eget, scelerisque suscipit purus. Sed porta bibendum purus, ac viverra.        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus bibendum, ligula sit amet posuere dignissim, est nisi eleifend libero, eget tempus nisi est eu ante. In varius, justo at condimentum dictum, sapien est fringilla nunc, a tincidunt orci mi at ante. Sed in nunc ut urna fringilla eleifend. Cras bibendum odio quis odio feugiat fringilla. Curabitur ullamcorper tortor a diam vehicula, nec egestas eros scelerisque. Quisque posuere sapien in ipsum venenatis, ut feugiat tellus facilisis. Nulla eleifend nisl facilisis, rhoncus mi in, pellentesque nunc. Nullam non elit ac ex dapibus imperdiet. Sed ac tristique turpis, ut rhoncus dolor. In libero justo, bibendum a ligula eget, scelerisque suscipit purus. Sed porta bibendum purus, ac viverra.       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus bibendum, ligula sit amet posuere dignissim, est nisi eleifend libero, eget tempus nisi est eu ante. In varius, justo at condimentum dictum, sapien est fringilla nunc, a tincidunt orci mi at ante. Sed in nunc ut urna fringilla eleifend. Cras bibendum odio quis odio feugiat fringilla. Curabitur ullamcorper tortor a diam vehicula, nec egestas eros scelerisque. Quisque posuere sapien in ipsum venenatis, ut feugiat tellus facilisis. Nulla eleifend nisl facilisis, rhoncus mi in, pellentesque nunc. Nullam non elit ac ex dapibus imperdiet. Sed ac tristique turpis, ut rhoncus dolor. In libero justo, bibendum a ligula eget, scelerisque suscipit purus. Sed porta bibendum purus, ac viverra." />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

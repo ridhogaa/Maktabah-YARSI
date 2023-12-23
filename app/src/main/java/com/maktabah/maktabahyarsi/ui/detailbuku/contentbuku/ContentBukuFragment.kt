@@ -1,10 +1,11 @@
 package com.maktabah.maktabahyarsi.ui.detailbuku.contentbuku
 
-//import com.maktabah.maktabahyarsi.ui.detailbuku.contentbuku.adapter.ContentIsiBukuAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -12,19 +13,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.amrdeveloper.treeview.TreeNode
-import com.amrdeveloper.treeview.TreeViewAdapter
-import com.google.android.material.sidesheet.SideSheetBehavior
-import com.google.android.material.sidesheet.SideSheetCallback
-import com.google.android.material.sidesheet.SideSheetDialog
-import com.maktabah.maktabahyarsi.R
-import com.maktabah.maktabahyarsi.data.network.api.model.book.DataItemListContent
-import com.maktabah.maktabahyarsi.data.network.api.model.book.GetContentResponse
-import com.maktabah.maktabahyarsi.databinding.DaftarIsiSideSheetDialogBinding
+import androidx.paging.LoadState
+import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
+import com.maktabah.maktabahyarsi.data.network.api.model.book.DataItemBookById
 import com.maktabah.maktabahyarsi.databinding.FragmentContentBukuBinding
-import com.maktabah.maktabahyarsi.databinding.ItemDaftarIsiBinding
-import com.maktabah.maktabahyarsi.ui.detailbuku.contentbuku.adapter.ListOfContentAdapter
+import com.maktabah.maktabahyarsi.ui.detailbuku.contentbuku.adapter.ContentAdapter
+import com.maktabah.maktabahyarsi.ui.detailbuku.contentbuku.adapter.LoadingStateAdapter
 import com.maktabah.maktabahyarsi.wrapper.proceedWhen
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -37,6 +32,9 @@ class ContentBukuFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: ContentBukuViewModel by viewModels()
     private val navArgs: ContentBukuFragmentArgs by navArgs()
+    private val contentAdapter: ContentAdapter by lazy {
+        ContentAdapter()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -49,130 +47,138 @@ class ContentBukuFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         toolBarAction()
         getData()
-        setObserveDataContentDetail()
+        setRecyclerViewContent()
     }
 
     private fun toolBarAction() = with(binding) {
         iconBack.setOnClickListener {
             findNavController().popBackStack()
         }
-        iconNav.setOnClickListener {
-            showSideSheet()
-        }
     }
 
     private fun getData() = with(viewModel) {
-        getContentsBook(navArgs.id)
         getContentDetail(navArgs.id)
+        getBooksById(navArgs.id)
     }
 
-    private fun setObserveDataContentDetail() {
+    private fun setRecyclerViewContent() {
+        binding.run {
+            vpContent.apply {
+                adapter =
+                    this@ContentBukuFragment.contentAdapter.withLoadStateFooter(footer = LoadingStateAdapter { contentAdapter.retry() })
+                registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                    override fun onPageScrollStateChanged(state: Int) {}
+
+                    override fun onPageSelected(position: Int) {}
+
+                    override fun onPageScrolled(
+                        position: Int,
+                        positionOffset: Float,
+                        positionOffsetPixels: Int
+                    ) {
+                    }
+                })
+            }
+            contentAdapter.addLoadStateListener {
+                when (it.source.refresh) {
+                    is LoadState.NotLoading -> {
+                        vpContent.isVisible = true
+                        errorMsg.isVisible = false
+                        pbLoading.isVisible = false
+                    }
+
+                    is LoadState.Loading -> {
+                        vpContent.isVisible = false
+                        errorMsg.isVisible = false
+                        pbLoading.isVisible = true
+                    }
+
+                    is LoadState.Error -> {
+                        vpContent.isVisible = false
+                        errorMsg.isVisible = true
+                        pbLoading.isVisible = false
+                        val errorState = it.source.refresh as LoadState.Error
+                        Toast.makeText(
+                            requireContext(),
+                            errorState.error.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
+            setObserveDataContentDetail()
+            setObserveDataBook()
+        }
+    }
+
+    //        viewModel.contentDetailResponse.flowWithLifecycle(
+//            viewLifecycleOwner.lifecycle,
+//            Lifecycle.State.STARTED
+//        )
+//            .onEach(contentAdapter::submitData)
+//            .launchIn(viewLifecycleOwner.lifecycleScope)
+//
+//        (view?.parent as? ViewGroup)?.doOnPreDraw {
+//            startPostponedEnterTransition()
+//        }
+    private fun setObserveDataContentDetail() = binding.run {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.contentDetailResponse.collectLatest {
                     it.proceedWhen(
                         doOnSuccess = { result ->
-                            bindViewContent(result.payload)
-                        },
-                        doOnLoading = {
-                        },
-                        doOnError = { err ->
-                        }
-                    )
-                }
-            }
-        }
-    }
-
-    private fun bindViewContent(data: GetContentResponse?) = with(binding) {
-
-    }
-
-    private val treeViewAdapter: TreeViewAdapter by lazy {
-        TreeViewAdapter { v: View?, layout: Int ->
-            FileViewHolder(
-                ItemDaftarIsiBinding.inflate(
-                    LayoutInflater.from(requireContext())
-                )
-            )
-        }
-    }
-
-    private fun showSideSheet() = with(binding) {
-        val sideSheetDialog = SideSheetDialog(requireContext())
-
-        sideSheetDialog.behavior.addCallback(object : SideSheetCallback() {
-            override fun onStateChanged(sheet: View, newState: Int) {
-                if (newState == SideSheetBehavior.STATE_DRAGGING) {
-                    sideSheetDialog.behavior.state = SideSheetBehavior.STATE_EXPANDED
-                }
-            }
-
-            override fun onSlide(sheet: View, slideOffset: Float) {
-            }
-        })
-
-        val inflater =
-            DaftarIsiSideSheetDialogBinding.inflate(LayoutInflater.from(requireContext()))
-        inflater.rvDaftarIsi.apply {
-            layoutManager = LinearLayoutManager(requireContext())
-            isNestedScrollingEnabled = false
-            adapter = testadapter
-        }
-
-        setObserveDataContent()
-
-
-        val javaDirectory = TreeNode("Java", R.layout.item_daftar_isi)
-        javaDirectory.addChild(TreeNode("FileJava1.java", R.layout.item_daftar_isi))
-        javaDirectory.addChild(TreeNode("FileJava2.java", R.layout.item_daftar_isi))
-        javaDirectory.addChild(TreeNode("FileJava3.java", R.layout.item_daftar_isi))
-
-        val fileRoots: MutableList<TreeNode> = ArrayList()
-        fileRoots.add(javaDirectory)
-
-//        treeViewAdapter.updateTreeNodes(fileRoots)
-//
-//        treeViewAdapter.setTreeNodeClickListener { treeNode: TreeNode, nodeView: View? ->
-//
-//        }
-//
-//        treeViewAdapter.setTreeNodeLongClickListener { treeNode: TreeNode, nodeView: View? ->
-//
-//            true
-//        }
-
-        sideSheetDialog.setCancelable(false)
-        sideSheetDialog.setCanceledOnTouchOutside(true)
-        sideSheetDialog.setContentView(inflater.root)
-        sideSheetDialog.show()
-    }
-
-    private val testadapter: ListOfContentAdapter by lazy {
-        ListOfContentAdapter(
-            {}
-        )
-    }
-
-    private fun setObserveDataContent() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.contentResponse.collectLatest {
-                    it.proceedWhen(
-                        doOnSuccess = { result ->
-                            result.payload?.let {
-                                testadapter.setData(it.data)
+                            vpContent.isVisible = true
+                            errorMsg.isVisible = true
+                            pbLoading.isVisible = false
+                            oleh.isVisible = true
+                            tvTitle.isVisible = true
+                            pencipta.isVisible = true
+                            result.payload?.let { data ->
+                                contentAdapter.submitData(lifecycle, data)
                             }
                         },
-                        doOnLoading = {
+                        doOnError = { e ->
+                            vpContent.isVisible = false
+                            errorMsg.isVisible = true
+                            pbLoading.isVisible = false
+                            oleh.isVisible = false
+                            tvTitle.isVisible = false
+                            pencipta.isVisible = false
+                            errorMsg.text = "Check ur network : ${e.message.orEmpty()}"
                         },
-                        doOnError = { err ->
+                        doOnLoading = {
+                            vpContent.isVisible = false
+                            errorMsg.isVisible = false
+                            pbLoading.isVisible = true
+                            oleh.isVisible = false
+                            tvTitle.isVisible = false
+                            pencipta.isVisible = false
                         }
                     )
                 }
             }
         }
     }
+
+    private fun setObserveDataBook() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.bookResponse.collectLatest {
+                    it.proceedWhen(doOnSuccess = { result ->
+                        result.payload?.let { payload ->
+                            bindToViewBook(payload.data)
+                        }
+                    })
+                }
+            }
+        }
+    }
+
+    private fun bindToViewBook(data: DataItemBookById) =
+        with(binding) {
+            judulBuku.text = data.title
+            pencipta.text = data.creator
+        }
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -1,5 +1,9 @@
 package com.maktabah.maktabahyarsi.data.repository
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import com.google.gson.Gson
 import com.maktabah.maktabahyarsi.data.local.database.datasource.FavoriteBookDataSource
 import com.maktabah.maktabahyarsi.data.local.database.datasource.HistoryBookDataSource
 import com.maktabah.maktabahyarsi.data.local.database.entity.FavoriteBookEntity
@@ -7,11 +11,20 @@ import com.maktabah.maktabahyarsi.data.local.database.entity.HistoryBookEntity
 import com.maktabah.maktabahyarsi.data.network.api.datasource.BookApiDataSource
 import com.maktabah.maktabahyarsi.data.network.api.model.book.GetBookByIdResponse
 import com.maktabah.maktabahyarsi.data.network.api.model.book.GetBookResponse
-import com.maktabah.maktabahyarsi.data.network.api.model.book.GetContentResponse
 import com.maktabah.maktabahyarsi.data.network.api.model.book.GetListContentBookResponse
+import com.maktabah.maktabahyarsi.data.network.api.model.content.GetContentResponse
+import com.maktabah.maktabahyarsi.data.network.api.model.error.BaseErrorResponse
+import com.maktabah.maktabahyarsi.data.network.paging.ContentPagingSource
 import com.maktabah.maktabahyarsi.wrapper.ResultWrapper
 import com.maktabah.maktabahyarsi.wrapper.proceedFlow
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
+import retrofit2.HttpException
 import javax.inject.Inject
 
 
@@ -20,7 +33,7 @@ interface BookRepository {
     suspend fun getBooksById(id: String): Flow<ResultWrapper<GetBookByIdResponse>>
     suspend fun getBooksByCategory(id: String): Flow<ResultWrapper<GetBookResponse>>
     suspend fun getContentsBook(id: String): Flow<ResultWrapper<GetListContentBookResponse>>
-    suspend fun getContents(id: String): Flow<ResultWrapper<GetContentResponse>>
+    suspend fun getContents(id: String): Flow<ResultWrapper<PagingData<GetContentResponse.Data>>>
     suspend fun addFavorite(favorite: FavoriteBookEntity)
     suspend fun removeFavorite(favorite: FavoriteBookEntity)
     suspend fun getAllFavorites(idUser: String): Flow<ResultWrapper<List<FavoriteBookEntity>>>
@@ -32,7 +45,7 @@ interface BookRepository {
 class BookRepositoryImpl @Inject constructor(
     private val bookApiDataSource: BookApiDataSource,
     private val favoriteBookDataSource: FavoriteBookDataSource,
-    private val historyBookDataSource: HistoryBookDataSource
+    private val historyBookDataSource: HistoryBookDataSource,
 ) : BookRepository {
     override suspend fun getBooksBySort(sort: String?): Flow<ResultWrapper<GetBookResponse>> =
         proceedFlow {
@@ -54,9 +67,12 @@ class BookRepositoryImpl @Inject constructor(
             bookApiDataSource.getContentsBook(id)
         }
 
-    override suspend fun getContents(id: String): Flow<ResultWrapper<GetContentResponse>> =
+    override suspend fun getContents(id: String): Flow<ResultWrapper<PagingData<GetContentResponse.Data>>> =
         proceedFlow {
-            bookApiDataSource.getContents(id)
+            Pager(
+                config = PagingConfig(pageSize = 1, enablePlaceholders = false),
+                pagingSourceFactory = { ContentPagingSource(bookApiDataSource, id) }
+            ).flow.first()
         }
 
     override suspend fun addFavorite(favorite: FavoriteBookEntity) =

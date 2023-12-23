@@ -2,8 +2,8 @@ package com.maktabah.maktabahyarsi.data.network.api.datasource
 
 import com.maktabah.maktabahyarsi.data.network.api.model.book.GetBookByIdResponse
 import com.maktabah.maktabahyarsi.data.network.api.model.book.GetBookResponse
-import com.maktabah.maktabahyarsi.data.network.api.model.book.GetContentResponse
 import com.maktabah.maktabahyarsi.data.network.api.model.book.GetListContentBookResponse
+import com.maktabah.maktabahyarsi.data.network.api.model.content.GetContentResponse
 import com.maktabah.maktabahyarsi.data.network.api.service.BookService
 import javax.inject.Inject
 
@@ -13,7 +13,7 @@ interface BookApiDataSource {
     suspend fun getBooksById(id: String): GetBookByIdResponse
     suspend fun getBooksByCategoryId(id: String): GetBookResponse
     suspend fun getContentsBook(id: String): GetListContentBookResponse
-    suspend fun getContents(id: String): GetContentResponse
+    suspend fun getContents(id: String, page: Int): GetContentResponse
 }
 
 class BookApiDataSourceImpl @Inject constructor(
@@ -31,6 +31,6 @@ class BookApiDataSourceImpl @Inject constructor(
     override suspend fun getContentsBook(id: String): GetListContentBookResponse =
         bookService.getContentsBook(id)
 
-    override suspend fun getContents(id: String): GetContentResponse =
-        bookService.getContents(id)
+    override suspend fun getContents(id: String, page: Int): GetContentResponse =
+        bookService.getContents(id, page)
 }
