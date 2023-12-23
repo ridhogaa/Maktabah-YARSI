@@ -27,7 +27,7 @@ class ContentPagingSource(
             val page = params.key ?: INITIAL_PAGE_INDEX
             val responseData = bookApiDataSource.getContents(
                 idBibliography,
-                pageFromSearch ?: page
+                (params.key ?: pageFromSearch) ?: page
             ).data.orEmpty()
 
             LoadResult.Page(
