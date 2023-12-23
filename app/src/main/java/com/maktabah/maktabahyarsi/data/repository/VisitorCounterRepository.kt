@@ -10,9 +10,7 @@ import javax.inject.Inject
 
 interface VisitorCounterRepository {
     suspend fun getVisitorCounter(): Flow<ResultWrapper<GetVisitorCounterResponse>>
-
     suspend fun updateVisitorCounter()
-
 }
 
 class VisitorCounterRepositoryImpl @Inject constructor(
@@ -25,5 +23,4 @@ class VisitorCounterRepositoryImpl @Inject constructor(
 
     override suspend fun updateVisitorCounter() =
         visitorCounterApiDataSource.updateVisitorCounter()
-
 }

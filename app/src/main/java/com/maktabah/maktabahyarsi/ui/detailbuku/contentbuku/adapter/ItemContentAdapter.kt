@@ -7,9 +7,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.maktabah.maktabahyarsi.data.network.api.model.content.GetContentResponse.Data.Sub
 import com.maktabah.maktabahyarsi.databinding.ItemContentBukuBinding
+import com.maktabah.maktabahyarsi.utils.highlightText
 
 
-class ItemContentAdapter : RecyclerView.Adapter<ItemContentAdapter.LinearViewHolder>() {
+class ItemContentAdapter(private val text: String) :
+    RecyclerView.Adapter<ItemContentAdapter.LinearViewHolder>() {
 
     private val differ = AsyncListDiffer(this,
         object : DiffUtil.ItemCallback<Sub>() {
@@ -51,7 +53,11 @@ class ItemContentAdapter : RecyclerView.Adapter<ItemContentAdapter.LinearViewHol
         fun bind(sub: Sub) {
             with(binding) {
                 tvSubBab.text = sub.heading
-                tvIsi.text = sub.text
+                tvIsi.text = if (text.isNotEmpty()) highlightText(
+                    text.lowercase(),
+                    sub.text.toString(),
+                    tvIsi.context
+                ) else sub.text
             }
         }
     }

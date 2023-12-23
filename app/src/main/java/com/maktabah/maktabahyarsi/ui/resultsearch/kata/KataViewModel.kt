@@ -2,6 +2,7 @@ package com.maktabah.maktabahyarsi.ui.resultsearch.kata
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.maktabah.maktabahyarsi.data.local.datastore.HighlightTextPreferenceDataSource
 import com.maktabah.maktabahyarsi.data.network.api.model.search.SearchContentResponse
 import com.maktabah.maktabahyarsi.data.network.api.model.search.SearchRequest
 import com.maktabah.maktabahyarsi.data.repository.SearchRepository
@@ -17,7 +18,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class KataViewModel @Inject constructor(
-    private val searchRepository: SearchRepository
+    private val searchRepository: SearchRepository,
+    private val pref: HighlightTextPreferenceDataSource
 ) : ViewModel() {
     private val _search =
         MutableStateFlow<ResultWrapper<SearchContentResponse>>(ResultWrapper.Loading())
@@ -44,6 +46,9 @@ class KataViewModel @Inject constructor(
                 }
             }
         }
+    }
 
+    fun setHighlightText(text: String) = viewModelScope.launch(Dispatchers.IO) {
+        pref.setHighlightTextPref(text)
     }
 }

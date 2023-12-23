@@ -6,6 +6,8 @@ import com.maktabah.maktabahyarsi.data.local.database.datasource.FavoriteBookDat
 import com.maktabah.maktabahyarsi.data.local.database.datasource.FavoriteBookDataSourceImpl
 import com.maktabah.maktabahyarsi.data.local.database.datasource.HistoryBookDataSource
 import com.maktabah.maktabahyarsi.data.local.database.datasource.HistoryBookDataSourceImpl
+import com.maktabah.maktabahyarsi.data.local.datastore.HighlightTextPreferenceDataSource
+import com.maktabah.maktabahyarsi.data.local.datastore.HighlightTextPreferenceDataSourceImpl
 import com.maktabah.maktabahyarsi.data.local.datastore.OnboardingPreferenceDataSource
 import com.maktabah.maktabahyarsi.data.local.datastore.OnboardingPreferenceDataSourceImpl
 import com.maktabah.maktabahyarsi.data.local.datastore.ThemePreferenceDataSource
@@ -98,5 +100,10 @@ object DataSourceModule {
     @Provides
     fun provideThemePreferenceDataSource(preferenceDataStoreHelperImpl: PreferenceDataStoreHelperImpl): ThemePreferenceDataSource =
         ThemePreferenceDataSourceImpl(preferenceDataStoreHelperImpl)
+
+    @Singleton
+    @Provides
+    fun provideHighlightTextPreferenceDataSource(preferenceDataStoreHelperImpl: PreferenceDataStoreHelperImpl): HighlightTextPreferenceDataSource =
+        HighlightTextPreferenceDataSourceImpl(preferenceDataStoreHelperImpl)
 
 }

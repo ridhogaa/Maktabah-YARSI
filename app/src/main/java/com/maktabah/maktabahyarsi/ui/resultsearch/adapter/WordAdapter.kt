@@ -12,7 +12,7 @@ import com.maktabah.maktabahyarsi.utils.highlightText
 
 
 class WordAdapter(
-    private val itemClick: (SearchContentResponse.Data) -> Unit,
+    private val itemClick: (SearchContentResponse.Data, String) -> Unit,
     private val query: String = ""
 ) : RecyclerView.Adapter<WordAdapter.WordViewHolder>() {
 
@@ -61,7 +61,7 @@ class WordAdapter(
                     tvKataBuku.text = highlightText(query.lowercase(), it.text, tvKataBuku.context)
                 }
                 root.setOnClickListener {
-                    itemClick(data)
+                    itemClick(data, query.lowercase())
                 }
             }
         }

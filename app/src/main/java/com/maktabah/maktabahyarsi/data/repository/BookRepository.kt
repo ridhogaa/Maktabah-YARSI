@@ -25,6 +25,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import retrofit2.HttpException
+import retrofit2.http.Path
 import javax.inject.Inject
 
 
@@ -32,7 +33,7 @@ interface BookRepository {
     suspend fun getBooksBySort(sort: String? = null): Flow<ResultWrapper<GetBookResponse>>
     suspend fun getBooksById(id: String): Flow<ResultWrapper<GetBookByIdResponse>>
     suspend fun getBooksByCategory(id: String): Flow<ResultWrapper<GetBookResponse>>
-    suspend fun getContentsBook(id: String): Flow<ResultWrapper<GetListContentBookResponse>>
+    suspend fun updateTotalReadingBook(idBibliography: String) : Flow<ResultWrapper<Unit>>
     suspend fun getContents(id: String): Flow<ResultWrapper<PagingData<GetContentResponse.Data>>>
     suspend fun addFavorite(favorite: FavoriteBookEntity)
     suspend fun removeFavorite(favorite: FavoriteBookEntity)
@@ -62,9 +63,9 @@ class BookRepositoryImpl @Inject constructor(
             bookApiDataSource.getBooksByCategoryId(id)
         }
 
-    override suspend fun getContentsBook(id: String): Flow<ResultWrapper<GetListContentBookResponse>> =
+    override suspend fun updateTotalReadingBook(idBibliography: String): Flow<ResultWrapper<Unit>> =
         proceedFlow {
-            bookApiDataSource.getContentsBook(id)
+            bookApiDataSource.updateTotalReadingBook(idBibliography)
         }
 
     override suspend fun getContents(id: String): Flow<ResultWrapper<PagingData<GetContentResponse.Data>>> =

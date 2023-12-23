@@ -20,7 +20,6 @@ interface UserRepository {
     suspend fun updateUsernameUserById(
         updateUsernameRequestBody: UpdateUsernameRequestBody
     ): Flow<ResultWrapper<UpdateUserResponse>>
-
     suspend fun updatePasswordUserById(
         updatePasswordRequestBody: UpdatePasswordRequestBody
     ): Flow<ResultWrapper<UpdateUserResponse>>

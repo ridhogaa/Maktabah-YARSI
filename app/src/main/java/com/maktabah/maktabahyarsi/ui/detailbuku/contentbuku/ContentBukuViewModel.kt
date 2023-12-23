@@ -1,9 +1,11 @@
 package com.maktabah.maktabahyarsi.ui.detailbuku.contentbuku
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.maktabah.maktabahyarsi.data.local.datastore.HighlightTextPreferenceDataSource
 import com.maktabah.maktabahyarsi.data.network.api.model.book.GetBookByIdResponse
 import com.maktabah.maktabahyarsi.data.network.api.model.content.GetContentResponse
 import com.maktabah.maktabahyarsi.data.repository.BookRepository
@@ -20,7 +22,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ContentBukuViewModel @Inject constructor(
-    private val bookRepository: BookRepository
+    private val bookRepository: BookRepository,
+    private val pref: HighlightTextPreferenceDataSource
 ) : ViewModel() {
     private val _contentDetailResponse =
         MutableStateFlow<ResultWrapper<PagingData<GetContentResponse.Data>>>(ResultWrapper.Empty())
@@ -40,5 +43,11 @@ class ContentBukuViewModel @Inject constructor(
         bookRepository.getBooksById(id).collectLatest {
             _bookResponse.value = it
         }
+    }
+
+    val getHighlightText = pref.getHighlightTextPrefFlow().asLiveData(Dispatchers.IO)
+
+    fun removeHighlight() = viewModelScope.launch(Dispatchers.IO) {
+        pref.removeHighlightTextPref()
     }
 }

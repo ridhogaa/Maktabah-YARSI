@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -20,6 +21,8 @@ import com.maktabah.maktabahyarsi.data.network.api.model.book.DataItemBookById
 import com.maktabah.maktabahyarsi.databinding.FragmentContentBukuBinding
 import com.maktabah.maktabahyarsi.ui.detailbuku.contentbuku.adapter.ContentAdapter
 import com.maktabah.maktabahyarsi.ui.detailbuku.contentbuku.adapter.LoadingStateAdapter
+import com.maktabah.maktabahyarsi.ui.profile.editprofile.EditProfileFragmentDirections
+import com.maktabah.maktabahyarsi.utils.safeNavigate
 import com.maktabah.maktabahyarsi.wrapper.proceedWhen
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -33,14 +36,28 @@ class ContentBukuFragment : Fragment() {
     private val viewModel: ContentBukuViewModel by viewModels()
     private val navArgs: ContentBukuFragmentArgs by navArgs()
     private val contentAdapter: ContentAdapter by lazy {
-        ContentAdapter()
+        ContentAdapter(
+            viewModel.getHighlightText.value.orEmpty()
+        )
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentContentBukuBinding.inflate(inflater, container, false)
+        handleOnBackPressed()
         return binding.root
+    }
+
+    private fun handleOnBackPressed() {
+        val callbacks: OnBackPressedCallback =
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    viewModel.removeHighlight()
+                    findNavController().popBackStack()
+                }
+            }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callbacks)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,6 +69,7 @@ class ContentBukuFragment : Fragment() {
 
     private fun toolBarAction() = with(binding) {
         iconBack.setOnClickListener {
+            viewModel.removeHighlight()
             findNavController().popBackStack()
         }
     }
@@ -66,18 +84,6 @@ class ContentBukuFragment : Fragment() {
             vpContent.apply {
                 adapter =
                     this@ContentBukuFragment.contentAdapter.withLoadStateFooter(footer = LoadingStateAdapter { contentAdapter.retry() })
-                registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-                    override fun onPageScrollStateChanged(state: Int) {}
-
-                    override fun onPageSelected(position: Int) {}
-
-                    override fun onPageScrolled(
-                        position: Int,
-                        positionOffset: Float,
-                        positionOffsetPixels: Int
-                    ) {
-                    }
-                })
             }
             contentAdapter.addLoadStateListener {
                 when (it.source.refresh) {
@@ -111,16 +117,6 @@ class ContentBukuFragment : Fragment() {
         }
     }
 
-    //        viewModel.contentDetailResponse.flowWithLifecycle(
-//            viewLifecycleOwner.lifecycle,
-//            Lifecycle.State.STARTED
-//        )
-//            .onEach(contentAdapter::submitData)
-//            .launchIn(viewLifecycleOwner.lifecycleScope)
-//
-//        (view?.parent as? ViewGroup)?.doOnPreDraw {
-//            startPostponedEnterTransition()
-//        }
     private fun setObserveDataContentDetail() = binding.run {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {

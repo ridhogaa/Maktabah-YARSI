@@ -16,7 +16,7 @@ import com.maktabah.maktabahyarsi.databinding.ItemContentBinding
  * Github: https://github.com/ridhogaa
  */
 
-class ContentAdapter :
+class ContentAdapter(private val text: String) :
     PagingDataAdapter<GetContentResponse.Data, ContentAdapter.ListViewHolder>(callback) {
 
     companion object {
@@ -49,7 +49,7 @@ class ContentAdapter :
         RecyclerView.ViewHolder(binding.root) {
 
         private val itemContentAdapter: ItemContentAdapter by lazy {
-            ItemContentAdapter()
+            ItemContentAdapter(text)
         }
 
         fun bind(item: GetContentResponse.Data) {

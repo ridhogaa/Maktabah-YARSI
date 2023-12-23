@@ -5,6 +5,7 @@ import com.maktabah.maktabahyarsi.data.network.api.model.book.GetBookResponse
 import com.maktabah.maktabahyarsi.data.network.api.model.book.GetListContentBookResponse
 import com.maktabah.maktabahyarsi.data.network.api.model.content.GetContentResponse
 import retrofit2.http.GET
+import retrofit2.http.PATCH
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -26,15 +27,15 @@ interface BookService {
         @Path("id") id: String
     ): GetBookResponse
 
-    @GET("/api/v1/listcontents/{id}")
-    suspend fun getContentsBook(
-        @Path("id") id: String
-    ): GetListContentBookResponse
-
     @GET("/api/v1/contents/bibliography/{id}")
     suspend fun getContents(
         @Path("id") idBibliography: String,
         @Query("page") page: Int = 1,
         @Query("size") size: Int = 1,
     ): GetContentResponse
+
+    @PATCH("/api/v1/bibliographies/{id}")
+    suspend fun updateTotalReadingBook(
+        @Path("id") idBibliography: String
+    )
 }
