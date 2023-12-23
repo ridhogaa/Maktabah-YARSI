@@ -272,5 +272,9 @@
         <argument
             android:name="id"
             app:argType="string" />
+        <argument
+            android:name="page"
+            app:argType="integer"
+            android:defaultValue="1" />
     </fragment>
 </navigation>

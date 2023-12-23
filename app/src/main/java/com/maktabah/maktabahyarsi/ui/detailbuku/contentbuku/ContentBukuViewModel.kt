@@ -33,8 +33,8 @@ class ContentBukuViewModel @Inject constructor(
         MutableStateFlow<ResultWrapper<GetBookByIdResponse>>(ResultWrapper.Loading())
     val bookResponse = _bookResponse.asStateFlow()
 
-    fun getContentDetail(id: String) = viewModelScope.launch(Dispatchers.IO){
-        bookRepository.getContents(id).collectLatest {
+    fun getContentDetail(id: String, page: Int? = null) = viewModelScope.launch(Dispatchers.IO){
+        bookRepository.getContents(id, page).collectLatest {
             _contentDetailResponse.value = it
         }
     }

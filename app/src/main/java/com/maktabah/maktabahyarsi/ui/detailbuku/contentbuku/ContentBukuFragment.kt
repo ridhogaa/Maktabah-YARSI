@@ -75,7 +75,7 @@ class ContentBukuFragment : Fragment() {
     }
 
     private fun getData() = with(viewModel) {
-        getContentDetail(navArgs.id)
+        getContentDetail(navArgs.id, navArgs.page)
         getBooksById(navArgs.id)
     }
 

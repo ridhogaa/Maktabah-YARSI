@@ -33,8 +33,12 @@ interface BookRepository {
     suspend fun getBooksBySort(sort: String? = null): Flow<ResultWrapper<GetBookResponse>>
     suspend fun getBooksById(id: String): Flow<ResultWrapper<GetBookByIdResponse>>
     suspend fun getBooksByCategory(id: String): Flow<ResultWrapper<GetBookResponse>>
-    suspend fun updateTotalReadingBook(idBibliography: String) : Flow<ResultWrapper<Unit>>
-    suspend fun getContents(id: String): Flow<ResultWrapper<PagingData<GetContentResponse.Data>>>
+    suspend fun updateTotalReadingBook(idBibliography: String): Flow<ResultWrapper<Unit>>
+    suspend fun getContents(
+        id: String,
+        page: Int? = null
+    ): Flow<ResultWrapper<PagingData<GetContentResponse.Data>>>
+
     suspend fun addFavorite(favorite: FavoriteBookEntity)
     suspend fun removeFavorite(favorite: FavoriteBookEntity)
     suspend fun getAllFavorites(idUser: String): Flow<ResultWrapper<List<FavoriteBookEntity>>>
@@ -68,11 +72,14 @@ class BookRepositoryImpl @Inject constructor(
             bookApiDataSource.updateTotalReadingBook(idBibliography)
         }
 
-    override suspend fun getContents(id: String): Flow<ResultWrapper<PagingData<GetContentResponse.Data>>> =
+    override suspend fun getContents(
+        id: String,
+        page: Int?
+    ): Flow<ResultWrapper<PagingData<GetContentResponse.Data>>> =
         proceedFlow {
             Pager(
                 config = PagingConfig(pageSize = 1, enablePlaceholders = false),
-                pagingSourceFactory = { ContentPagingSource(bookApiDataSource, id) }
+                pagingSourceFactory = { ContentPagingSource(bookApiDataSource, id, page) }
             ).flow.first()
         }
 

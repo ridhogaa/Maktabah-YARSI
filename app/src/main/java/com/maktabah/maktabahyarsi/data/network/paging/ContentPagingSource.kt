@@ -8,7 +8,8 @@ import com.maktabah.maktabahyarsi.data.network.api.model.content.GetContentRespo
 
 class ContentPagingSource(
     private val bookApiDataSource: BookApiDataSource,
-    private val idBibliography: String
+    private val idBibliography: String,
+    private val pageFromSearch: Int? = null
 ) : PagingSource<Int, GetContentResponse.Data>() {
 
     private companion object {
@@ -24,7 +25,10 @@ class ContentPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, GetContentResponse.Data> =
         try {
             val page = params.key ?: INITIAL_PAGE_INDEX
-            val responseData = bookApiDataSource.getContents(idBibliography, page).data.orEmpty()
+            val responseData = bookApiDataSource.getContents(
+                idBibliography,
+                pageFromSearch ?: page
+            ).data.orEmpty()
 
             LoadResult.Page(
                 data = responseData,

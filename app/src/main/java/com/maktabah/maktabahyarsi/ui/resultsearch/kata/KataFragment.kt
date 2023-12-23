@@ -41,7 +41,7 @@ class KataFragment : Fragment() {
                 viewModel.setHighlightText(query)
                 findNavController().safeNavigate(
                     ResultSearchFragmentDirections.actionResultSearchFragmentToContentBukuFragment(
-                        data._source.listcontent
+                        data._source.listcontent, data._source.page
                     )
                 )
             },
