@@ -37,10 +37,11 @@ class KataFragment : Fragment() {
     private val viewModel: KataViewModel by viewModels()
     private val wordAdapter: WordAdapter by lazy {
         WordAdapter(
-            {
+            { data, query ->
+                viewModel.setHighlightText(query)
                 findNavController().safeNavigate(
                     ResultSearchFragmentDirections.actionResultSearchFragmentToContentBukuFragment(
-                        it._source.listcontent
+                        data._source.listcontent
                     )
                 )
             },

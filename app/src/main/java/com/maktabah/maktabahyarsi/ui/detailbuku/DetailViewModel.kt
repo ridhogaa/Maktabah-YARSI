@@ -40,6 +40,10 @@ class DetailViewModel @Inject constructor(
         }
     }
 
+    fun updateTotalReadingBook(idBibliography: String) = viewModelScope.launch(Dispatchers.IO) {
+        bookRepository.updateTotalReadingBook(idBibliography)
+    }
+
     fun addOrUpdateHistory(
         id: String,
         title: String,

@@ -1,6 +1,7 @@
 package com.maktabah.maktabahyarsi.ui.detailbuku
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -154,12 +155,14 @@ class DetailFragment : Fragment() {
         }
     }
 
-    private fun navigateToContentBook(id: String) =
+    private fun navigateToContentBook(id: String) {
+        viewModel.updateTotalReadingBook(id)
         findNavController().safeNavigate(
             DetailFragmentDirections.actionDetailFragmentToContentBukuFragment(
                 id
             )
         )
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

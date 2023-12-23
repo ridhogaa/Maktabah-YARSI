@@ -1,12 +1,14 @@
 package com.maktabah.maktabahyarsi.di
 
 import com.maktabah.maktabahyarsi.BuildConfig
+import com.maktabah.maktabahyarsi.data.network.api.datasource.BookApiDataSource
 import com.maktabah.maktabahyarsi.data.network.api.service.AuthService
 import com.maktabah.maktabahyarsi.data.network.api.service.BookService
 import com.maktabah.maktabahyarsi.data.network.api.service.CategoryService
 import com.maktabah.maktabahyarsi.data.network.api.service.SearchService
 import com.maktabah.maktabahyarsi.data.network.api.service.UserService
 import com.maktabah.maktabahyarsi.data.network.api.service.VisitorCounterService
+import com.maktabah.maktabahyarsi.data.network.paging.ContentPagingSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -67,4 +69,11 @@ object NetworkModule {
     @Singleton
     fun provideSearchService(retrofit: Retrofit): SearchService =
         retrofit.create(SearchService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideContentPagingSource(
+        bookApiDataSource: BookApiDataSource,
+        id: String
+    ): ContentPagingSource = ContentPagingSource(bookApiDataSource, id)
 }
