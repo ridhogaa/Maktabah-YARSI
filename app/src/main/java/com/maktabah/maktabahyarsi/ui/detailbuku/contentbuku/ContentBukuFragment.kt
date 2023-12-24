@@ -77,7 +77,7 @@ class ContentBukuFragment : Fragment() {
     private fun getData() = with(viewModel) {
         getContentDetail(navArgs.id, navArgs.page)
         getBooksById(navArgs.id)
-        getHighlightText.observe(viewLifecycleOwner){
+        getHighlightText.observe(viewLifecycleOwner) {
             contentAdapter.setText(it.orEmpty())
         }
     }
@@ -159,15 +159,40 @@ class ContentBukuFragment : Fragment() {
         }
     }
 
-    private fun setObserveDataBook() {
+    private fun setObserveDataBook() = binding.run{
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.bookResponse.collectLatest {
-                    it.proceedWhen(doOnSuccess = { result ->
-                        result.payload?.let { payload ->
-                            bindToViewBook(payload.data)
+                    it.proceedWhen(
+                        doOnSuccess = { result ->
+                            vpContent.isVisible = true
+                            errorMsg.isVisible = true
+                            pbLoading.isVisible = false
+                            oleh.isVisible = true
+                            tvTitle.isVisible = true
+                            pencipta.isVisible = true
+                            result.payload?.let { payload ->
+                                bindToViewBook(payload.data)
+                            }
+                        },
+                        doOnError = { e ->
+                            vpContent.isVisible = false
+                            errorMsg.isVisible = true
+                            pbLoading.isVisible = false
+                            oleh.isVisible = false
+                            tvTitle.isVisible = false
+                            pencipta.isVisible = false
+                            errorMsg.text = "Check ur network : ${e.message.orEmpty()}"
+                        },
+                        doOnLoading = {
+                            vpContent.isVisible = false
+                            errorMsg.isVisible = false
+                            pbLoading.isVisible = true
+                            oleh.isVisible = false
+                            tvTitle.isVisible = false
+                            pencipta.isVisible = false
                         }
-                    })
+                    )
                 }
             }
         }
