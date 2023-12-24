@@ -25,16 +25,24 @@ class ContentPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, GetContentResponse.Data> =
         try {
             val page = params.key ?: INITIAL_PAGE_INDEX
+            val newPage = params.key ?: pageFromSearch
             val responseData = bookApiDataSource.getContents(
                 idBibliography,
-                (params.key ?: pageFromSearch) ?: page
+                newPage ?: page
             ).data.orEmpty()
-
-            LoadResult.Page(
-                data = responseData,
-                prevKey = if (page == 1) null else page - 1,
-                nextKey = if (responseData.isEmpty()) null else page + 1
-            )
+            if (newPage != null){
+                LoadResult.Page(
+                    data = responseData,
+                    prevKey = if (newPage == 1) null else newPage - 1,
+                    nextKey = if (responseData.isEmpty()) null else newPage + 1
+                )
+            } else {
+                LoadResult.Page(
+                    data = responseData,
+                    prevKey = if (page == 1) null else page - 1,
+                    nextKey = if (responseData.isEmpty()) null else page + 1
+                )
+            }
         } catch (exception: Exception) {
             LoadResult.Error(exception)
         }

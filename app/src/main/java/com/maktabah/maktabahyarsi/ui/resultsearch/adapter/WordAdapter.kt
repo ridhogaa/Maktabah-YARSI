@@ -1,5 +1,6 @@
 package com.maktabah.maktabahyarsi.ui.resultsearch.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -13,7 +14,7 @@ import com.maktabah.maktabahyarsi.utils.highlightText
 
 class WordAdapter(
     private val itemClick: (SearchContentResponse.Data, String) -> Unit,
-    private val query: String = ""
+    private val query: String
 ) : RecyclerView.Adapter<WordAdapter.WordViewHolder>() {
 
     private val differ = AsyncListDiffer(this,
@@ -22,14 +23,14 @@ class WordAdapter(
                 oldItem: SearchContentResponse.Data,
                 newItem: SearchContentResponse.Data,
             ): Boolean {
-                return oldItem._id == newItem._id
+                return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(
                 oldItem: SearchContentResponse.Data,
                 newItem: SearchContentResponse.Data,
             ): Boolean {
-                return oldItem._id == newItem._id
+                return oldItem.id == newItem.id
             }
         })
 
@@ -54,7 +55,7 @@ class WordAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: SearchContentResponse.Data) {
             with(binding) {
-                data._source.let {
+                data.source.let {
                     tvJudulBuku.text = it.heading
                     tvJumlahHalaman.text =
                         itemView.context.getString(R.string.halaman_kata, it.page.toString())

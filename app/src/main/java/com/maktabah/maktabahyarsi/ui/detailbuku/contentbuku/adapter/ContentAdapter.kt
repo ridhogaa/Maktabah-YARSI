@@ -1,5 +1,6 @@
 package com.maktabah.maktabahyarsi.ui.detailbuku.contentbuku.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,8 +17,10 @@ import com.maktabah.maktabahyarsi.databinding.ItemContentBinding
  * Github: https://github.com/ridhogaa
  */
 
-class ContentAdapter(private val text: String) :
+class ContentAdapter :
     PagingDataAdapter<GetContentResponse.Data, ContentAdapter.ListViewHolder>(callback) {
+
+    private lateinit var text: String
 
     companion object {
         val callback = object : DiffUtil.ItemCallback<GetContentResponse.Data>() {
@@ -45,6 +48,10 @@ class ContentAdapter(private val text: String) :
         if (data != null) holder.bind(data)
     }
 
+    fun setText(text: String){
+        this.text = text
+    }
+
     inner class ListViewHolder(private val binding: ItemContentBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -54,6 +61,7 @@ class ContentAdapter(private val text: String) :
 
         fun bind(item: GetContentResponse.Data) {
             binding.run {
+                Log.i("TAG", "bind: $text")
                 tvBab.text = item.heading
                 item.sub?.let { sub -> setChildAdapter(sub) }
             }

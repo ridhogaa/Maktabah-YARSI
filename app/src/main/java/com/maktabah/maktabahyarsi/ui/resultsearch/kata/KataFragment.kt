@@ -2,6 +2,7 @@ package com.maktabah.maktabahyarsi.ui.resultsearch.kata
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -41,7 +42,7 @@ class KataFragment : Fragment() {
                 viewModel.setHighlightText(query)
                 findNavController().safeNavigate(
                     ResultSearchFragmentDirections.actionResultSearchFragmentToContentBukuFragment(
-                        data._source.listcontent, data._source.page
+                        data.source.idBibliography, data.source.page
                     )
                 )
             },

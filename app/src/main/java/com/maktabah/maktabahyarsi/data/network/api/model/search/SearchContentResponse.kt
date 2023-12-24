@@ -5,34 +5,42 @@ import com.google.gson.annotations.SerializedName
 
 @Keep
 data class SearchContentResponse(
-    @field:SerializedName("data")
-    val `data`: List<Data>,
-    @field:SerializedName("message")
-    val message: String,
-    @field:SerializedName("status")
-    val status: String,
-    @field:SerializedName("statusCode")
-    val statusCode: Int
+    @SerializedName("data")
+    val `data`: List<Data> = listOf(),
+    @SerializedName("message")
+    val message: String = "",
+    @SerializedName("status")
+    val status: String = "",
+    @SerializedName("statusCode")
+    val statusCode: Int = 0
 ) {
     data class Data(
-        @field:SerializedName("_index")
-        val _index: String,
-        @field:SerializedName("_id")
-        val _id: String,
-        @field:SerializedName("_score")
-        val _score: Int,
-        @field:SerializedName("_source")
-        val _source: Source
+        @SerializedName("_index")
+        val index: String = "",
+        @SerializedName("_id")
+        val id: String = "",
+        @SerializedName("_score")
+        val score: Int = 0,
+        @SerializedName("_ignored")
+        val ignored: List<String> = listOf(),
+        @SerializedName("_source")
+        val source: Source = Source()
     ) {
         data class Source(
-            @field:SerializedName("heading")
-            val heading: String,
-            @field:SerializedName("text")
-            val text: String,
-            @field:SerializedName("listcontent")
-            val listcontent: String,
-            @field:SerializedName("page")
-            val page: Int
+            @SerializedName("id_content")
+            val idContent: String = "",
+            @SerializedName("author")
+            val author: String = "",
+            @SerializedName("bibliography_title")
+            val bibliographyTitle: String = "",
+            @SerializedName("id_bibliography")
+            val idBibliography: String = "",
+            @SerializedName("text")
+            val text: String = "",
+            @SerializedName("page")
+            val page: Int = 0,
+            @SerializedName("heading")
+            val heading: String = ""
         )
     }
 }

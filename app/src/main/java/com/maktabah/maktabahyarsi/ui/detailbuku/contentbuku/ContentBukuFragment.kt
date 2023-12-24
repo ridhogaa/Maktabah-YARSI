@@ -1,6 +1,7 @@
 package com.maktabah.maktabahyarsi.ui.detailbuku.contentbuku
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,7 @@ import com.maktabah.maktabahyarsi.ui.profile.editprofile.EditProfileFragmentDire
 import com.maktabah.maktabahyarsi.utils.safeNavigate
 import com.maktabah.maktabahyarsi.wrapper.proceedWhen
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -36,9 +38,7 @@ class ContentBukuFragment : Fragment() {
     private val viewModel: ContentBukuViewModel by viewModels()
     private val navArgs: ContentBukuFragmentArgs by navArgs()
     private val contentAdapter: ContentAdapter by lazy {
-        ContentAdapter(
-            viewModel.getHighlightText.value.orEmpty()
-        )
+        ContentAdapter()
     }
 
     override fun onCreateView(
@@ -77,6 +77,9 @@ class ContentBukuFragment : Fragment() {
     private fun getData() = with(viewModel) {
         getContentDetail(navArgs.id, navArgs.page)
         getBooksById(navArgs.id)
+        getHighlightText.observe(viewLifecycleOwner){
+            contentAdapter.setText(it.orEmpty())
+        }
     }
 
     private fun setRecyclerViewContent() {
