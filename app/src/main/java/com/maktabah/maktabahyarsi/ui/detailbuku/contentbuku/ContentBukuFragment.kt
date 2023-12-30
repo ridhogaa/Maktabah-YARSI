@@ -159,7 +159,7 @@ class ContentBukuFragment : Fragment() {
         }
     }
 
-    private fun setObserveDataBook() = binding.run{
+    private fun setObserveDataBook() = binding.run {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.bookResponse.collectLatest {
@@ -198,11 +198,24 @@ class ContentBukuFragment : Fragment() {
         }
     }
 
-    private fun bindToViewBook(data: DataItemBookById) =
+    private fun bindToViewBook(data: DataItemBookById) {
         with(binding) {
             judulBuku.text = data.title
             pencipta.text = data.creator
+            viewModel.getUserTokenPrefFlow.observe(viewLifecycleOwner) {
+                if (it.isNotEmpty()) {
+                    viewModel.addOrUpdateHistory(
+                        data.id,
+                        data.title,
+                        data.description,
+                        data.page,
+                        data.creator,
+                        data.imageUrl,
+                    )
+                }
+            }
         }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

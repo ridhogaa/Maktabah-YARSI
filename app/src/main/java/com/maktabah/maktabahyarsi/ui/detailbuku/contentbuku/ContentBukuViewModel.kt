@@ -5,16 +5,20 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.maktabah.maktabahyarsi.data.local.database.entity.HistoryBookEntity
 import com.maktabah.maktabahyarsi.data.local.datastore.HighlightTextPreferenceDataSource
+import com.maktabah.maktabahyarsi.data.local.datastore.UserPreferenceDataSource
 import com.maktabah.maktabahyarsi.data.network.api.model.book.GetBookByIdResponse
 import com.maktabah.maktabahyarsi.data.network.api.model.content.GetContentResponse
 import com.maktabah.maktabahyarsi.data.repository.BookRepository
+import com.maktabah.maktabahyarsi.utils.currentDate
 import com.maktabah.maktabahyarsi.wrapper.ResultWrapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -23,7 +27,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ContentBukuViewModel @Inject constructor(
     private val bookRepository: BookRepository,
-    private val pref: HighlightTextPreferenceDataSource
+    private val pref: HighlightTextPreferenceDataSource,
+    private val userPreferenceDataSource: UserPreferenceDataSource
 ) : ViewModel() {
     private val _contentDetailResponse =
         MutableStateFlow<ResultWrapper<PagingData<GetContentResponse.Data>>>(ResultWrapper.Empty())
@@ -50,4 +55,29 @@ class ContentBukuViewModel @Inject constructor(
     fun removeHighlight() = viewModelScope.launch(Dispatchers.IO) {
         pref.removeHighlightTextPref()
     }
+
+    fun addOrUpdateHistory(
+        id: String,
+        title: String,
+        desc: String,
+        page: Int,
+        creator: String,
+        imageUrl: String
+    ) = viewModelScope.launch(Dispatchers.IO) {
+        bookRepository.addOrUpdateHistory(
+            HistoryBookEntity(
+                id,
+                title,
+                desc,
+                page,
+                creator,
+                imageUrl,
+                userPreferenceDataSource.getUserIdPrefFlow().first(),
+                currentDate
+            )
+        )
+    }
+
+    val getUserTokenPrefFlow =
+        userPreferenceDataSource.getUserTokenPrefFlow().asLiveData(Dispatchers.IO)
 }

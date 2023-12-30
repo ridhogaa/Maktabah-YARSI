@@ -52,11 +52,18 @@ class EditProfileFragment : Fragment() {
         observeCurrentUser()
         actionBack()
         showEditUsernameAndShowEditPassword()
+        onEditImageClicked()
     }
 
     private fun actionBack() = with(binding) {
         iconBack.setOnClickListener {
             findNavController().safeNavigate(EditProfileFragmentDirections.actionEditProfileFragmentToProfileFragment())
+        }
+    }
+
+    private fun onEditImageClicked() = binding.run {
+        backgroundFoto.setOnClickListener {
+            Toast.makeText(requireContext(), "Sedang Dikembangkan!", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -75,7 +82,11 @@ class EditProfileFragment : Fragment() {
                             }
                         },
                         doOnError = { error ->
-                            Toast.makeText(requireContext(), "${error.exception?.message}", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                requireContext(),
+                                "${error.exception?.message}",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     )
                 }
