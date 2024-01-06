@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -21,8 +23,19 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", "BASE_URL", "\"http://192.168.0.145:3000\"")
         proguardFiles("consumer-rules.pro")
+    }
+
+    val keyPropertiesFile = rootProject.file("key.properties")
+    val keyProperties = Properties()
+    keyProperties.load(keyPropertiesFile.inputStream())
+
+    flavorDimensions("default")
+    productFlavors {
+        create("production") {
+            dimension = "default"
+            buildConfigField("String", "BASE_URL", "\"${keyProperties.getProperty("BASE_URL")}\"")
+        }
     }
 
     buildTypes {
