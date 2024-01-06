@@ -54,7 +54,21 @@ jobs:
 
       # Create APK Release
       - name: Build apk release project (APK) - ${{ env.main_project_module }} module
-        run: ./gradlew assemble
+        run: ./gradlew assembleRelease
+
+      # Upload Debug Artifact
+      - name: Upload Debug Artifact
+        uses: actions/upload-artifact@v2
+        with:
+            name: debug-apk
+            path: app/build/outputs/apk/debug/
+
+      # Upload Release Artifact
+      - name: Upload Release Artifact
+        uses: actions/upload-artifact@v2
+        with:
+            name: release-apk
+            path: app/build/outputs/apk/release/
 
       # Create Bundle AAB Release
       # Noted for main module build [main_project_module]:bundleRelease
