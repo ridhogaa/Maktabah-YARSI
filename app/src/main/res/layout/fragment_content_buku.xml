@@ -67,6 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
+            android:visibility="gone"
             android:fontFamily="@font/poppins_bold"
             android:textColor="?attr/color"
             android:textSize="24sp"
@@ -82,6 +83,7 @@
             android:layout_marginStart="20dp"
             android:fontFamily="@font/poppins_bold"
             android:text="Oleh"
+            android:visibility="gone"
             android:textColor="?attr/color"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -93,6 +95,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="20dp"
+            android:visibility="gone"
             android:fontFamily="@font/poppins_bold"
             android:textColor="@color/green_maktabah"
             android:textSize="12sp"
@@ -130,6 +133,17 @@
 
         <ProgressBar
             android:id="@+id/pb_loading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/pb_loading2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:indeterminate="true"
