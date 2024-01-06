@@ -127,11 +127,8 @@ class ContentBukuFragment : Fragment() {
                     it.proceedWhen(
                         doOnSuccess = { result ->
                             vpContent.isVisible = true
-                            errorMsg.isVisible = true
-                            pbLoading.isVisible = false
-                            oleh.isVisible = true
-                            tvTitle.isVisible = true
-                            pencipta.isVisible = true
+                            errorMsg.isVisible = false
+                            pbLoading2.isVisible = false
                             result.payload?.let { data ->
                                 contentAdapter.submitData(lifecycle, data)
                             }
@@ -139,19 +136,13 @@ class ContentBukuFragment : Fragment() {
                         doOnError = { e ->
                             vpContent.isVisible = false
                             errorMsg.isVisible = true
-                            pbLoading.isVisible = false
-                            oleh.isVisible = false
-                            tvTitle.isVisible = false
-                            pencipta.isVisible = false
+                            pbLoading2.isVisible = false
                             errorMsg.text = "Check ur network : ${e.message.orEmpty()}"
                         },
                         doOnLoading = {
                             vpContent.isVisible = false
                             errorMsg.isVisible = false
-                            pbLoading.isVisible = true
-                            oleh.isVisible = false
-                            tvTitle.isVisible = false
-                            pencipta.isVisible = false
+                            pbLoading2.isVisible = true
                         }
                     )
                 }
@@ -165,8 +156,7 @@ class ContentBukuFragment : Fragment() {
                 viewModel.bookResponse.collectLatest {
                     it.proceedWhen(
                         doOnSuccess = { result ->
-                            vpContent.isVisible = true
-                            errorMsg.isVisible = true
+                            errorMsg.isVisible = false
                             pbLoading.isVisible = false
                             oleh.isVisible = true
                             tvTitle.isVisible = true
@@ -186,7 +176,7 @@ class ContentBukuFragment : Fragment() {
                         },
                         doOnLoading = {
                             vpContent.isVisible = false
-                            errorMsg.isVisible = false
+                            errorMsg.isVisible = true
                             pbLoading.isVisible = true
                             oleh.isVisible = false
                             tvTitle.isVisible = false
