@@ -15,31 +15,30 @@ android {
     namespace = "com.maktabah.maktabahyarsi"
     compileSdk = 33
 
+    val keyPropertiesFile = rootProject.file("key.properties")
+    val keyProperties = Properties()
+    keyProperties.load(keyPropertiesFile.inputStream())
+
     defaultConfig {
         applicationId = "com.maktabah.maktabahyarsi"
         minSdk = 24
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
-
+        buildConfigField("String", "BASE_URL", "\"${keyProperties.getProperty("BASE_URL")}\"")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         proguardFiles("consumer-rules.pro")
     }
 
-    val keyPropertiesFile = rootProject.file("key.properties")
-    val keyProperties = Properties()
-    keyProperties.load(keyPropertiesFile.inputStream())
-
-    flavorDimensions("default")
-    productFlavors {
-        create("production") {
-            dimension = "default"
-            buildConfigField("String", "BASE_URL", "\"${keyProperties.getProperty("BASE_URL")}\"")
-        }
-    }
-
     buildTypes {
         release {
+            isMinifyEnabled = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+        debug {
             isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
