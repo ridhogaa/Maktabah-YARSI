@@ -23,6 +23,7 @@ import com.maktabah.maktabahyarsi.databinding.FragmentContentBukuBinding
 import com.maktabah.maktabahyarsi.ui.detailbuku.contentbuku.adapter.ContentAdapter
 import com.maktabah.maktabahyarsi.ui.detailbuku.contentbuku.adapter.LoadingStateAdapter
 import com.maktabah.maktabahyarsi.ui.profile.editprofile.EditProfileFragmentDirections
+import com.maktabah.maktabahyarsi.utils.hackMatchParentCheckInViewPager
 import com.maktabah.maktabahyarsi.utils.safeNavigate
 import com.maktabah.maktabahyarsi.wrapper.proceedWhen
 import dagger.hilt.android.AndroidEntryPoint
@@ -85,6 +86,7 @@ class ContentBukuFragment : Fragment() {
 
     private fun setRecyclerViewContent() {
         binding.run {
+            vpContent.hackMatchParentCheckInViewPager()
             vpContent.setPageTransformer { view, position ->
                 view.apply {
                     val pageWidth = width
