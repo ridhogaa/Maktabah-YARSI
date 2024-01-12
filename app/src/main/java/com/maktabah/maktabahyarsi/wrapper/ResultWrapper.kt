@@ -1,5 +1,6 @@
 package com.maktabah.maktabahyarsi.wrapper
 
+import android.accounts.NetworkErrorException
 import com.google.gson.Gson
 import com.maktabah.maktabahyarsi.data.network.api.model.error.BaseErrorResponse
 import kotlinx.coroutines.flow.Flow
@@ -71,7 +72,7 @@ suspend fun <T> proceedFlow(block: suspend () -> T): Flow<ResultWrapper<T>> {
             }
 
             else -> {
-                emit(ResultWrapper.Error(exception = Exception(e)))
+                emit(ResultWrapper.Error(exception = Exception(e.message)))
             }
         }
     }.onStart {

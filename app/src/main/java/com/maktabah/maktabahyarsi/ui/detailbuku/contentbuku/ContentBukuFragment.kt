@@ -129,14 +129,14 @@ class ContentBukuFragment : Fragment() {
                             vpContent.isVisible = true
                             errorMsg.isVisible = false
                             pbLoading2.isVisible = false
-                            result.payload?.let { data ->
-                                contentAdapter.submitData(lifecycle, data)
+                            if (result.payload != null){
+                                contentAdapter.submitData(lifecycle, result.payload)
                             }
                         },
                         doOnError = { e ->
                             vpContent.isVisible = false
                             errorMsg.isVisible = true
-                            pbLoading2.isVisible = false
+                            pbLoading2.isVisible = true
                             errorMsg.text = "Check ur network : ${e.message.orEmpty()}"
                         },
                         doOnLoading = {
@@ -168,7 +168,7 @@ class ContentBukuFragment : Fragment() {
                         doOnError = { e ->
                             vpContent.isVisible = false
                             errorMsg.isVisible = true
-                            pbLoading.isVisible = false
+                            pbLoading.isVisible = true
                             oleh.isVisible = false
                             tvTitle.isVisible = false
                             pencipta.isVisible = false
