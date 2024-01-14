@@ -12,6 +12,8 @@ import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.snackbar.Snackbar
@@ -105,4 +107,8 @@ fun highlightText(search: String?, originalText: String, context: Context): Char
         }
     }
     return originalText
+}
+
+fun ViewPager2.hackMatchParentCheckInViewPager() {
+    (getChildAt(0) as RecyclerView).clearOnChildAttachStateChangeListeners()
 }

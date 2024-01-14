@@ -62,6 +62,7 @@ class ContentAdapter :
         fun bind(item: GetContentResponse.Data) {
             binding.run {
                 Log.i("TAG", "bind: $text")
+                item.text = null
                 tvBab.text = item.heading
                 item.sub?.let { sub -> setChildAdapter(sub) }
             }

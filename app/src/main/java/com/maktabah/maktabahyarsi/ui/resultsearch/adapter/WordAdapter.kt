@@ -8,43 +8,39 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.maktabah.maktabahyarsi.R
 import com.maktabah.maktabahyarsi.data.network.api.model.search.SearchContentResponse
+import com.maktabah.maktabahyarsi.data.network.api.model.search.Source
 import com.maktabah.maktabahyarsi.databinding.ItemKataBinding
 import com.maktabah.maktabahyarsi.utils.highlightText
 
 
 class WordAdapter(
-    private val itemClick: (SearchContentResponse.Data, String) -> Unit,
-    private val query: String
+    private val itemClick: (Source, String) -> Unit, private val query: String
 ) : RecyclerView.Adapter<WordAdapter.WordViewHolder>() {
 
-    private val differ = AsyncListDiffer(this,
-        object : DiffUtil.ItemCallback<SearchContentResponse.Data>() {
-            override fun areItemsTheSame(
-                oldItem: SearchContentResponse.Data,
-                newItem: SearchContentResponse.Data,
-            ): Boolean {
-                return oldItem.id == newItem.id
-            }
+    private val differ = AsyncListDiffer(this, object : DiffUtil.ItemCallback<Source>() {
+        override fun areItemsTheSame(
+            oldItem: Source,
+            newItem: Source,
+        ): Boolean {
+            return oldItem.idContent == newItem.idContent
+        }
 
-            override fun areContentsTheSame(
-                oldItem: SearchContentResponse.Data,
-                newItem: SearchContentResponse.Data,
-            ): Boolean {
-                return oldItem.id == newItem.id
-            }
-        })
+        override fun areContentsTheSame(
+            oldItem: Source,
+            newItem: Source,
+        ): Boolean {
+            return oldItem.idContent == newItem.idContent
+        }
+    })
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): WordViewHolder =
-        WordViewHolder(
-            ItemKataBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
+    ): WordViewHolder = WordViewHolder(
+        ItemKataBinding.inflate(
+            LayoutInflater.from(parent.context), parent, false
         )
+    )
 
     override fun onBindViewHolder(holder: WordViewHolder, position: Int) =
         holder.bind(differ.currentList[position])
@@ -53,13 +49,19 @@ class WordAdapter(
 
     inner class WordViewHolder(private val binding: ItemKataBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: SearchContentResponse.Data) {
+
+        fun bind(data: Source) {
             with(binding) {
-                data.source.let {
-                    tvJudulBuku.text = it.heading
-                    tvJumlahHalaman.text =
-                        itemView.context.getString(R.string.halaman_kata, it.page.toString())
-                    tvKataBuku.text = highlightText(query.lowercase(), it.text, tvKataBuku.context)
+                tvJudulBuku.text = data.heading
+                tvJumlahHalaman.text =
+                    itemView.context.getString(R.string.halaman_kata, data.page.toString())
+                data.text.let {
+                    tvKataBuku.text = highlightText(
+                        query.lowercase(), it.substring(
+                            Regex("(\\w*\\s)${Regex.escape(query)}").find(it)?.range?.first
+                                ?: it.indexOf(query, ignoreCase = true)
+                        ).split(" ").take(20).joinToString(" ") { it.trim() }, tvKataBuku.context
+                    )
                 }
                 root.setOnClickListener {
                     itemClick(data, query.lowercase())
@@ -68,7 +70,7 @@ class WordAdapter(
         }
     }
 
-    fun setData(data: List<SearchContentResponse.Data>) {
+    fun setData(data: List<Source>) {
         differ.submitList(data)
     }
 

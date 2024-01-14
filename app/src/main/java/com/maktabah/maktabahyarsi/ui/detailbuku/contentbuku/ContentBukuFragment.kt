@@ -23,12 +23,14 @@ import com.maktabah.maktabahyarsi.databinding.FragmentContentBukuBinding
 import com.maktabah.maktabahyarsi.ui.detailbuku.contentbuku.adapter.ContentAdapter
 import com.maktabah.maktabahyarsi.ui.detailbuku.contentbuku.adapter.LoadingStateAdapter
 import com.maktabah.maktabahyarsi.ui.profile.editprofile.EditProfileFragmentDirections
+import com.maktabah.maktabahyarsi.utils.hackMatchParentCheckInViewPager
 import com.maktabah.maktabahyarsi.utils.safeNavigate
 import com.maktabah.maktabahyarsi.wrapper.proceedWhen
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import kotlin.math.abs
 
 @AndroidEntryPoint
 class ContentBukuFragment : Fragment() {
@@ -84,6 +86,44 @@ class ContentBukuFragment : Fragment() {
 
     private fun setRecyclerViewContent() {
         binding.run {
+            vpContent.hackMatchParentCheckInViewPager()
+            vpContent.setPageTransformer { view, position ->
+                view.apply {
+                    val pageWidth = width
+                    val pageHeight = height
+                    when {
+                        position < -1 -> { // [-Infinity,-1)
+                            // This page is way off-screen to the left.
+                            alpha = 0f
+                        }
+
+                        position <= 1 -> { // [-1,1]
+                            // Modify the default slide transition to shrink the page as well
+                            val scaleFactor = 0.85f.coerceAtLeast(1 - abs(position))
+                            val vertMargin = pageHeight * (1 - scaleFactor) / 2
+                            val horzMargin = pageWidth * (1 - scaleFactor) / 2
+                            translationX = if (position < 0) {
+                                horzMargin - vertMargin / 2
+                            } else {
+                                horzMargin + vertMargin / 2
+                            }
+
+                            // Scale the page down (between MIN_SCALE and 1)
+                            scaleX = scaleFactor
+                            scaleY = scaleFactor
+
+                            // Fade the page relative to its size.
+                            alpha = (0.5f +
+                                    (((scaleFactor - 0.85f) / (1 - 0.85f)) * (1 - 0.5f)))
+                        }
+
+                        else -> { // (1,+Infinity]
+                            // This page is way off-screen to the right.
+                            alpha = 0f
+                        }
+                    }
+                }
+            }
             vpContent.apply {
                 adapter =
                     this@ContentBukuFragment.contentAdapter.withLoadStateFooter(footer = LoadingStateAdapter { contentAdapter.retry() })
@@ -129,14 +169,14 @@ class ContentBukuFragment : Fragment() {
                             vpContent.isVisible = true
                             errorMsg.isVisible = false
                             pbLoading2.isVisible = false
-                            result.payload?.let { data ->
-                                contentAdapter.submitData(lifecycle, data)
+                            if (result.payload != null){
+                                contentAdapter.submitData(lifecycle, result.payload)
                             }
                         },
                         doOnError = { e ->
                             vpContent.isVisible = false
                             errorMsg.isVisible = true
-                            pbLoading2.isVisible = false
+                            pbLoading2.isVisible = true
                             errorMsg.text = "Check ur network : ${e.message.orEmpty()}"
                         },
                         doOnLoading = {
@@ -168,7 +208,7 @@ class ContentBukuFragment : Fragment() {
                         doOnError = { e ->
                             vpContent.isVisible = false
                             errorMsg.isVisible = true
-                            pbLoading.isVisible = false
+                            pbLoading.isVisible = true
                             oleh.isVisible = false
                             tvTitle.isVisible = false
                             pencipta.isVisible = false

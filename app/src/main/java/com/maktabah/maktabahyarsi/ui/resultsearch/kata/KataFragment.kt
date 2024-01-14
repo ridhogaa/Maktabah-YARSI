@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -42,7 +43,7 @@ class KataFragment : Fragment() {
                 viewModel.setHighlightText(query)
                 findNavController().safeNavigate(
                     ResultSearchFragmentDirections.actionResultSearchFragmentToContentBukuFragment(
-                        data.source.idBibliography, data.source.page
+                        data.idBibliography, data.page
                     )
                 )
             },
@@ -79,7 +80,7 @@ class KataFragment : Fragment() {
 
     private fun setObserveDataWord() = with(binding) {
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.search.collectLatest {
                     it.proceedWhen(
                         doOnSuccess = { result ->
@@ -89,7 +90,7 @@ class KataFragment : Fragment() {
                             tvUps.isVisible = false
                             tvNoContent.isVisible = false
                             result.payload?.let { payload ->
-                                wordAdapter.setData(payload.data)
+                                wordAdapter.setData(payload)
                             }
                         },
                         doOnLoading = {
@@ -105,6 +106,7 @@ class KataFragment : Fragment() {
                             pbLoading.isVisible = false
                             tvUps.isVisible = true
                             tvNoContent.isVisible = true
+                            Toast.makeText(requireContext(), err.exception.toString(), Toast.LENGTH_SHORT).show()
                         },
                         doOnEmpty = {
                             rvSearchKata.isVisible = false
