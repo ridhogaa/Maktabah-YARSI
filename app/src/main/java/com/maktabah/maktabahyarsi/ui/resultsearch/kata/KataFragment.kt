@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -105,6 +106,7 @@ class KataFragment : Fragment() {
                             pbLoading.isVisible = false
                             tvUps.isVisible = true
                             tvNoContent.isVisible = true
+                            Toast.makeText(requireContext(), err.exception.toString(), Toast.LENGTH_SHORT).show()
                         },
                         doOnEmpty = {
                             rvSearchKata.isVisible = false

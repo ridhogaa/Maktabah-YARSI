@@ -14,7 +14,7 @@ data class GetContentResponse(
         val heading: String? = null,
         val bibliography: String? = null,
         val page: Int? = null,
-        val text: String? = null,
+        var text: String? = null,
         val size: Int? = null,
         val sub: List<Sub>? = null
     ) {
