@@ -42,7 +42,7 @@ class KataFragment : Fragment() {
                 viewModel.setHighlightText(query)
                 findNavController().safeNavigate(
                     ResultSearchFragmentDirections.actionResultSearchFragmentToContentBukuFragment(
-                        data.source.idBibliography, data.source.page
+                        data.idBibliography, data.page
                     )
                 )
             },
@@ -79,7 +79,7 @@ class KataFragment : Fragment() {
 
     private fun setObserveDataWord() = with(binding) {
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.search.collectLatest {
                     it.proceedWhen(
                         doOnSuccess = { result ->
@@ -89,7 +89,7 @@ class KataFragment : Fragment() {
                             tvUps.isVisible = false
                             tvNoContent.isVisible = false
                             result.payload?.let { payload ->
-                                wordAdapter.setData(payload.data)
+                                wordAdapter.setData(payload)
                             }
                         },
                         doOnLoading = {

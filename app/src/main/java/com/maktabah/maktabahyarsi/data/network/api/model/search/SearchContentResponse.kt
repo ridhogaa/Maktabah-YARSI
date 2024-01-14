@@ -44,3 +44,32 @@ data class SearchContentResponse(
         )
     }
 }
+
+data class Source(
+    val idContent: String,
+    val author: String,
+    val bibliographyTitle: String,
+    val idBibliography: String,
+    val text: String,
+    val page: Int,
+    val heading: String
+)
+
+fun SearchContentResponse.mapToEntityList(): List<Source> {
+    val dataList: MutableList<Source> = mutableListOf()
+    dataList.clear()
+    data.forEach { data ->
+        dataList.add(
+            Source(
+                data.source.idContent,
+                data.source.author,
+                data.source.bibliographyTitle,
+                data.source.idBibliography,
+                data.source.text,
+                data.source.page,
+                data.source.heading,
+            )
+        )
+    }
+    return dataList
+}
