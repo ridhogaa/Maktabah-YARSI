@@ -118,5 +118,5 @@ class DetailViewModel @Inject constructor(
     }
 
     val getUserTokenPrefFlow =
-        userPreferenceDataSource.getUserTokenPrefFlow().asLiveData(Dispatchers.IO)
+        userPreferenceDataSource.getUserTokenPrefFlow().asLiveData()
 }
